@@ -1,207 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>T&T Dashboard — Elecnor Australia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>T&T Dashboard — Elecnor Australia</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#003087;--blue-mid:#0047b3;--blue-light:#deeaff;--blue-dark:#001a4d;
+  --orange:#FF6A00;--orange-lt:#fff3e8;
+  --purple:#5b3d99;--purple-lt:#f0ebff;
+  --teal:#0e7490;--teal-lt:#e0f7fa;
+  --green:#166534;--green-lt:#dcfce7;
+  --dark:#0f172a;--mid:#475569;--muted:#94a3b8;--light:#f1f5f9;--white:#fff;
+  --red:#dc2626;--amber:#d97706;--steel:#2563eb;
+  --rag-g:#16a34a;--rag-a:#d97706;--rag-r:#dc2626;
+  --panel:460px;--hdr:58px;--pill:32px;
+}
+html,body{height:100%;font-family:'Montserrat',sans-serif;background:var(--light);color:var(--dark);overflow:hidden}
+
+/* HEADER */
+header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;justify-content:space-between;padding:0 24px;box-shadow:0 2px 16px rgba(0,0,60,.28);position:relative;z-index:200}
+.h-l{display:flex;align-items:center;gap:14px}
+.logo-wrap{background:#fff;border-radius:7px;padding:4px 12px;height:40px;display:flex;align-items:center}
+.logo-wrap img{height:24px;display:block}
+.hdiv{width:1px;height:30px;background:rgba(255,255,255,.18)}
+.h-title{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.h-title span{color:var(--orange)}
+.h-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;font-weight:500}
+.h-r{display:flex;align-items:center;gap:18px}
+.hstat{text-align:center}
+.hstat-v{font-size:20px;font-weight:800;color:var(--orange);line-height:1}
+.hstat-l{font-size:9px;color:rgba(255,255,255,.38);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;font-weight:600}
+.add-btn{background:var(--orange);color:#fff;border:none;border-radius:7px;padding:8px 16px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .15s}
+.add-btn:hover{background:#e05500}
+
+/* PILLARS */
+.pillars{height:var(--pill);display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;flex-shrink:0}
+.pillar{display:flex;align-items:center;justify-content:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.pillar.tech{background:var(--blue-mid);color:#fff}
+.pillar.org{background:var(--purple);color:#fff}
+.pillar.ppl{background:var(--teal);color:#fff}
+.psub{font-size:9px;font-weight:500;opacity:.6;letter-spacing:.8px}
+.arr{background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:800}
+
+/* APP */
+.app{display:flex;flex-direction:column;height:100vh}
+.board-wrap{flex:1;display:flex;overflow:hidden;position:relative}
+
+/* BOARD */
+.board{flex:1;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden;transition:margin-right .32s cubic-bezier(.4,0,.2,1)}
+.board.shifted{margin-right:var(--panel)}
+
+.col{display:flex;flex-direction:column;border-right:1px solid rgba(0,0,0,.07);overflow:hidden;background:var(--light)}
+.col:last-child{border-right:none}
+.col-hdr{padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid rgba(0,0,0,.06);flex-shrink:0}
+.col-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.col-title.l1{color:var(--red)}
+.col-title.l2{color:var(--amber)}
+.col-title.l3{color:var(--steel)}
+.col-pill{font-size:10px;font-weight:700;color:#fff;padding:2px 8px;border-radius:20px}
+.col-pill.l1{background:var(--red)}
+.col-pill.l2{background:var(--amber)}
+.col-pill.l3{background:var(--steel)}
+.col-body{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.col-body::-webkit-scrollbar{width:3px}
+.col-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:2px}
+
+/* DROP ZONE */
+.drop-zone{min-height:50px;border:2px dashed transparent;border-radius:10px;transition:all .15s}
+.drop-zone.over{border-color:var(--orange);background:var(--orange-lt)}
+
+/* CARD */
+.card{background:#fff;border-radius:10px;padding:13px 14px 12px;cursor:grab;box-shadow:0 1px 5px rgba(0,0,0,.07);border:2px solid transparent;transition:all .18s;position:relative;overflow:hidden;user-select:none}
+.card:active{cursor:grabbing}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:2px 0 0 2px}
+.card.Technology::before{background:var(--blue-mid)}
+.card.Organisation::before{background:var(--purple)}
+.card.People::before{background:var(--teal)}
+.card:hover{box-shadow:0 3px 14px rgba(0,0,0,.12);transform:translateY(-1px);border-color:var(--blue-light)}
+.card.active{border-color:var(--orange);box-shadow:0 3px 18px rgba(255,106,0,.18)}
+.card.dragging{opacity:.4;transform:scale(.97)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.card-name{font-size:13px;font-weight:700;color:var(--dark);line-height:1.3;flex:1}
+.rag{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.rag.Green{background:var(--rag-g)}
+.rag.Amber{background:var(--rag-a)}
+.rag.Red{background:var(--rag-r)}
+.card-cat{font-size:10px;color:var(--muted);margin-bottom:8px;font-weight:500}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+.tag.Technology{background:var(--blue-light);color:var(--blue-mid)}
+.tag.Organisation{background:var(--purple-lt);color:var(--purple)}
+.tag.People{background:var(--teal-lt);color:var(--teal)}
+.tag.living{background:var(--orange-lt);color:var(--orange)}
+.prog-row{display:flex;align-items:center;gap:8px}
+.prog-bar{flex:1;height:5px;background:var(--light);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--orange),#ffaa00);transition:width .4s}
+.prog-fill.done{background:linear-gradient(90deg,var(--rag-g),#4ade80)}
+.prog-pct{font-size:10px;font-weight:700;color:var(--mid);min-width:28px;text-align:right}
+
+/* PANEL */
+.panel{position:absolute;right:0;top:0;bottom:0;width:var(--panel);background:#fff;border-left:1px solid rgba(0,0,0,.09);box-shadow:-4px 0 28px rgba(0,0,0,.11);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);z-index:100;overflow:hidden}
+.panel.open{transform:translateX(0)}
+.p-hdr{padding:16px 18px 12px;border-bottom:1px solid var(--light);flex-shrink:0}
+.p-hdr-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.p-name{font-size:15px;font-weight:800;color:var(--dark);line-height:1.25;flex:1;outline:none;border:none;background:transparent;font-family:'Montserrat',sans-serif;cursor:text}
+.p-name:focus{background:var(--light);border-radius:5px;padding:4px 6px;margin:-4px -6px}
+.p-close{background:var(--light);border:none;border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--mid);flex-shrink:0;transition:background .15s;font-family:'Montserrat',sans-serif}
+.p-close:hover{background:#e2e8f0}
+.p-meta{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+
+.p-body{flex:1;overflow-y:auto;padding:14px 18px}
+.p-body::-webkit-scrollbar{width:3px}
+.p-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.09);border-radius:2px}
+
+.sec{margin-bottom:18px}
+.sec-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--light)}
+
+/* Editable description */
+.p-desc{font-size:12.5px;color:var(--mid);line-height:1.65;width:100%;border:1px solid transparent;border-radius:6px;padding:6px 8px;font-family:'Montserrat',sans-serif;resize:vertical;min-height:60px;background:var(--light);transition:border .15s;outline:none}
+.p-desc:focus{border-color:var(--orange);background:#fff}
+
+/* Pillar selector */
+.pillar-sel{display:flex;gap:6px;margin-bottom:0}
+.psel-btn{padding:5px 12px;border-radius:5px;border:2px solid transparent;cursor:pointer;font-size:10px;font-weight:700;font-family:'Montserrat',sans-serif;letter-spacing:.5px;text-transform:uppercase;transition:all .15s;opacity:.45}
+.psel-btn.active{opacity:1}
+.psel-btn.Technology{background:var(--blue-light);color:var(--blue-mid);border-color:var(--blue-mid)}
+.psel-btn.Organisation{background:var(--purple-lt);color:var(--purple);border-color:var(--purple)}
+.psel-btn.People{background:var(--teal-lt);color:var(--teal);border-color:var(--teal)}
+
+/* Living toggle */
+.living-toggle{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--light);border-radius:7px;cursor:pointer}
+.toggle-sw{width:36px;height:20px;border-radius:10px;background:#cbd5e1;position:relative;transition:background .2s;flex-shrink:0}
+.toggle-sw.on{background:var(--orange)}
+.toggle-sw::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle-sw.on::after{transform:translateX(16px)}
+.toggle-label{font-size:12px;font-weight:600;color:var(--dark)}
+.toggle-sub{font-size:10px;color:var(--muted);font-weight:500}
+
+/* Stage map */
+.stage-map{display:flex;flex-direction:column}
+.stage-item{display:flex;gap:10px;align-items:flex-start}
+.stage-l{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.stage-circle{width:24px;height:24px;border-radius:50%;border:2px solid #e2e8f0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .18s;flex-shrink:0}
+.stage-circle.done{background:var(--rag-g);border-color:var(--rag-g);color:#fff}
+.stage-circle.cur{background:var(--orange);border-color:var(--orange);color:#fff}
+.stage-line{width:2px;flex:1;min-height:12px;background:#e2e8f0;margin:2px 0}
+.stage-line.done{background:var(--rag-g)}
+.stage-txt{padding:3px 0 12px;font-size:12px;color:var(--mid);line-height:1.4;font-weight:500}
+.stage-txt.cur{color:var(--dark);font-weight:700}
+.stage-txt.done{color:var(--muted);text-decoration:line-through}
+
+/* Documents */
+.doc-list{display:flex;flex-direction:column;gap:5px}
+.doc-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--light);border-radius:7px}
+.doc-link{font-size:12px;color:var(--blue-mid);font-weight:600;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doc-link:hover{text-decoration:underline}
+.doc-rm{background:none;border:none;cursor:pointer;color:var(--muted);font-size:12px;padding:2px 4px}
+.doc-rm:hover{color:var(--red)}
+.doc-add{display:flex;gap:6px;margin-top:6px}
+.doc-inp{flex:1;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-family:'Montserrat',sans-serif;font-size:11px;outline:none;transition:border .15s}
+.doc-inp:focus{border-color:var(--orange)}
+.doc-add-btn{background:var(--blue);color:#fff;border:none;border-radius:6px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer}
+
+/* Info grid */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.info-cell{background:var(--light);border-radius:7px;padding:8px 10px}
+.info-lbl{font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:3px;font-weight:600}
+.info-inp{width:100%;border:none;background:transparent;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;color:var(--dark);outline:none;cursor:text}
+.info-inp:focus{border-bottom:1.5px solid var(--orange)}
+
+/* RAG */
+.rag-sel{display:flex;gap:7px}
+.rag-btn{padding:5px 14px;border-radius:5px;border:2px solid transparent;cursor:pointer;font-size:11px;font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;transition:all .15s;opacity:.38}
+.rag-btn.on{opacity:1}
+.rag-btn.Green{background:var(--rag-g)}
+.rag-btn.Amber{background:var(--rag-a)}
+.rag-btn.Red{background:var(--rag-r)}
+
+/* Progress */
+.prog-edit{display:flex;align-items:center;gap:10px}
+.prog-edit input[type=range]{flex:1;accent-color:var(--orange);cursor:pointer}
+.prog-edit-val{font-size:16px;font-weight:800;color:var(--orange);min-width:40px}
+
+/* Notes */
+.notes-area{width:100%;border:1px solid #e2e8f0;border-radius:7px;padding:8px 10px;font-family:'Montserrat',sans-serif;font-size:12px;color:var(--dark);resize:vertical;min-height:60px;background:var(--light);outline:none;transition:border .15s;font-weight:500}
+.notes-area:focus{border-color:var(--orange);background:#fff}
+
+/* Save / Delete */
+.p-footer{padding:12px 18px;border-top:1px solid var(--light);flex-shrink:0;display:flex;gap:8px}
+.save-btn{flex:1;padding:10px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.save-btn:hover{background:#e05500}
+.save-btn.ok{background:var(--rag-g)}
+.del-btn{padding:10px 14px;background:var(--light);color:var(--red);border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.del-btn:hover{background:#fee2e2}
+
+/* MODAL (add project) */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:none;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:14px;padding:28px;width:480px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h2{font-size:17px;font-weight:800;color:var(--dark);margin-bottom:18px}
+.form-row{margin-bottom:13px}
+.form-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;display:block}
+.form-inp{width:100%;border:1.5px solid #e2e8f0;border-radius:7px;padding:8px 11px;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;transition:border .15s;color:var(--dark);font-weight:500}
+.form-inp:focus{border-color:var(--orange)}
+.form-ta{resize:vertical;min-height:70px}
+.form-sel{display:flex;gap:7px;flex-wrap:wrap}
+.fsel-btn{padding:6px 14px;border-radius:6px;border:2px solid #e2e8f0;cursor:pointer;font-size:11px;font-weight:700;font-family:'Montserrat',sans-serif;color:var(--mid);transition:all .15s;background:#fff}
+.fsel-btn.active-l1{border-color:var(--red);color:var(--red);background:#fff5f5}
+.fsel-btn.active-l2{border-color:var(--amber);color:var(--amber);background:#fffbeb}
+.fsel-btn.active-l3{border-color:var(--steel);color:var(--steel);background:#eff6ff}
+.fsel-btn.active-Tech{border-color:var(--blue-mid);color:var(--blue-mid);background:var(--blue-light)}
+.fsel-btn.active-Org{border-color:var(--purple);color:var(--purple);background:var(--purple-lt)}
+.fsel-btn.active-Ppl{border-color:var(--teal);color:var(--teal);background:var(--teal-lt)}
+.modal-footer{display:flex;gap:8px;margin-top:20px}
+.modal-save{flex:1;padding:11px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+.modal-cancel{padding:11px 18px;background:var(--light);color:var(--mid);border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
+
+/* FOOTER */
+.footer{height:22px;background:var(--blue-dark);display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex-shrink:0}
+.footer span{font-size:8px;color:rgba(255,255,255,.28);letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.footer .fr{color:var(--orange);opacity:.65}
+</style>
 </head>
 <body>
-
 <div class="app">
 
-  <!-- ── HEADER ── -->
-  <header>
-    <div class="h-left">
-      <div class="logo-wrap">
-        <img src="https://www.elecnor.com.au/storage/media/files/shares/logo-elecnoraustralia.png" alt="Elecnor Australia"/>
-      </div>
-      <div class="h-divider"></div>
-      <div>
-        <div class="h-title"><span>T&T</span> Program</div>
-        <div class="h-sub">Technology &amp; Transformation · Elecnor Australia</div>
-      </div>
+<!-- HEADER -->
+<header>
+  <div class="h-l">
+    <div class="logo-wrap">
+      <img src="https://www.elecnor.com.au/storage/media/files/shares/logo-elecnoraustralia.png" alt="Elecnor"/>
     </div>
-    <div class="h-right">
-      <div class="h-stat">
-        <div class="h-stat-val" id="stat-total">—</div>
-        <div class="h-stat-lbl">Projects</div>
-      </div>
-      <div class="h-divider-v"></div>
-      <div class="h-stat">
-        <div class="h-stat-val" id="stat-active">—</div>
-        <div class="h-stat-lbl">In Progress</div>
-      </div>
-      <div class="h-divider-v"></div>
-      <div class="h-stat">
-        <div class="h-stat-val" id="stat-complete">—</div>
-        <div class="h-stat-lbl">Complete</div>
-      </div>
-      <div class="h-divider-v"></div>
-      <div class="h-stat">
-        <div class="h-stat-val" id="stat-avg">—</div>
-        <div class="h-stat-lbl">Avg Progress</div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ── PILLARS ── -->
-  <div class="pillars">
-    <div class="pillar tech">
-      Technology
-      <span class="pillar-sub">Systems · Data · AI · Infrastructure</span>
-    </div>
-    <div class="arr">›</div>
-    <div class="pillar org">
-      Organisation
-      <span class="pillar-sub">Process · Governance · Change</span>
-    </div>
-    <div class="arr">›</div>
-    <div class="pillar ppl">
-      People
-      <span class="pillar-sub">Adoption · Culture · Skills</span>
+    <div class="hdiv"></div>
+    <div>
+      <div class="h-title"><span>T&T</span> Program</div>
+      <div class="h-sub">Technology &amp; Transformation · Elecnor Australia</div>
     </div>
   </div>
-
-  <!-- ── BOARD + PANEL ── -->
-  <div class="board-wrap">
-
-    <!-- KANBAN BOARD -->
-    <div class="board" id="board">
-
-      <!-- NOW -->
-      <div class="column">
-        <div class="col-header">
-          <div class="col-title now">⚡ Now</div>
-          <div class="col-count now" id="count-Now">0</div>
-        </div>
-        <div class="col-body" id="col-Now"></div>
-      </div>
-
-      <!-- Q2 -->
-      <div class="column">
-        <div class="col-header">
-          <div class="col-title q2">◎ Q2 — Apr to Jun</div>
-          <div class="col-count q2" id="count-Q2">0</div>
-        </div>
-        <div class="col-body" id="col-Q2"></div>
-      </div>
-
-      <!-- Q3 -->
-      <div class="column">
-        <div class="col-header">
-          <div class="col-title q3">◷ Q3 — Jul to Sep</div>
-          <div class="col-count q3" id="count-Q3">0</div>
-        </div>
-        <div class="col-body" id="col-Q3"></div>
-      </div>
-
-    </div>
-
-    <!-- SIDE PANEL -->
-    <div class="panel" id="panel">
-
-      <div class="panel-header">
-        <div class="panel-header-top">
-          <div class="panel-name" id="panel-name"></div>
-          <button class="panel-close" onclick="closePanel()">✕</button>
-        </div>
-        <div class="panel-meta" id="panel-meta"></div>
-      </div>
-
-      <div class="panel-body">
-
-        <!-- Description -->
-        <div class="panel-section">
-          <div class="panel-section-title">About this project</div>
-          <div class="panel-desc" id="panel-desc"></div>
-        </div>
-
-        <!-- Goals -->
-        <div class="panel-section">
-          <div class="panel-section-title">Goals</div>
-          <div id="panel-goals"></div>
-        </div>
-
-        <!-- Stage Map -->
-        <div class="panel-section">
-          <div class="panel-section-title">Stage Map — click a stage to update</div>
-          <div class="stage-map" id="panel-stages"></div>
-        </div>
-
-        <!-- Documents -->
-        <div class="panel-section">
-          <div class="panel-section-title">Documents</div>
-          <div id="panel-docs"></div>
-        </div>
-
-        <!-- Info -->
-        <div class="panel-section">
-          <div class="panel-section-title">Project Info</div>
-          <div class="info-grid">
-            <div class="info-cell">
-              <div class="info-label">Owner</div>
-              <div class="info-val" id="info-owner"></div>
-            </div>
-            <div class="info-cell">
-              <div class="info-label">Category</div>
-              <div class="info-val" id="info-category"></div>
-            </div>
-            <div class="info-cell">
-              <div class="info-label">Start</div>
-              <div class="info-val" id="info-start"></div>
-            </div>
-            <div class="info-cell">
-              <div class="info-label">Target</div>
-              <div class="info-val" id="info-target"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Edit: RAG -->
-        <div class="panel-section">
-          <div class="panel-section-title">RAG Status</div>
-          <div class="rag-select">
-            <button class="rag-btn Green" data-rag="Green">● Green</button>
-            <button class="rag-btn Amber" data-rag="Amber">● Amber</button>
-            <button class="rag-btn Red"   data-rag="Red">● Red</button>
-          </div>
-        </div>
-
-        <!-- Edit: Progress -->
-        <div class="panel-section">
-          <div class="panel-section-title">Progress</div>
-          <div class="prog-edit">
-            <input type="range" id="prog-slider" min="0" max="100" step="5" value="0"/>
-            <div class="prog-edit-val" id="prog-val">0%</div>
-          </div>
-        </div>
-
-        <!-- Edit: Notes -->
-        <div class="panel-section">
-          <div class="panel-section-title">Notes</div>
-          <textarea class="notes-area" id="panel-notes" placeholder="Add notes, blockers, decisions, links…"></textarea>
-        </div>
-
-      </div>
-
-      <!-- Save -->
-      <div class="panel-footer">
-        <button class="save-btn" id="save-btn">Save Changes</button>
-      </div>
-
-    </div>
+  <div class="h-r">
+    <div class="hstat"><div class="hstat-v" id="s-total">—</div><div class="hstat-l">Projects</div></div>
+    <div class="hdiv"></div>
+    <div class="hstat"><div class="hstat-v" id="s-active">—</div><div class="hstat-l">In Progress</div></div>
+    <div class="hdiv"></div>
+    <div class="hstat"><div class="hstat-v" id="s-done">—</div><div class="hstat-l">Complete</div></div>
+    <div class="hdiv"></div>
+    <div class="hstat"><div class="hstat-v" id="s-avg">—</div><div class="hstat-l">Avg Progress</div></div>
+    <div class="hdiv"></div>
+    <button class="add-btn" onclick="openModal()">＋ Add Project</button>
   </div>
+</header>
 
-  <!-- ── FOOTER ── -->
-  <div class="footer-bar">
-    <span>Elecnor Australia · T&T Program · Confidential · 2025–2026</span>
-    <span class="f-r">Technology › Organisation › People</span>
-  </div>
-
+<!-- PILLARS -->
+<div class="pillars">
+  <div class="pillar tech">Technology<span class="psub">&nbsp;·&nbsp;Systems · Data · AI</span></div>
+  <div class="arr">›</div>
+  <div class="pillar org">Organisation<span class="psub">&nbsp;·&nbsp;Process · Governance</span></div>
+  <div class="arr">›</div>
+  <div class="pillar ppl">People<span class="psub">&nbsp;·&nbsp;Adoption · Culture</span></div>
 </div>
 
-<script src="app.js"></script>
+<!-- BOARD -->
+<div class="board-wrap">
+  <div class="board" id="board">
+    <div class="col">
+      <div class="col-hdr">
+        <div class="col-title l1">⚡ Level 1 — Immediate</div>
+        <div class="col-pill l1" id="cnt-Level 1">0</div>
+      </div>
+      <div class="col-body drop-zone" id="col-Level 1" data-col="Level 1"></div>
+    </div>
+    <div class="col">
+      <div class="col-hdr">
+        <div class="col-title l2">◎ Level 2 — Near Term</div>
+        <div class="col-pill l2" id="cnt-Level 2">0</div>
+      </div>
+      <div class="col-body drop-zone" id="col-Level 2" data-col="Level 2"></div>
+    </div>
+    <div class="col">
+      <div class="col-hdr">
+        <div class="col-title l3">◷ Level 3 — Pipeline</div>
+        <div class="col-pill l3" id="cnt-Level 3">0</div>
+      </div>
+      <div class="col-body drop-zone" id="col-Level 3" data-col="Level 3"></div>
+    </div>
+  </div>
+
+  <!-- SIDE PANEL -->
+  <div class="panel" id="panel">
+    <div class="p-hdr">
+      <div class="p-hdr-top">
+        <div class="p-name" id="p-name" contenteditable="true" spellcheck="false"></div>
+        <button class="p-close" onclick="closePanel()">✕</button>
+      </div>
+      <div class="p-meta" id="p-meta"></div>
+    </div>
+    <div class="p-body">
+
+      <div class="sec">
+        <div class="sec-title">Description</div>
+        <textarea class="p-desc" id="p-desc" placeholder="Describe this project…"></textarea>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Pillar</div>
+        <div class="pillar-sel">
+          <button class="psel-btn Technology" data-pillar="Technology" onclick="setPillar('Technology')">Technology</button>
+          <button class="psel-btn Organisation" data-pillar="Organisation" onclick="setPillar('Organisation')">Organisation</button>
+          <button class="psel-btn People" data-pillar="People" onclick="setPillar('People')">People</button>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Living Project</div>
+        <div class="living-toggle" id="living-toggle" onclick="toggleLiving()">
+          <div class="toggle-sw" id="toggle-sw"></div>
+          <div>
+            <div class="toggle-label">⟳ Living / Autonomous</div>
+            <div class="toggle-sub">This project evolves continuously — no fixed end date</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Stage Map — click to advance</div>
+        <div class="stage-map" id="p-stages"></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Documents &amp; Links</div>
+        <div class="doc-list" id="p-docs"></div>
+        <div class="doc-add">
+          <input class="doc-inp" id="doc-url" placeholder="Paste link (SharePoint, Drive, etc.)"/>
+          <input class="doc-inp" id="doc-label" placeholder="Label" style="max-width:110px"/>
+          <button class="doc-add-btn" onclick="addDoc()">Add</button>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Project Info</div>
+        <div class="info-grid">
+          <div class="info-cell"><div class="info-lbl">Owner</div><input class="info-inp" id="i-owner" placeholder="Owner"/></div>
+          <div class="info-cell"><div class="info-lbl">Category</div><input class="info-inp" id="i-cat" placeholder="Category"/></div>
+          <div class="info-cell"><div class="info-lbl">Start</div><input class="info-inp" id="i-start" placeholder="Start date"/></div>
+          <div class="info-cell"><div class="info-lbl">Target</div><input class="info-inp" id="i-target" placeholder="Target date"/></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">RAG Status</div>
+        <div class="rag-sel">
+          <button class="rag-btn Green" data-rag="Green" onclick="setRag('Green')">● Green</button>
+          <button class="rag-btn Amber" data-rag="Amber" onclick="setRag('Amber')">● Amber</button>
+          <button class="rag-btn Red"   data-rag="Red"   onclick="setRag('Red')">● Red</button>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Progress</div>
+        <div class="prog-edit">
+          <input type="range" id="prog-slider" min="0" max="100" step="5" oninput="document.getElementById('prog-val').textContent=this.value+'%'"/>
+          <div class="prog-edit-val" id="prog-val">0%</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Notes</div>
+        <textarea class="notes-area" id="p-notes" placeholder="Notes, blockers, decisions, links…"></textarea>
+      </div>
+
+    </div>
+    <div class="p-footer">
+      <button class="save-btn" id="save-btn" onclick="saveProject()">Save Changes</button>
+      <button class="del-btn" onclick="deleteProject()">🗑</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Elecnor Australia · T&T Program · Confidential · 2025–2026</span>
+  <span class="fr">Technology › Organisation › People</span>
+</div>
+
+<!-- ADD PROJECT MODAL -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h2>Add New Project</h2>
+    <div class="form-row">
+      <label class="form-lbl">Project Name</label>
+      <input class="form-inp" id="m-name" placeholder="e.g. Data Centre Strategy"/>
+    </div>
+    <div class="form-row">
+      <label class="form-lbl">Description</label>
+      <textarea class="form-inp form-ta" id="m-desc" placeholder="What is this project about?"></textarea>
+    </div>
+    <div class="form-row">
+      <label class="form-lbl">Priority Level</label>
+      <div class="form-sel" id="m-priority">
+        <button class="fsel-btn" data-val="Level 1" onclick="mSel(this,'priority')">Level 1 — Immediate</button>
+        <button class="fsel-btn" data-val="Level 2" onclick="mSel(this,'priority')">Level 2 — Near Term</button>
+        <button class="fsel-btn" data-val="Level 3" onclick="mSel(this,'priority')">Level 3 — Pipeline</button>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-lbl">Pillar</label>
+      <div class="form-sel" id="m-pillar">
+        <button class="fsel-btn" data-val="Technology" onclick="mSel(this,'pillar')">Technology</button>
+        <button class="fsel-btn" data-val="Organisation" onclick="mSel(this,'pillar')">Organisation</button>
+        <button class="fsel-btn" data-val="People" onclick="mSel(this,'pillar')">People</button>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-lbl">Owner</label>
+      <input class="form-inp" id="m-owner" placeholder="e.g. Prerit, Ivan"/>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-save" onclick="addProject()">Add Project</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────
+const STORE = 'tt_v3';
+let projects = [];
+let activeId = null;
+let dragId   = null;
+
+// Load from data.json then merge localStorage
+fetch('data.json')
+  .then(r => r.json())
+  .then(d => {
+    const saved = loadSaved();
+    if (saved && saved.length) {
+      projects = saved;
+    } else {
+      projects = d.projects;
+    }
+    render();
+  })
+  .catch(() => {
+    // Fallback if no server (single file mode)
+    const saved = loadSaved();
+    if (saved && saved.length) { projects = saved; render(); }
+  });
+
+function loadSaved() {
+  try { return JSON.parse(localStorage.getItem(STORE)) || null; }
+  catch { return null; }
+}
+function save() {
+  localStorage.setItem(STORE, JSON.stringify(projects));
+}
+
+// ── RENDER ───────────────────────────────────────────────────────────
+function render() {
+  ['Level 1','Level 2','Level 3'].forEach(p => {
+    const col = document.getElementById('col-'+p);
+    col.innerHTML = '';
+    const grp = projects.filter(x => x.priority === p);
+    document.getElementById('cnt-'+p).textContent = grp.length;
+    grp.forEach(proj => col.appendChild(makeCard(proj)));
+    setupDropZone(col);
+  });
+  updateStats();
+  if (activeId) {
+    const p = projects.find(x => x.id === activeId);
+    if (p) populatePanel(p);
+  }
+}
+
+function updateStats() {
+  const t = projects.length;
+  const a = projects.filter(p => p.progress > 0 && p.progress < 100).length;
+  const d = projects.filter(p => p.progress === 100).length;
+  const avg = t ? Math.round(projects.reduce((s,p) => s+p.progress,0)/t) : 0;
+  document.getElementById('s-total').textContent = t;
+  document.getElementById('s-active').textContent = a;
+  document.getElementById('s-done').textContent = d;
+  document.getElementById('s-avg').textContent = avg+'%';
+}
+
+// ── CARD ─────────────────────────────────────────────────────────────
+function makeCard(p) {
+  const el = document.createElement('div');
+  el.className = `card ${p.pillar}${p.id===activeId?' active':''}`;
+  el.dataset.id = p.id;
+  el.draggable = true;
+  const pct = p.progress;
+  el.innerHTML = `
+    <div class="card-top">
+      <div class="card-name">${p.name}</div>
+      <div class="rag ${p.rag}"></div>
+    </div>
+    <div class="card-cat">${p.category||'—'}</div>
+    <div class="card-tags">
+      <span class="tag ${p.pillar}">${p.pillar}</span>
+      ${p.living?'<span class="tag living">⟳ Living</span>':''}
+    </div>
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill${pct===100?' done':''}" style="width:${pct}%"></div></div>
+      <div class="prog-pct">${pct}%</div>
+    </div>`;
+  el.addEventListener('click', () => openPanel(p.id));
+  el.addEventListener('dragstart', e => { dragId = p.id; el.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
+  el.addEventListener('dragend', () => { dragId=null; el.classList.remove('dragging'); document.querySelectorAll('.drop-zone').forEach(z=>z.classList.remove('over')); });
+  return el;
+}
+
+// ── DRAG & DROP ───────────────────────────────────────────────────────
+function setupDropZone(zone) {
+  zone.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect='move'; zone.classList.add('over'); });
+  zone.addEventListener('dragleave', e => { if(!zone.contains(e.relatedTarget)) zone.classList.remove('over'); });
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('over');
+    if (!dragId) return;
+    const col  = zone.dataset.col;
+    const proj = projects.find(x => x.id === dragId);
+    if (!proj) return;
+    proj.priority = col;
+    // Reorder within column if dropped near a card
+    const afterEl = getDragAfterEl(zone, e.clientY);
+    const colProjs = projects.filter(x => x.priority === col && x.id !== dragId);
+    if (afterEl) {
+      const afterId = +afterEl.dataset.id;
+      const idx = colProjs.findIndex(x => x.id === afterId);
+      colProjs.splice(idx, 0, proj);
+    } else {
+      colProjs.push(proj);
+    }
+    // Rebuild projects order for this column
+    const others = projects.filter(x => x.priority !== col && x.id !== dragId);
+    projects = [...others, ...colProjs];
+    save();
+    render();
+  });
+}
+function getDragAfterEl(container, y) {
+  const els = [...container.querySelectorAll('.card:not(.dragging)')];
+  return els.reduce((closest, el) => {
+    const box = el.getBoundingClientRect();
+    const offset = y - box.top - box.height/2;
+    if (offset < 0 && offset > closest.offset) return { offset, el };
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY }).el;
+}
+
+// ── PANEL ─────────────────────────────────────────────────────────────
+function openPanel(id) {
+  activeId = id;
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  populatePanel(p);
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('board').classList.add('shifted');
+  document.querySelectorAll('.card').forEach(c => c.classList.toggle('active', +c.dataset.id===id));
+}
+
+function populatePanel(p) {
+  // Name
+  document.getElementById('p-name').textContent = p.name;
+  // Meta
+  const pc = {'Level 1':'#dc2626','Level 2':'#d97706','Level 3':'#2563eb'};
+  document.getElementById('p-meta').innerHTML = `
+    <span class="tag ${p.pillar}">${p.pillar}</span>
+    <span style="background:${pc[p.priority]}22;color:${pc[p.priority]};font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px">${p.priority}</span>
+    ${p.living?'<span class="tag living">⟳ Living</span>':''}
+  `;
+  // Desc
+  document.getElementById('p-desc').value = p.description||'';
+  // Pillar
+  document.querySelectorAll('.psel-btn').forEach(b => b.classList.toggle('active', b.dataset.pillar===p.pillar));
+  // Living
+  document.getElementById('toggle-sw').classList.toggle('on', !!p.living);
+  // Stages
+  renderStages(p);
+  // Docs
+  renderDocs(p);
+  // Info
+  document.getElementById('i-owner').value  = p.owner||'';
+  document.getElementById('i-cat').value    = p.category||'';
+  document.getElementById('i-start').value  = p.startDate||'';
+  document.getElementById('i-target').value = p.targetDate||'';
+  // RAG
+  document.querySelectorAll('.rag-btn').forEach(b => b.classList.toggle('on', b.dataset.rag===p.rag));
+  // Progress
+  document.getElementById('prog-slider').value = p.progress;
+  document.getElementById('prog-val').textContent = p.progress+'%';
+  // Notes
+  document.getElementById('p-notes').value = p.notes||'';
+}
+
+function renderStages(p) {
+  const el = document.getElementById('p-stages');
+  el.innerHTML = '';
+  (p.stages||[]).forEach((s,i) => {
+    const done = i < p.currentStage;
+    const cur  = i === p.currentStage;
+    const last = i === p.stages.length-1;
+    el.innerHTML += `<div class="stage-item">
+      <div class="stage-l">
+        <div class="stage-circle ${done?'done':cur?'cur':''}" onclick="setStage(${p.id},${i})">${done?'✓':i+1}</div>
+        ${!last?`<div class="stage-line ${done?'done':''}"></div>`:''}
+      </div>
+      <div class="stage-txt ${done?'done':cur?'cur':''}">${s}</div>
+    </div>`;
+  });
+}
+
+function setStage(pid, idx) {
+  const p = projects.find(x => x.id===pid);
+  if (!p) return;
+  p.currentStage = idx;
+  p.progress = Math.round((idx/(Math.max(p.stages.length-1,1)))*100);
+  document.getElementById('prog-slider').value = p.progress;
+  document.getElementById('prog-val').textContent = p.progress+'%';
+  renderStages(p);
+  save(); render();
+}
+
+function renderDocs(p) {
+  const el = document.getElementById('p-docs');
+  el.innerHTML = '';
+  (p.documents||[]).forEach((d,i) => {
+    const div = document.createElement('div');
+    div.className = 'doc-item';
+    div.innerHTML = `<span>📎</span><a class="doc-link" href="${d.url}" target="_blank">${d.label||d.url}</a><button class="doc-rm" onclick="removeDoc(${p.id},${i})">✕</button>`;
+    el.appendChild(div);
+  });
+}
+
+function addDoc() {
+  const url   = document.getElementById('doc-url').value.trim();
+  const label = document.getElementById('doc-label').value.trim();
+  if (!url || !activeId) return;
+  const p = projects.find(x => x.id===activeId);
+  if (!p) return;
+  if (!p.documents) p.documents = [];
+  p.documents.push({ url, label: label||url });
+  document.getElementById('doc-url').value = '';
+  document.getElementById('doc-label').value = '';
+  renderDocs(p);
+}
+
+function removeDoc(pid, idx) {
+  const p = projects.find(x => x.id===pid);
+  if (!p) return;
+  p.documents.splice(idx,1);
+  renderDocs(p);
+}
+
+function setPillar(pillar) {
+  document.querySelectorAll('.psel-btn').forEach(b => b.classList.toggle('active', b.dataset.pillar===pillar));
+}
+
+function toggleLiving() {
+  const sw = document.getElementById('toggle-sw');
+  sw.classList.toggle('on');
+}
+
+function setRag(rag) {
+  document.querySelectorAll('.rag-btn').forEach(b => b.classList.toggle('on', b.dataset.rag===rag));
+}
+
+function closePanel() {
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('board').classList.remove('shifted');
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+  activeId = null;
+}
+
+// ── SAVE ──────────────────────────────────────────────────────────────
+function saveProject() {
+  if (!activeId) return;
+  const p = projects.find(x => x.id===activeId);
+  if (!p) return;
+  p.name        = document.getElementById('p-name').textContent.trim();
+  p.description = document.getElementById('p-desc').value;
+  p.pillar      = document.querySelector('.psel-btn.active')?.dataset.pillar || p.pillar;
+  p.living      = document.getElementById('toggle-sw').classList.contains('on');
+  p.rag         = document.querySelector('.rag-btn.on')?.dataset.rag || p.rag;
+  p.progress    = parseInt(document.getElementById('prog-slider').value);
+  p.owner       = document.getElementById('i-owner').value;
+  p.category    = document.getElementById('i-cat').value;
+  p.startDate   = document.getElementById('i-start').value;
+  p.targetDate  = document.getElementById('i-target').value;
+  p.notes       = document.getElementById('p-notes').value;
+  save(); render();
+  const btn = document.getElementById('save-btn');
+  btn.textContent='✓ Saved'; btn.classList.add('ok');
+  setTimeout(()=>{ btn.textContent='Save Changes'; btn.classList.remove('ok'); }, 1800);
+}
+
+// ── DELETE ─────────────────────────────────────────────────────────────
+function deleteProject() {
+  if (!activeId) return;
+  if (!confirm('Delete this project?')) return;
+  projects = projects.filter(x => x.id !== activeId);
+  closePanel();
+  save(); render();
+}
+
+// ── ADD PROJECT MODAL ──────────────────────────────────────────────────
+const mState = { priority: 'Level 1', pillar: 'Technology' };
+function openModal() { document.getElementById('modal-bg').classList.add('open'); }
+function closeModal() { document.getElementById('modal-bg').classList.remove('open'); }
+function mSel(btn, type) {
+  const group = btn.closest('.form-sel');
+  group.querySelectorAll('.fsel-btn').forEach(b => {
+    b.className = 'fsel-btn';
+  });
+  mState[type] = btn.dataset.val;
+  const cls = type==='priority'
+    ? {'Level 1':'active-l1','Level 2':'active-l2','Level 3':'active-l3'}[btn.dataset.val]
+    : {'Technology':'active-Tech','Organisation':'active-Org','People':'active-Ppl'}[btn.dataset.val];
+  btn.classList.add(cls);
+}
+
+function addProject() {
+  const name = document.getElementById('m-name').value.trim();
+  if (!name) { document.getElementById('m-name').focus(); return; }
+  const newP = {
+    id: Date.now(),
+    name,
+    description: document.getElementById('m-desc').value.trim(),
+    category: 'General',
+    pillar: mState.pillar,
+    priority: mState.priority,
+    progress: 0,
+    rag: 'Green',
+    living: false,
+    goals: [],
+    stages: ['Define scope','Plan & design','Execute','Review & test','Complete'],
+    currentStage: 0,
+    documents: [],
+    owner: document.getElementById('m-owner').value.trim() || 'Prerit',
+    startDate: new Date().toLocaleDateString('en-AU',{month:'long',year:'numeric'}),
+    targetDate: 'TBD',
+    notes: ''
+  };
+  projects.push(newP);
+  save(); render(); closeModal();
+  document.getElementById('m-name').value='';
+  document.getElementById('m-desc').value='';
+  document.getElementById('m-owner').value='';
+  openPanel(newP.id);
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ closePanel(); closeModal(); } });
+</script>
 </body>
 </html>
