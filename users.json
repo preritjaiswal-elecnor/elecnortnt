@@ -1,0 +1,48 @@
+[
+  {
+    "key": "apollo",
+    "name": "Ivan",
+    "codename": "Mission Commander",
+    "emoji": "\ud83d\ude80",
+    "level": "owner",
+    "projects": "all",
+    "canAdd": true,
+    "master": true
+  },
+  {
+    "key": "polaris",
+    "name": "Prerit",
+    "codename": "Lead Navigator",
+    "emoji": "\ud83c\udf0d",
+    "level": "owner",
+    "projects": "all",
+    "canAdd": true,
+    "master": true
+  },
+  {
+    "key": "orion",
+    "name": "Laura",
+    "codename": "Mission Specialist",
+    "emoji": "\ud83d\udef0\ufe0f",
+    "level": "specialist",
+    "projects": [
+      5,
+      6
+    ],
+    "canAdd": false,
+    "master": false
+  },
+  {
+    "key": "artemis",
+    "name": "Ana",
+    "codename": "Mission Specialist",
+    "emoji": "\ud83c\udf19",
+    "level": "specialist",
+    "projects": [
+      5,
+      6
+    ],
+    "canAdd": false,
+    "master": false
+  }
+]
