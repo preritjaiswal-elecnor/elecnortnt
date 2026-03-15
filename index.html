@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>T&T Dashboard — Elecnor Australia</title>
+<meta name="theme-color" content="#003087"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="T&T Dashboard"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="icon-192.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -47,7 +53,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 
 /* APP */
 .app{display:flex;flex-direction:column;height:100vh}
-.board-wrap{flex:1;display:flex;overflow:hidden;position:relative}
+.board-wrap{flex:1;display:flex;overflow:hidden;position:relative;-webkit-overflow-scrolling:touch}
 
 /* BOARD */
 .board{flex:1;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden;transition:margin-right .32s cubic-bezier(.4,0,.2,1)}
@@ -219,6 +225,354 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .modal-save{flex:1;padding:11px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
 .modal-cancel{padding:11px 18px;background:var(--light);color:var(--mid);border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
 
+
+/* Stage editor */
+.stage-editor{display:none;margin-top:8px;background:var(--light);border-radius:8px;padding:10px}
+.stage-editor.open{display:block}
+.stage-edit-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.stage-edit-inp{flex:1;border:1.5px solid #e2e8f0;border-radius:6px;padding:5px 9px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:500;outline:none;color:var(--dark);transition:border .15s}
+.stage-edit-inp:focus{border-color:var(--orange)}
+.stage-rm-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;font-family:'Montserrat',sans-serif}
+.stage-rm-btn:hover{color:var(--red)}
+.stage-add-row{display:flex;gap:6px;margin-top:4px}
+.stage-add-inp{flex:1;border:1.5px dashed #cbd5e1;border-radius:6px;padding:5px 9px;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;color:var(--dark);transition:border .15s;background:#fff}
+.stage-add-inp:focus{border-color:var(--orange);border-style:solid}
+.stage-add-btn{background:var(--blue);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer}
+.edit-icon-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:0 4px;transition:color .15s;line-height:1}
+.edit-icon-btn:hover{color:var(--orange)}
+.sec-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--light)}
+.sec-title-row .sec-title{margin-bottom:0;padding-bottom:0;border-bottom:none}
+
+
+/* ── AUTH SCREEN ── */
+#auth-screen{position:fixed;inset:0;z-index:9999;background:var(--blue-dark);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+#auth-screen.gone{display:none}
+
+/* Grid background */
+.auth-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.auth-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,0,.12) 0%,transparent 70%);pointer-events:none}
+
+/* Corner accents */
+.auth-corner{position:absolute;width:60px;height:60px;border-color:rgba(255,106,0,.4);border-style:solid}
+.auth-corner.tl{top:24px;left:24px;border-width:2px 0 0 2px}
+.auth-corner.tr{top:24px;right:24px;border-width:2px 2px 0 0}
+.auth-corner.bl{bottom:24px;left:24px;border-width:0 0 2px 2px}
+.auth-corner.br{bottom:24px;right:24px;border-width:0 2px 2px 0}
+
+.auth-box{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;width:400px;padding:40px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;backdrop-filter:blur(10px)}
+.auth-logo{background:#fff;border-radius:10px;padding:8px 20px;margin-bottom:32px;display:flex;align-items:center}
+.auth-logo img{height:28px;display:block}
+.auth-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px}
+.auth-title{font-size:26px;font-weight:800;color:#fff;margin-bottom:4px;text-align:center}
+.auth-title span{color:var(--orange)}
+.auth-sub{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:32px;font-weight:500;text-align:center}
+
+.auth-input-wrap{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.auth-inp{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 18px;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;color:#fff;outline:none;letter-spacing:1px;transition:border .2s,background .2s}
+.auth-inp::placeholder{color:rgba(255,255,255,.25);letter-spacing:.5px;font-weight:400}
+.auth-inp:focus{border-color:var(--orange);background:rgba(255,255,255,.09)}
+.auth-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:rgba(255,255,255,.35);font-size:16px;padding:4px;transition:color .15s}
+.auth-eye:hover{color:rgba(255,255,255,.7)}
+
+.auth-btn{width:100%;padding:14px;background:var(--orange);color:#fff;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.5px;transition:background .15s,transform .1s;margin-bottom:16px}
+.auth-btn:hover{background:#e05500}
+.auth-btn:active{transform:scale(.98)}
+.auth-err{font-size:11px;color:#f87171;font-weight:600;text-align:center;min-height:16px;letter-spacing:.3px}
+
+.auth-hint{margin-top:28px;text-align:center}
+.auth-hint-title{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:10px;font-weight:600}
+.auth-roles{display:flex;gap:8px;justify-content:center}
+.auth-role{padding:4px 12px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.3)}
+
+/* Role badge in header */
+.role-badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border-radius:20px;padding:4px 12px;cursor:pointer;transition:background .15s}
+.role-badge:hover{background:rgba(255,255,255,.15)}
+.role-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.role-badge-name{font-size:11px;font-weight:700;color:rgba(255,255,255,.8)}
+.role-badge-logout{font-size:10px;color:rgba(255,255,255,.35);margin-left:2px}
+
+/* Locked card */
+.card.locked{cursor:default;pointer-events:auto}
+.card.locked:hover{transform:none;box-shadow:0 1px 5px rgba(0,0,0,.07)}
+.card-blur{filter:blur(4px);user-select:none;pointer-events:none}
+.card-lock-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:10px;background:rgba(255,255,255,.5)}
+.card-lock-icon{font-size:20px;opacity:.4}
+.card-lock-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mid);opacity:.6}
+
+
+/* ── ADMIN PANEL ── */
+#admin-screen{position:fixed;inset:0;z-index:8000;background:var(--blue-dark);display:none;flex-direction:column;overflow:hidden}
+#admin-screen.open{display:flex}
+.adm-hdr{height:58px;background:var(--blue);display:flex;align-items:center;justify-content:space-between;padding:0 28px;flex-shrink:0;box-shadow:0 2px 16px rgba(0,0,60,.3)}
+.adm-title{font-size:17px;font-weight:800;color:#fff}
+.adm-title span{color:var(--orange)}
+.adm-sub{font-size:10px;color:rgba(255,255,255,.35);font-weight:500;margin-top:1px}
+.adm-close{background:rgba(255,255,255,.1);border:none;border-radius:7px;padding:7px 16px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s}
+.adm-close:hover{background:rgba(255,255,255,.18)}
+.adm-body{flex:1;overflow-y:auto;padding:32px;display:flex;flex-direction:column;gap:28px;max-width:860px;margin:0 auto;width:100%}
+.adm-section{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px}
+.adm-sec-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:18px}
+.user-grid{display:flex;flex-direction:column;gap:12px}
+.user-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 18px;display:grid;grid-template-columns:36px 1fr auto;gap:14px;align-items:start}
+.user-card.master{border-color:rgba(255,106,0,.3);background:rgba(255,106,0,.06)}
+.user-emoji{font-size:22px;line-height:1;margin-top:2px}
+.user-info{display:flex;flex-direction:column;gap:8px}
+.user-name-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.user-name-inp{background:transparent;border:none;border-bottom:1.5px solid rgba(255,255,255,.15);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#fff;outline:none;padding:2px 4px;width:140px;transition:border .15s}
+.user-name-inp:focus{border-color:var(--orange)}
+.user-key-wrap{display:flex;align-items:center;gap:6px}
+.user-key-inp{background:rgba(0,0,0,.25);border:1.5px solid rgba(255,255,255,.1);border-radius:6px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.7);outline:none;padding:5px 10px;width:140px;letter-spacing:.5px;transition:border .15s}
+.user-key-inp:focus{border-color:var(--orange);color:#fff}
+.key-gen-btn{background:rgba(255,255,255,.08);border:none;border-radius:5px;padding:5px 9px;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .15s}
+.key-gen-btn:hover{background:rgba(255,106,0,.2);color:var(--orange)}
+.user-level-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.level-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.level-btn{padding:4px 12px;border-radius:20px;border:1.5px solid rgba(255,255,255,.15);background:transparent;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;transition:all .15s}
+.level-btn.on.owner{border-color:var(--orange);color:var(--orange);background:rgba(255,106,0,.12)}
+.level-btn.on.specialist{border-color:#60a5fa;color:#60a5fa;background:rgba(96,165,250,.1)}
+.can-add-row{display:flex;align-items:center;gap:8px}
+.can-add-lbl{font-size:10px;color:rgba(255,255,255,.4);font-weight:500}
+.mini-toggle{width:30px;height:17px;border-radius:9px;background:#334155;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;border:none}
+.mini-toggle.on{background:var(--orange)}
+.mini-toggle::after{content:'';position:absolute;top:2.5px;left:2.5px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .2s}
+.mini-toggle.on::after{transform:translateX(13px)}
+.proj-access-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:7px}
+.proj-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.proj-chip{padding:3px 10px;border-radius:20px;border:1.5px solid rgba(255,255,255,.1);background:transparent;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;color:rgba(255,255,255,.35);cursor:pointer;transition:all .15s}
+.proj-chip.on{border-color:var(--orange);color:var(--orange);background:rgba(255,106,0,.1)}
+.proj-chip.all-on{border-color:#4ade80;color:#4ade80;background:rgba(74,222,128,.08)}
+.user-actions{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.save-user-btn{background:var(--orange);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.save-user-btn:hover{background:#e05500}
+.save-user-btn.ok{background:var(--rag-g)}
+.del-user-btn{background:rgba(220,38,38,.15);color:#f87171;border:1px solid rgba(220,38,38,.2);border-radius:6px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer}
+.del-user-btn:hover{background:rgba(220,38,38,.25)}
+.add-user-box{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+.adm-inp{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;padding:9px 13px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:#fff;outline:none;width:100%;transition:border .15s}
+.adm-inp::placeholder{color:rgba(255,255,255,.25);font-weight:400}
+.adm-inp:focus{border-color:var(--orange)}
+.adm-inp-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px}
+.adm-add-btn{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;cursor:pointer;height:42px}
+.adm-add-btn:hover{background:#e05500}
+.admin-btn{background:rgba(255,255,255,.1);border:none;border-radius:7px;padding:7px 14px;color:rgba(255,255,255,.7);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer;display:none;align-items:center;gap:6px;transition:background .15s}
+.admin-btn:hover{background:rgba(255,255,255,.18);color:#fff}
+
+
+/* ── CHAT ── */
+.chat-btn{position:absolute;bottom:10px;right:10px;background:var(--blue);border:none;border-radius:20px;padding:5px 10px 5px 8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .15s;z-index:5}
+.chat-btn:hover{background:var(--blue-mid)}
+.chat-btn-icon{font-size:13px;line-height:1}
+.chat-badge{background:var(--orange);border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;min-width:16px;text-align:center}
+
+/* Chat drawer — slides up inside the panel */
+.chat-drawer{position:fixed;bottom:0;right:0;width:var(--panel);height:420px;background:#fff;border-top:2px solid var(--orange);border-left:1px solid rgba(0,0,0,.09);box-shadow:0 -4px 24px rgba(0,0,0,.12);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:150}
+.chat-drawer.open{transform:translateY(0)}
+.chat-drawer.board-shifted{right:var(--panel)}
+.chat-hdr{padding:10px 14px;border-bottom:1px solid var(--light);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--blue-dark)}
+.chat-hdr-l{display:flex;align-items:center;gap:8px}
+.chat-hdr-icon{font-size:16px}
+.chat-hdr-name{font-size:12px;font-weight:700;color:#fff}
+.chat-hdr-sub{font-size:9px;color:rgba(255,255,255,.4);font-weight:500}
+.chat-close{background:rgba(255,255,255,.1);border:none;border-radius:5px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6);font-size:12px;font-family:'Montserrat',sans-serif}
+.chat-close:hover{background:rgba(255,255,255,.2);color:#fff}
+.chat-msgs{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;background:#f8fafc}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:2px}
+.chat-empty{text-align:center;color:var(--muted);font-size:11px;font-weight:500;margin:auto;padding:20px}
+.msg{display:flex;flex-direction:column;gap:2px;max-width:85%}
+.msg.mine{align-self:flex-end;align-items:flex-end}
+.msg.theirs{align-self:flex-start;align-items:flex-start}
+.msg-meta{font-size:9px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px}
+.msg-bubble{padding:8px 11px;border-radius:10px;font-size:12px;line-height:1.5;font-weight:500;word-break:break-word}
+.msg.mine .msg-bubble{background:var(--blue);color:#fff;border-radius:10px 10px 2px 10px}
+.msg.theirs .msg-bubble{background:#fff;color:var(--dark);border-radius:10px 10px 10px 2px;border:1px solid #e2e8f0}
+.chat-input-row{padding:10px 12px;border-top:1px solid var(--light);display:flex;gap:8px;flex-shrink:0;background:#fff}
+.chat-inp{flex:1;border:1.5px solid #e2e8f0;border-radius:20px;padding:7px 14px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:500;outline:none;transition:border .15s;color:var(--dark);background:var(--light)}
+.chat-inp:focus{border-color:var(--orange);background:#fff}
+.chat-send{background:var(--orange);border:none;border-radius:20px;padding:7px 16px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s;flex-shrink:0}
+.chat-send:hover{background:#e05500}
+
+
+/* ── NOTIFICATIONS ── */
+.bell-wrap{position:relative;display:none}
+.bell-btn{background:rgba(255,255,255,.1);border:none;border-radius:7px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;transition:background .15s;position:relative}
+.bell-btn:hover{background:rgba(255,255,255,.18)}
+.bell-badge{position:absolute;top:-4px;right:-4px;background:var(--orange);color:#fff;border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;min-width:16px;text-align:center;border:2px solid var(--blue);display:none}
+.bell-badge.show{display:block}
+.notif-panel{position:absolute;top:calc(100% + 10px);right:0;width:320px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);border:1px solid rgba(0,0,0,.08);z-index:500;display:none;flex-direction:column;overflow:hidden;max-height:420px}
+.notif-panel.open{display:flex}
+.notif-ph{padding:12px 16px;border-bottom:1px solid var(--light);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.notif-ph-title{font-size:12px;font-weight:800;color:var(--dark)}
+.notif-clear{background:none;border:none;font-size:10px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Montserrat',sans-serif}
+.notif-clear:hover{color:var(--red)}
+.notif-list{overflow-y:auto;flex:1}
+.notif-list::-webkit-scrollbar{width:3px}
+.notif-list::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:2px}
+.notif-empty{padding:28px;text-align:center;color:var(--muted);font-size:11px;font-weight:500}
+.notif-item{padding:10px 16px;border-bottom:1px solid var(--light);display:flex;gap:10px;align-items:flex-start;transition:background .15s}
+.notif-item:hover{background:var(--light)}
+.notif-item.unread{background:#fff8f3;border-left:3px solid var(--orange)}
+.notif-item.unread:hover{background:#fff0e6}
+.notif-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.notif-body{flex:1}
+.notif-text{font-size:11px;color:var(--dark);font-weight:600;line-height:1.4;margin-bottom:2px}
+.notif-text span{color:var(--orange)}
+.notif-time{font-size:9px;color:var(--muted);font-weight:500}
+
+
+
+/* ── MOBILE TAB BAR ── */
+.mob-tabs{display:none;background:var(--blue-dark);padding:0;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.08)}
+.mob-tab{flex:1;padding:10px 4px;background:none;border:none;border-bottom:3px solid transparent;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.mob-tab.active{color:#fff;border-bottom-color:var(--orange)}
+
+/* ── MOBILE MODAL ── */
+.mob-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;display:none;align-items:center;justify-content:center;padding:16px;pointer-events:none}
+.mob-modal-bg.open{display:flex;pointer-events:all}
+.mob-modal{background:#fff;border-radius:16px;width:100%;max-width:480px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.mob-modal-hdr{padding:16px 18px 12px;border-bottom:1px solid var(--light);display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-shrink:0}
+.mob-modal-name{font-size:15px;font-weight:800;color:var(--dark);line-height:1.3;flex:1}
+.mob-modal-close{background:var(--light);border:none;border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--mid);flex-shrink:0;font-family:'Montserrat',sans-serif}
+.mob-modal-body{flex:1;overflow-y:auto;padding:14px 18px;-webkit-overflow-scrolling:touch}
+.mob-modal-body::-webkit-scrollbar{width:3px}
+.mob-modal-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:2px}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  :root { --panel: 100vw; }
+
+  /* ── HEADER ── */
+  header { padding: 0 10px; gap: 6px; }
+  .h-sub,.hstat,.hdiv { display: none; }
+  .h-title { font-size: 15px; }
+  .logo-wrap { padding: 3px 8px; height: 32px; }
+  .logo-wrap img { height: 17px; }
+  .h-r { gap: 7px; }
+  .add-btn { padding: 6px 10px; font-size: 10px; }
+  .admin-btn { padding: 5px 8px; font-size: 10px; }
+  .role-badge { padding: 3px 8px; }
+  .role-badge-name { font-size: 9px; max-width: 90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  #sync-status { display: none !important; }
+  .bell-btn { width: 30px; height: 30px; font-size: 14px; }
+
+  /* ── PILLARS: hide on mobile ── */
+  .pillars { display: none; }
+
+  /* ── MOBILE TAB BAR ── */
+  .mob-tabs { display: flex !important; }
+
+  /* ── BOARD: single visible column at a time ── */
+  .board-wrap { overflow: hidden; flex-direction: column; flex: 1; min-height: 0; }
+  .board {
+    display: block !important;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+    margin-right: 0 !important;
+    height: 100%;
+  }
+  .board.shifted { margin-right: 0 !important; }
+  .col { display: none; border-right: none; height: 100%; flex-direction: column; }
+  .col.mob-active { display: flex; }
+  .col-body { 
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    min-height: 0;
+    padding-bottom: 20px;
+  }
+
+  /* ── DESKTOP PANEL: hide on mobile ── */
+  .panel { display: none !important; }
+
+  /* ── MOBILE MODAL: controlled by .open class only ── */
+
+  /* ── CHAT: bottom sheet ── */
+  .chat-drawer {
+    width: 100vw !important;
+    right: 0 !important;
+    left: 0;
+    height: 72vh;
+    border-radius: 18px 18px 0 0;
+    border-left: none;
+    border-top: 3px solid var(--orange);
+    box-shadow: 0 -8px 32px rgba(0,0,0,.18);
+  }
+
+  /* ── ADMIN ── */
+  .adm-body { padding: 16px; }
+  .add-user-box { grid-template-columns: 1fr; }
+  .user-card { grid-template-columns: 36px 1fr; }
+  .user-actions { flex-direction: row; grid-column: 2; }
+
+  /* ── MODAL ── */
+  .modal { width: 95vw; padding: 20px; max-height: 90vh; overflow-y: auto; }
+
+  /* ── AUTH ── */
+  .auth-box { width: 92vw; padding: 28px 20px; }
+  .auth-corner { display: none; }
+  .auth-title { font-size: 22px; }
+
+  /* ── NOTIF ── */
+  .notif-panel { width: calc(100vw - 20px); right: -10px; }
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+
+/* ── SYSTEM MESSAGES + BROADCAST ── */
+.msg.system{align-self:center;align-items:center;max-width:95%}
+.msg.system .msg-bubble{background:var(--light);color:var(--mid);font-size:10.5px;font-weight:600;border-radius:20px;padding:5px 14px;border:1px solid rgba(0,0,0,.06);font-style:italic}
+.msg.broadcast{align-self:center;align-items:center;max-width:95%;width:100%}
+.msg.broadcast .msg-meta{color:var(--orange);font-weight:700}
+.msg.broadcast .msg-bubble{background:linear-gradient(135deg,#fff8f0,#fff3e0);color:var(--dark);border:1.5px solid var(--orange);border-radius:10px;padding:10px 14px;font-weight:600;font-size:12px;width:100%}
+.broadcast-btn{background:rgba(255,255,255,.1);border:none;border-radius:7px;padding:7px 13px;color:rgba(255,255,255,.7);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer;display:none;align-items:center;gap:6px;transition:background .15s}
+.broadcast-btn:hover{background:rgba(255,106,0,.25);color:var(--orange)}
+/* Broadcast modal */
+.bc-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:700;display:none;align-items:center;justify-content:center;padding:20px}
+.bc-modal-bg.open{display:flex}
+.bc-modal{background:#fff;border-radius:16px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.bc-modal-hdr{background:var(--blue-dark);padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
+.bc-modal-title{font-size:14px;font-weight:800;color:#fff}
+.bc-modal-title span{color:var(--orange)}
+.bc-modal-close{background:rgba(255,255,255,.1);border:none;border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6);font-size:13px;font-family:'Montserrat',sans-serif}
+.bc-modal-body{padding:20px 22px;display:flex;flex-direction:column;gap:14px}
+.bc-modal-sub{font-size:11px;color:var(--mid);font-weight:500;line-height:1.5}
+.bc-modal-sub strong{color:var(--orange)}
+.bc-inp{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:11px 14px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;outline:none;transition:border .15s;color:var(--dark);min-height:90px;resize:vertical}
+.bc-inp:focus{border-color:var(--orange)}
+.bc-modal-footer{display:flex;gap:10px;justify-content:flex-end;padding:0 22px 20px}
+.bc-cancel{background:var(--light);border:none;border-radius:8px;padding:9px 18px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;cursor:pointer;color:var(--mid)}
+.bc-send{background:var(--orange);border:none;border-radius:8px;padding:9px 20px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;cursor:pointer;color:#fff;display:flex;align-items:center;gap:7px;transition:background .15s}
+.bc-send:hover{background:#e05500}
+@media(max-width:768px){
+  .broadcast-btn{padding:5px 8px;font-size:10px}
+  .bc-modal{width:95vw}
+}
+
+/* ── ARCHIVE ── */
+.archive-bar{background:#fff;border-top:2px solid var(--light);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:38px;flex-shrink:0;cursor:pointer;user-select:none;transition:background .15s}
+.archive-bar:hover{background:var(--light)}
+.archive-bar-l{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;color:var(--mid);letter-spacing:1px;text-transform:uppercase}
+.archive-bar-icon{font-size:15px}
+.archive-pill{background:var(--mid);color:#fff;border-radius:20px;padding:1px 8px;font-size:10px;font-weight:700}
+.archive-chevron{font-size:12px;color:var(--muted);transition:transform .2s}
+.archive-chevron.open{transform:rotate(180deg)}
+.archive-body{background:#f8fafc;border-top:1px solid var(--light);display:none;overflow-y:auto;max-height:260px;padding:12px 16px;gap:8px;flex-wrap:wrap}
+.archive-body.open{display:flex}
+.archive-card{background:#fff;border-radius:8px;padding:10px 12px;border:1px solid var(--light);opacity:.7;min-width:220px;flex:1;max-width:320px;display:flex;flex-direction:column;gap:6px}
+.archive-card-name{font-size:12px;font-weight:700;color:var(--mid)}
+.archive-card-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.archive-card-actions{display:flex;justify-content:flex-end;margin-top:4px}
+.unarchive-btn{background:none;border:1.5px solid var(--muted);border-radius:5px;padding:3px 10px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:var(--mid);cursor:pointer;transition:all .15s}
+.unarchive-btn:hover{border-color:var(--orange);color:var(--orange)}
+.arch-btn{background:rgba(0,0,0,.04);border:1.5px solid rgba(0,0,0,.1);border-radius:6px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--mid);cursor:pointer;transition:all .15s;display:none}
+.arch-btn:hover{border-color:var(--orange);color:var(--orange)}
+@media(max-width:768px){
+  .archive-body{flex-direction:column;max-height:220px}
+  .archive-card{max-width:100%}
+}
+
 /* FOOTER */
 .footer{height:22px;background:var(--blue-dark);display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex-shrink:0}
 .footer span{font-size:8px;color:rgba(255,255,255,.28);letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
@@ -226,6 +580,68 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 </style>
 </head>
 <body>
+<!-- AUTH SCREEN -->
+<div id="auth-screen">
+  <div class="auth-grid"></div>
+  <div class="auth-glow"></div>
+  <div class="auth-corner tl"></div>
+  <div class="auth-corner tr"></div>
+  <div class="auth-corner bl"></div>
+  <div class="auth-corner br"></div>
+  <div class="auth-box">
+    <div class="auth-logo">
+      <img src="https://www.elecnor.com.au/storage/media/files/shares/logo-elecnoraustralia.png" alt="Elecnor"/>
+    </div>
+    <div class="auth-tag">T&T Program · Mission Control</div>
+    <div class="auth-title"><span>T&T</span> Dashboard</div>
+    <div class="auth-sub">Technology &amp; Transformation · Elecnor Australia</div>
+    <div id="auth-loading" style="display:none;flex-direction:column;align-items:center;gap:10px;margin-bottom:8px"><div style="width:28px;height:28px;border:3px solid rgba(255,255,255,.2);border-top-color:var(--orange);border-radius:50%;animation:spin 0.8s linear infinite"></div><div style="font-size:11px;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:1px">LOADING MISSION DATA…</div></div>
+    <div class="auth-input-wrap" id="auth-input-wrap" style="display:none">
+      <div style="position:relative;width:100%">
+        <input class="auth-inp" id="auth-inp" type="password" placeholder="Enter your access key…" autocomplete="off" onkeydown="if(event.key==='Enter')doAuth()" style="padding-right:48px"/>
+        <button class="auth-eye" onclick="toggleAuthVis()" id="auth-eye">👁</button>
+      </div>
+      <button class="auth-btn" onclick="doAuth()">Access Dashboard</button>
+    </div>
+    <div class="auth-err" id="auth-err"></div>
+
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-screen">
+  <div class="adm-hdr">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="logo-wrap" style="height:36px;padding:4px 10px"><img src="https://www.elecnor.com.au/storage/media/files/shares/logo-elecnoraustralia.png" style="height:20px"/></div>
+      <div>
+        <div class="adm-title">⚙️ <span>Mission</span> Control — User Management</div>
+        <div class="adm-sub">Visible to Owners only · Changes take effect on next login</div>
+      </div>
+    </div>
+    <button class="adm-close" onclick="closeAdmin()">← Back to Dashboard</button>
+  </div>
+  <div class="adm-body">
+    <div class="adm-section">
+      <div class="adm-sec-title">Current Users</div>
+      <div class="user-grid" id="user-grid"></div>
+    </div>
+    <div class="adm-section">
+      <div class="adm-sec-title">Add New User</div>
+      <div class="add-user-box">
+        <div>
+          <div class="adm-inp-lbl">Name</div>
+          <input class="adm-inp" id="new-name" placeholder="e.g. Sarah"/>
+        </div>
+        <div>
+          <div class="adm-inp-lbl">Access Key <button class="key-gen-btn" onclick="fillNewKey()" style="margin-left:6px">⟳ suggest</button></div>
+          <input class="adm-inp" id="new-key" placeholder="e.g. nebula"/>
+        </div>
+        <button class="adm-add-btn" onclick="addNewUser()">＋ Add User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="app">
 
 <!-- HEADER -->
@@ -249,9 +665,44 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     <div class="hdiv"></div>
     <div class="hstat"><div class="hstat-v" id="s-avg">—</div><div class="hstat-l">Avg Progress</div></div>
     <div class="hdiv"></div>
-    <button class="add-btn" onclick="openModal()">＋ Add Project</button>
+    <span id="sync-status" style="font-size:10px;font-weight:600;transition:color .3s;min-width:120px;text-align:right"></span>
+    <button class="admin-btn" id="admin-btn" onclick="openAdmin()">⚙️ Users</button>
+    <button class="broadcast-btn" id="broadcast-btn" onclick="openBroadcast()">📣 Broadcast</button>
+    <div class="bell-wrap" id="bell-wrap">
+      <button class="bell-btn" onclick="toggleNotifPanel()" id="bell-btn" title="Notifications">🔔
+        <span class="bell-badge" id="bell-badge"></span>
+      </button>
+      <div class="notif-panel" id="notif-panel">
+        <div class="notif-ph">
+          <div class="notif-ph-title">Notifications</div>
+          <button class="notif-clear" onclick="clearNotifs()">Clear all</button>
+        </div>
+        <div class="notif-list" id="notif-list"></div>
+      </div>
+    </div>
+    <div id="role-badge-wrap"></div>
+    <button class="add-btn" id="add-proj-btn" onclick="openModal()" style="display:none">＋ Add Project</button>
   </div>
 </header>
+
+
+<!-- MOBILE TAB BAR -->
+<div class="mob-tabs" id="mob-tabs">
+  <button class="mob-tab active" data-col="Level 1" onclick="mobTab(this)">⚡ Level 1</button>
+  <button class="mob-tab" data-col="Level 2" onclick="mobTab(this)">◎ Level 2</button>
+  <button class="mob-tab" data-col="Level 3" onclick="mobTab(this)">◷ Level 3</button>
+</div>
+
+<!-- MOBILE PROJECT MODAL -->
+<div class="mob-modal-bg" id="mob-modal-bg" onclick="closeMobModal(event)">
+  <div class="mob-modal" id="mob-modal" onclick="event.stopPropagation()">
+    <div class="mob-modal-hdr">
+      <div class="mob-modal-name" id="mob-modal-name"></div>
+      <button class="mob-modal-close" onclick="closeMobModal()">✕</button>
+    </div>
+    <div class="mob-modal-body" id="mob-modal-body"></div>
+  </div>
+</div>
 
 <!-- PILLARS -->
 <div class="pillars">
@@ -325,8 +776,18 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
       </div>
 
       <div class="sec">
-        <div class="sec-title">Stage Map — click to advance</div>
+        <div class="sec-title-row">
+          <div class="sec-title">Stage Map — click to advance</div>
+          <button class="edit-icon-btn" onclick="toggleStageEditor()" title="Edit stages">✏️</button>
+        </div>
         <div class="stage-map" id="p-stages"></div>
+        <div class="stage-editor" id="stage-editor">
+          <div id="stage-edit-list"></div>
+          <div class="stage-add-row">
+            <input class="stage-add-inp" id="stage-new-inp" placeholder="Add new stage…"/>
+            <button class="stage-add-btn" onclick="addStageItem()">Add</button>
+          </div>
+        </div>
       </div>
 
       <div class="sec">
@@ -374,8 +835,40 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     </div>
     <div class="p-footer">
       <button class="save-btn" id="save-btn" onclick="saveProject()">Save Changes</button>
+      <button class="arch-btn" id="arch-btn" onclick="archiveProject()">🗄 Archive</button>
       <button class="del-btn" onclick="deleteProject()">🗑</button>
     </div>
+  </div>
+</div>
+
+
+<!-- ARCHIVE -->
+<div class="archive-bar" onclick="toggleArchive()" id="archive-bar">
+  <div class="archive-bar-l">
+    <span class="archive-bar-icon">🗄️</span>
+    <span>Archived Projects</span>
+    <span class="archive-pill" id="archive-pill">0</span>
+  </div>
+  <span class="archive-chevron" id="archive-chevron">▼</span>
+</div>
+<div class="archive-body" id="archive-body"></div>
+
+<!-- CHAT DRAWER -->
+<div class="chat-drawer" id="chat-drawer">
+  <div class="chat-hdr">
+    <div class="chat-hdr-l">
+      <div class="chat-hdr-icon">💬</div>
+      <div>
+        <div class="chat-hdr-name" id="chat-hdr-name">Project Chat</div>
+        <div class="chat-hdr-sub" id="chat-hdr-sub">Team messages</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="closeChat()">✕</button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs"></div>
+  <div class="chat-input-row">
+    <input class="chat-inp" id="chat-inp" placeholder="Type a message…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"/>
+    <button class="chat-send" onclick="sendMsg()">Send</button>
   </div>
 </div>
 
@@ -417,6 +910,10 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
       <label class="form-lbl">Owner</label>
       <input class="form-inp" id="m-owner" placeholder="e.g. Prerit, Ivan"/>
     </div>
+    <div class="form-row">
+      <label class="form-lbl">Stage Map <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">(one per line, or leave blank for defaults)</span></label>
+      <textarea class="form-inp form-ta" id="m-stages" placeholder="Define scope&#10;Plan & design&#10;Execute&#10;Review & test&#10;Complete" style="min-height:90px;font-size:12px"></textarea>
+    </div>
     <div class="modal-footer">
       <button class="modal-cancel" onclick="closeModal()">Cancel</button>
       <button class="modal-save" onclick="addProject()">Add Project</button>
@@ -424,30 +921,431 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
   </div>
 </div>
 
+
+<!-- BROADCAST MODAL -->
+<div class="bc-modal-bg" id="bc-modal-bg" onclick="if(event.target===this)closeBroadcast()">
+  <div class="bc-modal">
+    <div class="bc-modal-hdr">
+      <div class="bc-modal-title">📣 <span>Clan Mail</span> — Broadcast to All Projects</div>
+      <button class="bc-modal-close" onclick="closeBroadcast()">✕</button>
+    </div>
+    <div class="bc-modal-body">
+      <div class="bc-modal-sub">Your message will be posted into <strong>every project chat</strong> you have access to. Use this for program-wide announcements, reminders, or updates.</div>
+      <textarea class="bc-inp" id="bc-inp" placeholder="e.g. Team — please review your project RAG statuses before Friday's board meeting…"></textarea>
+    </div>
+    <div class="bc-modal-footer">
+      <button class="bc-cancel" onclick="closeBroadcast()">Cancel</button>
+      <button class="bc-send" onclick="sendBroadcast()">📣 Send to All Projects</button>
+    </div>
+  </div>
+</div>
+
 <script>
+
+
+// ── GITHUB SYNC CONFIG ────────────────────────────────────────────────
+const GH = {
+  owner: 'preritjaiswal-elecnor',
+  repo:  'elecnortnt',
+  token: 'YOUR_GITHUB_TOKEN_HERE',  // paste your token here
+  dataFile:  'data.json',
+  usersFile: 'users.json',
+};
+
+async function ghGet(file) {
+  const r = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${file}`, {
+    headers: { Authorization: `token ${GH.token}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) throw new Error('GitHub read failed: ' + r.status);
+  const d = await r.json();
+  return { content: JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\n/g,'').trim())))), sha: d.sha };
+}
+
+async function ghPut(file, content, sha, message) {
+  const r = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${file}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${GH.token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))), sha })
+  });
+  if (!r.ok) throw new Error('GitHub write failed: ' + r.status);
+  return r.json();
+}
+
+// SHA cache so we don't re-fetch on every save
+let _dataSha  = null;
+let _usersSha = null;
+
+async function loadFromGitHub() {
+  try {
+    const [dataRes, usersRes] = await Promise.all([ghGet(GH.dataFile), ghGet(GH.usersFile)]);
+    _dataSha  = dataRes.sha;
+    _usersSha = usersRes.sha;
+    return { projects: dataRes.content.projects, users: usersRes.content };
+  } catch(e) {
+    console.warn('GitHub load failed, using embedded data:', e.message);
+    return null;
+  }
+}
+
+async function saveProjectsToGitHub() {
+  if (!_dataSha) { console.warn('No SHA, skipping GitHub save'); return; }
+  try {
+    showSyncStatus('saving');
+    const res = await ghPut(GH.dataFile, { projects }, _dataSha, 'Dashboard update: projects');
+    _dataSha = res.content.sha;
+    showSyncStatus('saved');
+  } catch(e) {
+    console.error('GitHub save failed:', e);
+    showSyncStatus('error');
+  }
+}
+
+async function saveUsersToGitHub(users) {
+  if (!_usersSha) { console.warn('No SHA, skipping GitHub save'); return; }
+  try {
+    showSyncStatus('saving');
+    const res = await ghPut(GH.usersFile, users, _usersSha, 'Dashboard update: users');
+    _usersSha = res.content.sha;
+    showSyncStatus('saved');
+  } catch(e) {
+    console.error('GitHub users save failed:', e);
+    showSyncStatus('error');
+  }
+}
+
+function showSyncStatus(state) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  const states = {
+    saving: { text: '⟳ Syncing…', color: 'rgba(255,255,255,.4)' },
+    saved:  { text: '✓ Saved to GitHub', color: '#4ade80' },
+    error:  { text: '✗ Sync failed', color: '#f87171' },
+  };
+  const s = states[state];
+  el.textContent = s.text;
+  el.style.color = s.color;
+  if (state !== 'saving') setTimeout(() => { el.textContent = ''; }, 3000);
+}
+
+// ── AUTH ──────────────────────────────────────────────────────────────
+const ROLES = {
+  'apollo':   { name:'Ivan',   codename:'Mission Commander',  emoji:'🚀', level:'owner',     projects:'all' },
+  'polaris':  { name:'Prerit', codename:'Lead Navigator',     emoji:'🌍', level:'owner',     projects:'all' },
+  'orion':    { name:'Laura',  codename:'Mission Specialist', emoji:'🛰️', level:'specialist', projects:[5,6] },
+  'artemis':  { name:'Ana',    codename:'Mission Specialist', emoji:'🌙', level:'specialist', projects:[5,6] },
+};
+const AUTH_STORE = 'tt_auth_v1';
+let currentRole = null;
+
+function mergeStoredUsers() {
+  try {
+    const stored = JSON.parse(localStorage.getItem('tt_users_v1'));
+    if (stored && stored.length) {
+      stored.forEach(u => {
+        ROLES[u.key] = { name:u.name, codename:u.codename||u.name, emoji:u.emoji||'\u{1F464}', level:u.level, projects:u.projects, canAdd:u.canAdd };
+      });
+    }
+  } catch {}
+}
+
+function bootAuth() {
+  mergeStoredUsers();
+  const saved = localStorage.getItem(AUTH_STORE);
+  if (saved) {
+    const r = ROLES[saved];
+    if (r) { currentRole = { ...r, key: saved }; enterDashboard(); return; }
+  }
+  document.getElementById('auth-screen').classList.remove('gone');
+}
+
+function doAuth() {
+  mergeStoredUsers();
+  const key = document.getElementById('auth-inp').value.trim().toLowerCase();
+  const role = ROLES[key];
+  if (!role) {
+    const err = document.getElementById('auth-err');
+    err.textContent = 'Invalid access key. Try again.';
+    document.getElementById('auth-inp').style.borderColor = 'var(--red)';
+    setTimeout(() => { err.textContent=''; document.getElementById('auth-inp').style.borderColor=''; }, 2500);
+    return;
+  }
+  currentRole = { ...role, key };
+  localStorage.setItem(AUTH_STORE, key);
+  enterDashboard();
+}
+
+function enterDashboard() {
+  document.getElementById('auth-screen').classList.add('gone');
+  const isMaster = MASTERS.includes(currentRole.key);
+  const canAddProj = currentRole.canAdd || currentRole.level === 'owner';
+  if (canAddProj) document.getElementById('add-proj-btn').style.display = 'flex';
+  if (isMaster) document.getElementById('admin-btn').style.display = 'flex';
+  if (isMaster) document.getElementById('broadcast-btn').style.display = 'flex';
+  document.getElementById('bell-wrap').style.display = 'flex';
+  if (currentRole.level === 'owner') document.getElementById('arch-btn').style.display = 'flex';
+  startNotifPolling();
+  initMobile();
+  // Reload ROLES from stored users so changes persist
+  const stored = loadUsers();
+  stored.forEach(u => {
+    ROLES[u.key] = { name:u.name, codename:u.codename||u.name, emoji:u.emoji||'👤', level:u.level, projects:u.projects, canAdd:u.canAdd };
+  });
+  const wrap = document.getElementById('role-badge-wrap');
+  wrap.innerHTML = `<div class="role-badge" onclick="logout()" title="Click to sign out">
+    <div class="role-badge-dot"></div>
+    <div class="role-badge-name">${currentRole.emoji} ${currentRole.name} · ${currentRole.codename}</div>
+    <div class="role-badge-logout">✕</div>
+  </div>`;
+  render();
+  updateBell();
+}
+
+function logout() {
+  if (!confirm('Sign out?')) return;
+  localStorage.removeItem(AUTH_STORE);
+  currentRole = null;
+  document.getElementById('auth-screen').classList.remove('gone');
+  document.getElementById('auth-inp').value = '';
+  // Re-show input (hidden during load, must restore on logout)
+  document.getElementById('auth-input-wrap').style.display = 'flex';
+  document.getElementById('auth-loading').style.display = 'none';
+  closePanel();
+  closeChat();
+}
+
+function toggleAuthVis() {
+  const inp = document.getElementById('auth-inp');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+function canAccess(projectId) {
+  if (!currentRole) return false;
+  if (currentRole.projects === 'all') return true;
+  if (!Array.isArray(currentRole.projects)) return false;
+  return currentRole.projects.includes(projectId);
+}
+
+
+
+// ── ADMIN ─────────────────────────────────────────────────────────────
+const MASTERS = ['polaris','apollo']; // keys with admin access
+const USER_STORE = 'tt_users_v1';
+const SPACE_WORDS = ['nova','nebula','pulsar','quasar','lyra','vega','atlas','sirius','ceres','titan','rigel','altair','deneb','mimosa','castor','spica','capella','antares','procyon','fomalhaut'];
+
+function loadUsers() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(USER_STORE));
+    if (saved) return saved;
+  } catch {}
+  // Default users from ROLES
+  return Object.entries(ROLES).map(([key, r]) => ({
+    key, name: r.name, codename: r.codename, emoji: r.emoji,
+    level: r.level, projects: r.projects,
+    canAdd: r.level === 'owner', master: MASTERS.includes(key)
+  }));
+}
+
+function saveUsers(users) {
+  localStorage.setItem(USER_STORE, JSON.stringify(users));
+  users.forEach(u => {
+    ROLES[u.key] = { name:u.name, codename:u.codename||u.name, emoji:u.emoji||'👤', level:u.level, projects:u.projects, canAdd:u.canAdd };
+  });
+  saveUsersToGitHub(users);
+}
+
+function openAdmin() {
+  document.getElementById('admin-screen').classList.add('open');
+  renderAdmin();
+}
+function closeAdmin() {
+  document.getElementById('admin-screen').classList.remove('open');
+}
+
+function renderAdmin() {
+  const users = loadUsers();
+  const grid = document.getElementById('user-grid');
+  grid.innerHTML = '';
+  users.forEach((u, idx) => {
+    const allAccess = u.projects === 'all';
+    const projList = projects.map(p => {
+      const on = allAccess || (Array.isArray(u.projects) && u.projects.includes(p.id));
+      return `<button class="proj-chip ${on?'on':''}" data-pid="${p.id}" onclick="toggleProjChip(this,${idx},${p.id})">${p.name}</button>`;
+    }).join('');
+    const card = document.createElement('div');
+    card.className = 'user-card' + (u.master ? ' master' : '');
+    card.id = 'ucard-' + idx;
+    card.innerHTML = `
+      <div class="user-emoji">${u.emoji||'👤'}</div>
+      <div class="user-info">
+        <div class="user-name-row">
+          <input class="user-name-inp" value="${u.name}" id="uname-${idx}" placeholder="Name"/>
+          <div class="user-key-wrap">
+            <span style="font-size:9px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase">key</span>
+            <input class="user-key-inp" value="${u.key}" id="ukey-${idx}" placeholder="key" ${u.master?'readonly title="Master keys cannot be changed"':''}/>
+            ${!u.master ? `<button class="key-gen-btn" onclick="genKey(${idx})">⟳</button>` : ''}
+          </div>
+        </div>
+        <div class="user-level-row">
+          <span class="level-lbl">Role</span>
+          <button class="level-btn ${u.level==='owner'?'on owner':''}" id="ulvl-owner-${idx}" onclick="setLevel(${idx},'owner')">🚀 Owner</button>
+          <button class="level-btn ${u.level==='specialist'?'on specialist':''}" id="ulvl-spec-${idx}" onclick="setLevel(${idx},'specialist')">🛰️ Specialist</button>
+          <span class="level-lbl" style="margin-left:8px">Add projects</span>
+          <button class="mini-toggle ${u.canAdd?'on':''}" id="ucanadd-${idx}" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div>
+          <div class="proj-access-lbl">Project Access
+            <button class="key-gen-btn" style="margin-left:8px" onclick="toggleAllProjects(${idx})">Toggle All</button>
+          </div>
+          <div class="proj-chips" id="uchips-${idx}">${projList}</div>
+        </div>
+      </div>
+      <div class="user-actions">
+        <button class="save-user-btn" id="usave-${idx}" onclick="saveUser(${idx})">Save</button>
+        ${!u.master ? `<button class="del-user-btn" onclick="deleteUser(${idx})">Remove</button>` : ''}
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function toggleProjChip(btn, userIdx, projId) {
+  btn.classList.toggle('on');
+}
+
+function toggleAllProjects(userIdx) {
+  const chips = document.querySelectorAll(`#uchips-${userIdx} .proj-chip`);
+  const anyOff = [...chips].some(c => !c.classList.contains('on'));
+  chips.forEach(c => c.classList.toggle('on', anyOff));
+}
+
+function setLevel(userIdx, level) {
+  document.getElementById(`ulvl-owner-${userIdx}`).className = 'level-btn' + (level==='owner'?' on owner':'');
+  document.getElementById(`ulvl-spec-${userIdx}`).className = 'level-btn' + (level==='specialist'?' on specialist':'');
+}
+
+function genKey(userIdx) {
+  const word = SPACE_WORDS[Math.floor(Math.random()*SPACE_WORDS.length)];
+  const num  = Math.floor(Math.random()*90)+10;
+  document.getElementById('ukey-'+userIdx).value = word+'-'+num;
+}
+
+function saveUser(userIdx) {
+  const users = loadUsers();
+  const u = users[userIdx];
+  u.name   = document.getElementById('uname-'+userIdx).value.trim() || u.name;
+  if (!u.master) u.key = document.getElementById('ukey-'+userIdx).value.trim().toLowerCase() || u.key;
+  // level
+  const ownerOn = document.getElementById('ulvl-owner-'+userIdx).classList.contains('on');
+  u.level  = ownerOn ? 'owner' : 'specialist';
+  // canAdd
+  u.canAdd = document.getElementById('ucanadd-'+userIdx).classList.contains('on');
+  // projects
+  const chips = [...document.querySelectorAll('#uchips-'+userIdx+' .proj-chip')];
+  const selIds = chips.filter(c=>c.classList.contains('on')).map(c=>parseInt(c.dataset.pid));
+  u.projects = selIds.length === projects.length ? 'all' : selIds;
+  users[userIdx] = u;
+  saveUsers(users);
+  // If editing self, refresh currentRole so name/emoji stay in sync
+  if (currentRole && u.key === currentRole.key) {
+    currentRole = { ...ROLES[u.key], key: u.key };
+  }
+  const btn = document.getElementById('usave-'+userIdx);
+  btn.textContent='✓ Saved'; btn.classList.add('ok');
+  setTimeout(()=>{btn.textContent='Save';btn.classList.remove('ok');},1800);
+}
+
+function deleteUser(userIdx) {
+  const users = loadUsers();
+  if (!confirm(`Remove ${users[userIdx].name}?`)) return;
+  users.splice(userIdx,1);
+  saveUsers(users);
+  renderAdmin();
+}
+
+const EMOJIS = ['🌟','💫','🌠','🪐','☄️','🌌','🔭','🛸','👾','🌙'];
+function addNewUser() {
+  const name = document.getElementById('new-name').value.trim();
+  const key  = document.getElementById('new-key').value.trim().toLowerCase();
+  if (!name || !key) { alert('Name and key are required.'); return; }
+  const users = loadUsers();
+  if (users.find(u=>u.key===key)) { alert('That key is already taken — try another.'); return; }
+  users.push({
+    key, name, codename: 'Mission Specialist',
+    emoji: EMOJIS[Math.floor(Math.random()*EMOJIS.length)],
+    level: 'specialist', projects: [], canAdd: false, master: false
+  });
+  saveUsers(users);
+  document.getElementById('new-name').value='';
+  document.getElementById('new-key').value='';
+  renderAdmin();
+}
+
+function fillNewKey() {
+  const word = SPACE_WORDS[Math.floor(Math.random()*SPACE_WORDS.length)];
+  const num  = Math.floor(Math.random()*90)+10;
+  document.getElementById('new-key').value = word+'-'+num;
+}
+
+
 // ── DATA ─────────────────────────────────────────────────────────────
 const STORE = 'tt_v3';
 let projects = [];
 let activeId = null;
 let dragId   = null;
 
-// Load from data.json then merge localStorage
-fetch('data.json')
-  .then(r => r.json())
-  .then(d => {
-    const saved = loadSaved();
-    if (saved && saved.length) {
-      projects = saved;
-    } else {
-      projects = d.projects;
-    }
-    render();
-  })
-  .catch(() => {
-    // Fallback if no server (single file mode)
-    const saved = loadSaved();
-    if (saved && saved.length) { projects = saved; render(); }
-  });
+// ── BOOT: Load from GitHub, fall back to embedded ────────────────────
+// Show loading state while fetching
+document.getElementById('auth-loading').style.display = 'flex';
+
+(async () => {
+  // Timeout helper — if GitHub doesn't respond in 6s, fall through to embedded
+  const withTimeout = (promise, ms) => Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms))
+  ]);
+  try {
+    // Load projects, users and chats in parallel
+    const [dataRes, usersRes] = await withTimeout(Promise.all([
+      ghGet(GH.dataFile),
+      ghGet(GH.usersFile)
+    ]), 6000);
+    _dataSha  = dataRes.sha;
+    _usersSha = usersRes.sha;
+    projects  = dataRes.content.projects || [];
+
+    // Merge GitHub users into ROLES + localStorage
+    const ghUsers = usersRes.content || [];
+    ghUsers.forEach(u => {
+      ROLES[u.key] = { name:u.name, codename:u.codename||u.name, emoji:u.emoji||'👤', level:u.level, projects:u.projects, canAdd:u.canAdd };
+    });
+    localStorage.setItem('tt_users_v1', JSON.stringify(ghUsers));
+
+    // Load chats
+    try {
+      const chatRes = await ghGet('chats.json');
+      _chatSha = chatRes.sha;
+      chats = chatRes.content || {};
+    } catch { chats = {}; _chatSha = null; }
+
+    // Load notifications
+    try {
+      const notifRes = await ghGet('notifications.json');
+      _notifSha = notifRes.sha;
+      notifications = notifRes.content || [];
+    } catch { notifications = []; _notifSha = null; }
+
+  } catch(e) {
+    console.warn('GitHub load failed, using embedded fallback:', e.message);
+    projects = _EMBEDDED.projects || [];
+    chats = {};
+    notifications = [];
+  }
+  // Always boot and render AFTER data is ready
+  // Hide loader, show input
+  document.getElementById('auth-loading').style.display = 'none';
+  document.getElementById('auth-input-wrap').style.display = 'flex';
+  bootAuth();
+  updateBell();
+})();
 
 function loadSaved() {
   try { return JSON.parse(localStorage.getItem(STORE)) || null; }
@@ -455,6 +1353,7 @@ function loadSaved() {
 }
 function save() {
   localStorage.setItem(STORE, JSON.stringify(projects));
+  saveProjectsToGitHub();
 }
 
 // ── RENDER ───────────────────────────────────────────────────────────
@@ -462,23 +1361,33 @@ function render() {
   ['Level 1','Level 2','Level 3'].forEach(p => {
     const col = document.getElementById('col-'+p);
     col.innerHTML = '';
-    const grp = projects.filter(x => x.priority === p);
+    const grp = projects.filter(x => x.priority === p && !x.archived);
     document.getElementById('cnt-'+p).textContent = grp.length;
     grp.forEach(proj => col.appendChild(makeCard(proj)));
     setupDropZone(col);
   });
   updateStats();
+  updateArchivePill();
   if (activeId) {
     const p = projects.find(x => x.id === activeId);
     if (p) populatePanel(p);
   }
 }
 
+function updateArchivePill() {
+  const el = document.getElementById('archive-pill');
+  if (el) el.textContent = projects.filter(p => p.archived).length;
+  // Re-render archive if open
+  const body = document.getElementById('archive-body');
+  if (body && body.classList.contains('open')) renderArchive();
+}
+
 function updateStats() {
-  const t = projects.length;
-  const a = projects.filter(p => p.progress > 0 && p.progress < 100).length;
-  const d = projects.filter(p => p.progress === 100).length;
-  const avg = t ? Math.round(projects.reduce((s,p) => s+p.progress,0)/t) : 0;
+  const active = projects.filter(p => !p.archived);
+  const t = active.length;
+  const a = active.filter(p => p.progress > 0 && p.progress < 100).length;
+  const d = active.filter(p => p.progress === 100).length;
+  const avg = t ? Math.round(active.reduce((s,p) => s+p.progress,0)/t) : 0;
   document.getElementById('s-total').textContent = t;
   document.getElementById('s-active').textContent = a;
   document.getElementById('s-done').textContent = d;
@@ -488,10 +1397,32 @@ function updateStats() {
 // ── CARD ─────────────────────────────────────────────────────────────
 function makeCard(p) {
   const el = document.createElement('div');
-  el.className = `card ${p.pillar}${p.id===activeId?' active':''}`;
+  const locked = !canAccess(p.id);
+  el.className = `card ${p.pillar}${p.id===activeId?' active':''}${locked?' locked':''}`;
   el.dataset.id = p.id;
   el.draggable = true;
   const pct = p.progress;
+  if (locked) {
+    el.innerHTML = `
+      <div class="card-blur">
+        <div class="card-top">
+          <div class="card-name">${p.name}</div>
+          <div class="rag ${p.rag}"></div>
+        </div>
+        <div class="card-cat">${p.category||'—'}</div>
+        <div class="card-tags"><span class="tag ${p.pillar}">${p.pillar}</span></div>
+        <div class="prog-row">
+          <div class="prog-bar"><div class="prog-fill${pct===100?' done':''}" style="width:${pct}%"></div></div>
+          <div class="prog-pct">${pct}%</div>
+        </div>
+      </div>
+      <div class="card-lock-overlay">
+        <div class="card-lock-icon">🔒</div>
+        <div class="card-lock-label">Classified</div>
+      </div>`;
+    el.draggable = false;
+    return el;
+  }
   el.innerHTML = `
     <div class="card-top">
       <div class="card-name">${p.name}</div>
@@ -506,7 +1437,15 @@ function makeCard(p) {
       <div class="prog-bar"><div class="prog-fill${pct===100?' done':''}" style="width:${pct}%"></div></div>
       <div class="prog-pct">${pct}%</div>
     </div>`;
-  el.addEventListener('click', () => openPanel(p.id));
+  // Chat button — show unread count only
+  const unreadCount = getChatUnread(p.id);
+  const chatBtn = document.createElement('button');
+  chatBtn.className = 'chat-btn';
+  chatBtn.innerHTML = `<span class="chat-btn-icon">💬</span> Chat${unreadCount>0?` <span class="chat-badge">${unreadCount}`+`</span>`:''}`;
+  chatBtn.addEventListener('click', e => { e.stopPropagation(); openChat(p.id); });
+  el.style.paddingBottom = '38px';
+  el.appendChild(chatBtn);
+  el.addEventListener('click', () => { if (!openMobModal(p.id)) openPanel(p.id); });
   el.addEventListener('dragstart', e => { dragId = p.id; el.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
   el.addEventListener('dragend', () => { dragId=null; el.classList.remove('dragging'); document.querySelectorAll('.drop-zone').forEach(z=>z.classList.remove('over')); });
   return el;
@@ -616,11 +1555,13 @@ function renderStages(p) {
 function setStage(pid, idx) {
   const p = projects.find(x => x.id===pid);
   if (!p) return;
+  const oldStage = p.currentStage;
   p.currentStage = idx;
   p.progress = Math.round((idx/(Math.max(p.stages.length-1,1)))*100);
   document.getElementById('prog-slider').value = p.progress;
   document.getElementById('prog-val').textContent = p.progress+'%';
   renderStages(p);
+  if (idx !== oldStage) auditLog(p.id, `advanced stage to "${p.stages[idx]}"`);
   save(); render();
 }
 
@@ -643,6 +1584,9 @@ function addDoc() {
   if (!p) return;
   if (!p.documents) p.documents = [];
   p.documents.push({ url, label: label||url });
+  pushNotif('document', p.id, p.name, `added a document "${label||url}"`);
+  auditLog(p.id, `added document "${label||url}"`);
+  save();
   document.getElementById('doc-url').value = '';
   document.getElementById('doc-label').value = '';
   renderDocs(p);
@@ -652,6 +1596,7 @@ function removeDoc(pid, idx) {
   const p = projects.find(x => x.id===pid);
   if (!p) return;
   p.documents.splice(idx,1);
+  save();
   renderDocs(p);
 }
 
@@ -684,13 +1629,19 @@ function saveProject() {
   p.description = document.getElementById('p-desc').value;
   p.pillar      = document.querySelector('.psel-btn.active')?.dataset.pillar || p.pillar;
   p.living      = document.getElementById('toggle-sw').classList.contains('on');
-  p.rag         = document.querySelector('.rag-btn.on')?.dataset.rag || p.rag;
+  const newRag = document.querySelector('.rag-btn.on')?.dataset.rag || p.rag;
+  const ragChanged = newRag !== p.rag;
+  p.rag = newRag;
+  const oldProgress = p.progress;
   p.progress    = parseInt(document.getElementById('prog-slider').value);
   p.owner       = document.getElementById('i-owner').value;
   p.category    = document.getElementById('i-cat').value;
   p.startDate   = document.getElementById('i-start').value;
   p.targetDate  = document.getElementById('i-target').value;
   p.notes       = document.getElementById('p-notes').value;
+  // Notify on progress change
+  if (p.progress !== oldProgress) { pushNotif('progress', p.id, p.name, `updated progress to ${p.progress}%`); auditLog(p.id, `updated progress to ${p.progress}%`); }
+  if (ragChanged) auditLog(p.id, `changed RAG status to ${p.rag}`);
   save(); render();
   const btn = document.getElementById('save-btn');
   btn.textContent='✓ Saved'; btn.classList.add('ok');
@@ -736,7 +1687,11 @@ function addProject() {
     rag: 'Green',
     living: false,
     goals: [],
-    stages: ['Define scope','Plan & design','Execute','Review & test','Complete'],
+    stages: (() => {
+      const raw = document.getElementById('m-stages').value.trim();
+      if (raw) return raw.split('\n').map(s=>s.trim()).filter(Boolean);
+      return ['Define scope','Plan & design','Execute','Review & test','Complete'];
+    })(),
     currentStage: 0,
     documents: [],
     owner: document.getElementById('m-owner').value.trim() || 'Prerit',
@@ -745,11 +1700,668 @@ function addProject() {
     notes: ''
   };
   projects.push(newP);
+  pushNotif('project', newP.id, newP.name, 'added a new project');
   save(); render(); closeModal();
   document.getElementById('m-name').value='';
   document.getElementById('m-desc').value='';
   document.getElementById('m-owner').value='';
+  document.getElementById('m-stages').value='';
   openPanel(newP.id);
+}
+
+
+// ── STAGE EDITOR ─────────────────────────────────────────────────────
+function toggleStageEditor() {
+  const ed = document.getElementById('stage-editor');
+  ed.classList.toggle('open');
+  if (ed.classList.contains('open')) renderStageEditor();
+}
+
+function renderStageEditor() {
+  if (!activeId) return;
+  const p = projects.find(x => x.id === activeId);
+  if (!p) return;
+  const list = document.getElementById('stage-edit-list');
+  list.innerHTML = '';
+  (p.stages||[]).forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'stage-edit-row';
+    row.innerHTML = `
+      <input class="stage-edit-inp" value="${s}" onchange="updateStageItem(${i}, this.value)" onblur="updateStageItem(${i}, this.value)"/>
+      <button class="stage-rm-btn" onclick="removeStageItem(${i})">✕</button>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function updateStageItem(idx, val) {
+  if (!activeId) return;
+  const p = projects.find(x => x.id === activeId);
+  if (!p) return;
+  p.stages[idx] = val;
+  renderStages(p);
+  save();
+}
+
+function removeStageItem(idx) {
+  if (!activeId) return;
+  const p = projects.find(x => x.id === activeId);
+  if (!p) return;
+  p.stages.splice(idx, 1);
+  if (p.currentStage >= p.stages.length) p.currentStage = Math.max(0, p.stages.length - 1);
+  renderStageEditor();
+  renderStages(p);
+  save();
+}
+
+function addStageItem() {
+  if (!activeId) return;
+  const inp = document.getElementById('stage-new-inp');
+  const val = inp.value.trim();
+  if (!val) return;
+  const p = projects.find(x => x.id === activeId);
+  if (!p) return;
+  p.stages.push(val);
+  inp.value = '';
+  renderStageEditor();
+  renderStages(p);
+}
+
+
+
+// ── NOTIFICATIONS ─────────────────────────────────────────────────────
+let notifications = [];   // { id, type, text, projectId, projectName, from, ts, read }
+let _notifSha = null;
+let _notifPollInterval = null;
+const NOTIF_ICONS = {
+  progress: '📊', document: '📎', project: '🚀', chat: '💬'
+};
+
+async function loadNotifsFromGitHub() {
+  try {
+    const res = await ghGet('notifications.json');
+    _notifSha = res.sha;
+    notifications = res.content || [];
+  } catch {
+    notifications = [];
+    _notifSha = null;
+  }
+}
+
+async function saveNotifsToGitHub() {
+  try {
+    if (_notifSha) {
+      const res = await ghPut('notifications.json', notifications, _notifSha, 'Notification update');
+      _notifSha = res.content.sha;
+    } else {
+      const r = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/notifications.json`, {
+        method: 'PUT',
+        headers: { Authorization: `token ${GH.token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Init notifications', content: btoa(unescape(encodeURIComponent(JSON.stringify(notifications, null, 2)))) })
+      });
+      const d = await r.json();
+      _notifSha = d.content.sha;
+    }
+  } catch(e) { console.error('Notif save failed:', e); }
+}
+
+async function pollNotifs() {
+  // Re-fetch notifications.json to pick up new ones from other users
+  try {
+    const res = await ghGet('notifications.json');
+    _notifSha = res.sha;
+    const fresh = res.content || [];
+    // Check if there are new unread notifs for me
+    const myNew = fresh.filter(n =>
+      !n.readBy?.includes(currentRole?.name) &&
+      n.from !== currentRole?.name &&
+      canAccessProject(n.projectId)
+    );
+    notifications = fresh;
+    updateBell();
+    renderNotifList();
+    if (myNew.length > 0) {
+      // Flash bell
+      const bell = document.getElementById('bell-btn');
+      bell.style.background = 'rgba(255,106,0,.3)';
+      setTimeout(() => bell.style.background = '', 800);
+    }
+  } catch {}
+}
+
+function canAccessProject(projectId) {
+  if (!currentRole) return false;
+  if (currentRole.projects === 'all') return true;
+  if (!Array.isArray(currentRole.projects)) return false;
+  return currentRole.projects.includes(projectId);
+}
+
+function pushNotif(type, projectId, projectName, detail) {
+  if (!currentRole) return;
+  const notif = {
+    id: Date.now(),
+    type,
+    projectId,
+    projectName,
+    from: currentRole.name,
+    emoji: currentRole.emoji || '👤',
+    detail,
+    ts: new Date().toISOString(),
+    readBy: [currentRole.name]  // sender already "read" it
+  };
+  notifications.unshift(notif);
+  // Keep max 50 notifications
+  if (notifications.length > 50) notifications = notifications.slice(0, 50);
+  saveNotifsToGitHub();
+  updateBell();
+  renderNotifList();
+}
+
+function myUnreadCount() {
+  if (!currentRole) return 0;
+  return notifications.filter(n =>
+    !n.readBy?.includes(currentRole.name) &&
+    n.from !== currentRole.name &&
+    canAccessProject(n.projectId)
+  ).length;
+}
+
+function updateBell() {
+  const count = myUnreadCount();
+  const badge = document.getElementById('bell-badge');
+  if (!badge) return;
+  badge.textContent = count > 9 ? '9+' : count;
+  badge.classList.toggle('show', count > 0);
+}
+
+function toggleNotifPanel() {
+  const panel = document.getElementById('notif-panel');
+  const isOpen = panel.classList.toggle('open');
+  if (isOpen) {
+    markAllRead();
+    renderNotifList();
+  }
+}
+
+function markAllRead() {
+  if (!currentRole) return;
+  let changed = false;
+  notifications.forEach(n => {
+    if (!n.readBy) n.readBy = [];
+    if (!n.readBy.includes(currentRole.name)) {
+      n.readBy.push(currentRole.name);
+      changed = true;
+    }
+  });
+  if (changed) { updateBell(); saveNotifsToGitHub(); }
+}
+
+function clearNotifs() {
+  if (!confirm('Clear all notifications?')) return;
+  notifications = [];
+  // Keep _notifSha so we can overwrite the existing file (not create a new one)
+  saveNotifsToGitHub();
+  renderNotifList();
+  updateBell();
+  document.getElementById('notif-panel').classList.remove('open');
+}
+
+function renderNotifList() {
+  const el = document.getElementById('notif-list');
+  if (!el) return;
+  const mine = notifications.filter(n => canAccessProject(n.projectId));
+  if (!mine.length) {
+    el.innerHTML = '<div class="notif-empty">All caught up! 🎉<br/>No notifications yet.</div>';
+    return;
+  }
+  el.innerHTML = mine.map(n => {
+    const unread = !n.readBy?.includes(currentRole?.name) && n.from !== currentRole?.name;
+    const time = new Date(n.ts).toLocaleString('en-AU', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+    const icon = NOTIF_ICONS[n.type] || '📌';
+    return `<div class="notif-item ${unread?'unread':''}">
+      <div class="notif-icon">${n.emoji||icon}</div>
+      <div class="notif-body">
+        <div class="notif-text"><span>${n.from}</span> ${n.detail} on <span>${n.projectName}</span></div>
+        <div class="notif-time">${time}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Close notif panel when clicking outside
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('bell-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('notif-panel')?.classList.remove('open');
+  }
+});
+
+// Start polling every 60 seconds when logged in
+function startNotifPolling() {
+  if (_notifPollInterval) clearInterval(_notifPollInterval);
+  _notifPollInterval = setInterval(pollNotifs, 60000);
+}
+
+
+// ── MOBILE ───────────────────────────────────────────────────────────
+const isMobile = () => window.innerWidth <= 768;
+
+function mobTab(btn) {
+  document.querySelectorAll('.mob-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const colMap = {'Level 1':0,'Level 2':1,'Level 3':2};
+  const idx = colMap[btn.dataset.col];
+  document.querySelectorAll('.board > .col').forEach((c,i) => {
+    c.classList.toggle('mob-active', i === idx);
+  });
+}
+
+function initMobile() {
+  if (!isMobile()) return;
+  // Show tab bar
+  document.getElementById('mob-tabs').style.display = 'flex';
+  // Activate first tab's column
+  document.querySelectorAll('.board > .col').forEach((c,i) => {
+    c.classList.toggle('mob-active', i === 0);
+  });
+  // Make sure first tab button is active
+  const tabs = document.querySelectorAll('.mob-tab');
+  tabs.forEach((t,i) => t.classList.toggle('active', i === 0));
+}
+
+function openMobModal(projectId) {
+  if (!isMobile()) return false;
+  const p = projects.find(x => x.id === projectId);
+  if (!p) return false;
+  activeId = projectId;
+
+  document.getElementById('mob-modal-name').textContent = p.name;
+
+  // Build modal body — simplified version of panel content
+  const pct = p.progress;
+  const pc = {'Level 1':'#dc2626','Level 2':'#d97706','Level 3':'#2563eb'};
+  const stages = (p.stages||[]).map((s,i) => {
+    const done = i < p.currentStage, cur = i === p.currentStage;
+    return `<div class="stage-item">
+      <div class="stage-l">
+        <div class="stage-circle ${done?'done':cur?'cur':''}" onclick="mobSetStage(${p.id},${i})">${done?'✓':i+1}</div>
+        ${i<p.stages.length-1?`<div class="stage-line ${done?'done':''}"></div>`:''}
+      </div>
+      <div class="stage-txt ${done?'done':cur?'cur':''}">${s}</div>
+    </div>`;
+  }).join('');
+
+  const docs = (p.documents||[]).map(d =>
+    `<div class="doc-item"><span>📎</span><a class="doc-link" href="${d.url}" target="_blank">${d.label||d.url}</a></div>`
+  ).join('');
+
+  document.getElementById('mob-modal-body').innerHTML = `
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+      <span class="tag ${p.pillar}">${p.pillar}</span>
+      <span style="background:${pc[p.priority]}22;color:${pc[p.priority]};font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">${p.priority}</span>
+      ${p.living?'<span class="tag living">⟳ Living</span>':''}
+      <span class="rag ${p.rag}" style="margin-left:auto;margin-top:4px"></span>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Description</div>
+      <p style="font-size:12.5px;color:var(--mid);line-height:1.65;font-weight:500">${p.description||'No description yet.'}</p>
+    </div>
+
+    <div class="sec" style="margin-top:14px">
+      <div class="sec-title">Progress</div>
+      <div class="prog-edit">
+        <input type="range" id="mob-prog-${p.id}" min="0" max="100" step="5" value="${pct}" 
+          oninput="document.getElementById('mob-prog-val-${p.id}').textContent=this.value+'%'" 
+          style="flex:1;accent-color:var(--orange)"/>
+        <div class="prog-edit-val" id="mob-prog-val-${p.id}">${pct}%</div>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:14px">
+      <div class="sec-title">RAG Status</div>
+      <div class="rag-sel">
+        <button class="rag-btn Green ${p.rag==='Green'?'on':''}" data-rag="Green" onclick="mobSetRag(${p.id},'Green',this)">● Green</button>
+        <button class="rag-btn Amber ${p.rag==='Amber'?'on':''}" data-rag="Amber" onclick="mobSetRag(${p.id},'Amber',this)">● Amber</button>
+        <button class="rag-btn Red ${p.rag==='Red'?'on':''}" data-rag="Red" onclick="mobSetRag(${p.id},'Red',this)">● Red</button>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:14px">
+      <div class="sec-title">Stage Map</div>
+      <div class="stage-map">${stages}</div>
+    </div>
+
+    ${docs ? `<div class="sec" style="margin-top:14px"><div class="sec-title">Documents</div><div class="doc-list">${docs}</div></div>` : ''}
+
+    <div class="sec" style="margin-top:14px">
+      <div class="sec-title">Notes</div>
+      <textarea class="notes-area" id="mob-notes-${p.id}" placeholder="Notes…" style="min-height:80px">${p.notes||''}</textarea>
+    </div>
+
+    <div class="sec" style="margin-top:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--muted);font-weight:500">
+        <span>👤 ${p.owner||'—'}</span>
+        <span>📅 ${p.startDate||'—'} → ${p.targetDate||'—'}</span>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid var(--light)">
+      <button onclick="mobSaveProject(${p.id})" style="flex:1;padding:11px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer" id="mob-save-${p.id}">Save Changes</button>
+      <button onclick="openChat(${p.id})" style="padding:11px 14px;background:var(--light);color:var(--blue);border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer">💬 Chat</button>
+    </div>`;
+
+  document.getElementById('mob-modal-bg').classList.add('open');
+  return true;
+}
+
+function closeMobModal(e) {
+  if (e && e.type === 'click' && e.target !== document.getElementById('mob-modal-bg')) return;
+  document.getElementById('mob-modal-bg').classList.remove('open');
+  render(); // refresh cards after any edits
+  activeId = null;
+}
+
+function mobSetStage(pid, idx) {
+  const p = projects.find(x => x.id===pid);
+  if (!p) return;
+  const oldStage = p.currentStage;
+  p.currentStage = idx;
+  p.progress = Math.round((idx/Math.max(p.stages.length-1,1))*100);
+  if (idx !== oldStage) auditLog(p.id, `advanced stage to "${p.stages[idx]}"`);
+  save();
+  openMobModal(pid);
+}
+
+function mobSetRag(pid, rag, btn) {
+  btn.closest('.rag-sel').querySelectorAll('.rag-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+function mobSaveProject(pid) {
+  const p = projects.find(x => x.id===pid);
+  if (!p) return;
+  const progEl = document.getElementById('mob-prog-'+pid);
+  const notesEl = document.getElementById('mob-notes-'+pid);
+  const ragEl = document.querySelector('#mob-modal-body .rag-btn.on');
+  const oldProg = p.progress;
+  const oldRag = p.rag;
+  if (progEl) p.progress = parseInt(progEl.value);
+  if (notesEl) p.notes = notesEl.value;
+  if (ragEl) p.rag = ragEl.dataset.rag || p.rag;
+  const ragChanged = ragEl && ragEl.dataset.rag !== oldRag;
+  if (p.progress !== oldProg) { pushNotif('progress', p.id, p.name, `updated progress to ${p.progress}%`); auditLog(p.id, `updated progress to ${p.progress}%`); }
+  if (ragChanged) auditLog(p.id, `changed RAG status to ${p.rag}`);
+  save(); render();
+  const btn = document.getElementById('mob-save-'+pid);
+  if (btn) { btn.textContent='✓ Saved'; btn.style.background='var(--rag-g)'; setTimeout(()=>{btn.textContent='Save Changes';btn.style.background='var(--orange)';},1800); }
+}
+
+
+
+// ── AUDIT + BROADCAST ────────────────────────────────────────────────
+function auditLog(projectId, message) {
+  // Posts a system message into the project chat
+  if (!currentRole) return;
+  if (!chats[projectId]) chats[projectId] = [];
+  chats[projectId].push({
+    user: 'System',
+    emoji: currentRole.emoji || '👤',
+    text: message,
+    ts: new Date().toISOString(),
+    system: true,
+    from: currentRole.name
+  });
+  saveChatsToGitHub();
+  if (activeChatId === projectId) renderChat();
+}
+
+function openBroadcast() {
+  document.getElementById('bc-modal-bg').classList.add('open');
+  setTimeout(() => document.getElementById('bc-inp').focus(), 200);
+}
+
+function closeBroadcast() {
+  document.getElementById('bc-modal-bg').classList.remove('open');
+  document.getElementById('bc-inp').value = '';
+}
+
+function sendBroadcast() {
+  const text = document.getElementById('bc-inp').value.trim();
+  if (!text || !currentRole) return;
+  const sendBtn = document.querySelector('.bc-send');
+  if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Sending…'; }
+  const accessible = projects.filter(p => !p.archived && canAccess(p.id));
+  if (!accessible.length) { alert('No accessible projects.'); return; }
+  const ts = new Date().toISOString();
+  accessible.forEach(p => {
+    if (!chats[p.id]) chats[p.id] = [];
+    chats[p.id].push({
+      user: currentRole.name,
+      emoji: currentRole.emoji || '👤',
+      text,
+      ts,
+      broadcast: true
+    });
+    pushNotif('chat', p.id, p.name, `sent a broadcast`);
+  });
+  saveChatsToGitHub();
+  if (activeChatId) renderChat();
+  render(); // refresh badges
+  closeBroadcast();
+  if (sendBtn) { sendBtn.disabled = false; sendBtn.innerHTML = '📣 Send to All Projects'; }
+  // Flash confirmation
+  const btn = document.getElementById('broadcast-btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '✓ Sent!';
+  btn.style.color = '#4ade80';
+  setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2000);
+}
+
+// ── ARCHIVE ───────────────────────────────────────────────────────────
+function toggleArchive() {
+  const body = document.getElementById('archive-body');
+  const chev = document.getElementById('archive-chevron');
+  const open = body.classList.toggle('open');
+  chev.classList.toggle('open', open);
+  if (open) renderArchive();
+}
+
+function renderArchive() {
+  const archived = projects.filter(p => p.archived);
+  const body = document.getElementById('archive-body');
+  document.getElementById('archive-pill').textContent = archived.length;
+  if (!archived.length) {
+    body.innerHTML = '<div style="font-size:12px;color:var(--muted);font-weight:500;padding:8px 4px;width:100%">No archived projects yet. Archive completed projects to keep the board clean.</div>';
+    return;
+  }
+  const pc = {'Level 1':'#dc2626','Level 2':'#d97706','Level 3':'#2563eb'};
+  body.innerHTML = archived.map(p => `
+    <div class="archive-card">
+      <div class="archive-card-name">${p.name}</div>
+      <div class="archive-card-meta">
+        <span class="tag ${p.pillar}" style="font-size:9px">${p.pillar}</span>
+        <span style="background:${pc[p.priority]||'#64748b'}22;color:${pc[p.priority]||'#64748b'};font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px">${p.priority}</span>
+        <span style="font-size:9px;color:var(--muted);font-weight:600">${p.progress}%</span>
+        <div class="rag ${p.rag}" style="margin-left:2px"></div>
+      </div>
+      <div class="archive-card-actions">
+        <button class="unarchive-btn" onclick="unarchiveProject(${p.id})">↩ Restore</button>
+      </div>
+    </div>`).join('');
+}
+
+function archiveProject() {
+  if (!activeId) return;
+  const p = projects.find(x => x.id === activeId);
+  if (!p) return;
+  if (!confirm(`Archive "${p.name}"? It will be hidden from the board but can be restored.`)) return;
+  p.archived = true;
+  p.archivedAt = new Date().toISOString();
+  auditLog(p.id, 'archived this project');
+  closePanel();
+  save(); render();
+  renderArchive();
+  // Update pill count
+  const archived = projects.filter(x => x.archived);
+  document.getElementById('archive-pill').textContent = archived.length;
+}
+
+function unarchiveProject(pid) {
+  const p = projects.find(x => x.id === pid);
+  if (!p) return;
+  delete p.archived;
+  delete p.archivedAt;
+  auditLog(p.id, 'restored this project from archive');
+  save(); render();
+  renderArchive();
+  const archived = projects.filter(x => x.archived);
+  document.getElementById('archive-pill').textContent = archived.length;
+}
+
+// ── CHAT ──────────────────────────────────────────────────────────────
+let chats = {};          // { projectId: [ {user, emoji, text, ts} ] }
+let activeChatId = null;
+let _chatSha = null;
+
+async function loadChatsFromGitHub() {
+  try {
+    const res = await ghGet('chats.json');
+    _chatSha = res.sha;
+    chats = res.content || {};
+  } catch {
+    // chats.json doesn't exist yet — start empty
+    chats = {};
+    _chatSha = null;
+  }
+}
+
+async function saveChatsToGitHub() {
+  try {
+    showSyncStatus('saving');
+    if (_chatSha) {
+      const res = await ghPut('chats.json', chats, _chatSha, 'Chat update');
+      _chatSha = res.content.sha;
+    } else {
+      // First time — create the file
+      const r = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/chats.json`, {
+        method: 'PUT',
+        headers: { Authorization: `token ${GH.token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Init chats', content: btoa(unescape(encodeURIComponent(JSON.stringify(chats, null, 2)))) })
+      });
+      const d = await r.json();
+      _chatSha = d.content.sha;
+    }
+    showSyncStatus('saved');
+  } catch(e) {
+    console.error('Chat save failed:', e);
+    showSyncStatus('error');
+  }
+}
+
+
+// ── CHAT UNREAD TRACKING ──────────────────────────────────────────────
+const CHAT_READ_STORE = 'tt_chat_read_v1';
+
+function getChatReadMap() {
+  try { return JSON.parse(localStorage.getItem(CHAT_READ_STORE)) || {}; }
+  catch { return {}; }
+}
+
+function getChatUnread(projectId) {
+  if (!currentRole) return 0;
+  const msgs = chats[projectId] || [];
+  const readMap = getChatReadMap();
+  const lastRead = readMap[`${currentRole.name}_${projectId}`] || 0;
+  // Count messages from others after last read timestamp
+  return msgs.filter(m => !m.system && !m.broadcast && m.user !== currentRole.name && new Date(m.ts).getTime() > lastRead).length;
+}
+
+function markChatRead(projectId) {
+  if (!currentRole) return;
+  const readMap = getChatReadMap();
+  readMap[`${currentRole.name}_${projectId}`] = Date.now();
+  localStorage.setItem(CHAT_READ_STORE, JSON.stringify(readMap));
+}
+
+function openChat(projectId) {
+  activeChatId = projectId;
+  const p = projects.find(x => x.id === projectId);
+  document.getElementById('chat-hdr-name').textContent = p ? p.name : 'Project Chat';
+  document.getElementById('chat-hdr-sub').textContent = p ? p.pillar + ' · ' + (p.priority||'') : '';
+  const drawer = document.getElementById('chat-drawer');
+  drawer.classList.add('open');
+  // Position chat drawer — sits to the left of side panel if open
+  const panelOpen = document.getElementById('panel').classList.contains('open');
+  drawer.style.right = panelOpen ? 'var(--panel)' : '0';
+  drawer.style.width = panelOpen ? 'min(460px, calc(100vw - var(--panel)))' : 'var(--panel)';
+  markChatRead(projectId);
+  renderChat();
+  render(); // refresh badge
+  // Only auto-focus on desktop, not mobile (avoids keyboard popup)
+  if (window.innerWidth > 768) setTimeout(() => { document.getElementById('chat-inp').focus(); }, 300);
+}
+
+function closeChat() {
+  document.getElementById('chat-drawer').classList.remove('open');
+  activeChatId = null;
+}
+
+function renderChat() {
+  const el = document.getElementById('chat-msgs');
+  const msgs = chats[activeChatId] || [];
+  if (!msgs.length) {
+    el.innerHTML = '<div class="chat-empty">No messages yet.<br/>Be the first to say something 👋</div>';
+    return;
+  }
+  el.innerHTML = msgs.map(m => {
+    const mine = currentRole && m.user === currentRole.name;
+    const time = new Date(m.ts).toLocaleString('en-AU', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+    if (m.system) {
+      return `<div class="msg system">
+        <div class="msg-bubble">${m.emoji} ${m.from} ${m.text} · <span style="font-weight:400;opacity:.7">${time}</span></div>
+      </div>`;
+    }
+    if (m.broadcast) {
+      return `<div class="msg broadcast">
+        <div class="msg-meta">📣 ${m.emoji} ${m.user} · Broadcast · ${time}</div>
+        <div class="msg-bubble">${m.text}</div>
+      </div>`;
+    }
+    return `<div class="msg ${mine?'mine':'theirs'}">
+      <div class="msg-meta">${m.emoji||'👤'} ${m.user} · ${time}</div>
+      <div class="msg-bubble">${m.text}</div>
+    </div>`;
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+function sendMsg() {
+  const inp = document.getElementById('chat-inp');
+  const text = inp.value.trim();
+  if (!text || !activeChatId || !currentRole) return;
+  if (!chats[activeChatId]) chats[activeChatId] = [];
+  const chatProj = projects.find(x => x.id === activeChatId);
+  chats[activeChatId].push({
+    user: currentRole.name,
+    emoji: currentRole.emoji || '👤',
+    text,
+    ts: new Date().toISOString()
+  });
+  inp.value = '';
+  markChatRead(activeChatId);
+  renderChat();
+  saveChatsToGitHub();
+  if (chatProj) pushNotif('chat', activeChatId, chatProj.name, `sent a message`);
+  render(); // refresh card badges
+}
+
+
+// ── PWA SERVICE WORKER ────────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(e => console.log('SW reg failed:', e));
+  });
 }
 
 document.addEventListener('keydown', e => { if(e.key==='Escape'){ closePanel(); closeModal(); } });
