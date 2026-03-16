@@ -191,35 +191,6 @@
       "notes": ""
     },
     {
-      "id": 5,
-      "name": "New eANZ Website",
-      "category": "Digital Presence",
-      "pillar": "Technology",
-      "priority": "Level 2",
-      "progress": 25,
-      "rag": "Green",
-      "living": true,
-      "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
-      "goals": [
-        "Refresh brand and content to reflect 2026 capabilities",
-        "Showcase EnergyConnect and major project credentials",
-        "Optimise for mobile and SEO"
-      ],
-      "stages": [
-        "Scope & brief",
-        "Site map",
-        "Content & design",
-        "Build & review",
-        "Launch"
-      ],
-      "currentStage": 1,
-      "documents": [],
-      "owner": "Prerit, Laura, Ana",
-      "startDate": "April 2026",
-      "targetDate": "December 2026",
-      "notes": ""
-    },
-    {
       "id": 6,
       "name": "eANZ SharePoint & Intranet",
       "category": "Collaboration",
@@ -280,6 +251,35 @@
       "owner": "Prerit, Ivan",
       "startDate": "April 2026",
       "targetDate": "Ongoing",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "name": "New eANZ Website",
+      "category": "Digital Presence",
+      "pillar": "Technology",
+      "priority": "Level 2",
+      "progress": 25,
+      "rag": "Green",
+      "living": true,
+      "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
+      "goals": [
+        "Refresh brand and content to reflect 2026 capabilities",
+        "Showcase EnergyConnect and major project credentials",
+        "Optimise for mobile and SEO"
+      ],
+      "stages": [
+        "Scope & brief",
+        "Site map",
+        "Content & design",
+        "Build & review",
+        "Launch"
+      ],
+      "currentStage": 1,
+      "documents": [],
+      "owner": "Prerit, Laura, Ana",
+      "startDate": "April 2026",
+      "targetDate": "December 2026",
       "notes": ""
     },
     {
