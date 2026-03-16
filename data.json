@@ -59,7 +59,16 @@
         "Onboarding of New Vendor"
       ],
       "currentStage": 3,
-      "documents": [],
+      "documents": [
+        {
+          "url": "https://drive.google.com/file/d/10VIWJg-3yA77mg38IQFlfJ70UuOgDUF2/view?usp=drive_link",
+          "label": "Provider Comparison"
+        },
+        {
+          "url": "https://app.pandadoc.com/document/v2?token=2e3dcb8d82b3bc48e5955a48132c0b92b645b06c",
+          "label": "A1 - Technologies Proposal"
+        }
+      ],
       "owner": "Ivan",
       "startDate": "April 2026",
       "targetDate": "June 2026",
@@ -272,7 +281,7 @@
       "id": 7,
       "name": "AI Adoption Roadmap",
       "category": "Innovation",
-      "pillar": "Technology",
+      "pillar": "People",
       "priority": "Level 3",
       "progress": 0,
       "rag": "Green",
