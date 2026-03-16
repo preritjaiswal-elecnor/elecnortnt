@@ -172,7 +172,7 @@
       "category": "Process",
       "pillar": "People",
       "priority": "Level 2",
-      "progress": 0,
+      "progress": 25,
       "rag": "Green",
       "living": false,
       "description": "Review and digitalise how Elecnor Australia manages business travel — flights, rental cars and hotel bookings. Assess current tools, policies and spend, and implement a streamlined digital solution.",
@@ -188,7 +188,7 @@
         "System configuration & training",
         "Launch"
       ],
-      "currentStage": 0,
+      "currentStage": 1,
       "documents": [
         {
           "url": "https://app.pandadoc.com/document/v2?token=0fca0e30afae54bab0ea16f24d4fc954e19e41a3",
