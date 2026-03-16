@@ -254,35 +254,6 @@
       "notes": ""
     },
     {
-      "id": 10,
-      "name": "Market Intelligence Capability",
-      "category": "Strategy",
-      "pillar": "Organisation",
-      "priority": "Level 3",
-      "progress": 0,
-      "rag": "Green",
-      "living": true,
-      "description": "Build a structured market intelligence function inside eANZ — tracking competitor activity, sector trends, tender pipelines and strategic opportunities like the data centre boom.",
-      "goals": [
-        "Define the sectors and signals worth tracking",
-        "Set up monitoring tools and reporting templates",
-        "Deliver first market intelligence report to MD & CFO"
-      ],
-      "stages": [
-        "Define scope & key intelligence questions",
-        "Tool and source selection",
-        "Build reporting template",
-        "First intelligence report",
-        "Quarterly cadence established"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "July 2026",
-      "targetDate": "Ongoing",
-      "notes": ""
-    },
-    {
       "id": 7,
       "name": "AI Adoption Roadmap",
       "category": "Innovation",
@@ -309,6 +280,35 @@
       "owner": "Prerit",
       "startDate": "April 2026",
       "targetDate": "June 2026",
+      "notes": ""
+    },
+    {
+      "id": 10,
+      "name": "Market Intelligence Capability",
+      "category": "Strategy",
+      "pillar": "Organisation",
+      "priority": "Level 3",
+      "progress": 0,
+      "rag": "Green",
+      "living": true,
+      "description": "Build a structured market intelligence function inside eANZ — tracking competitor activity, sector trends, tender pipelines and strategic opportunities like the data centre boom.",
+      "goals": [
+        "Define the sectors and signals worth tracking",
+        "Set up monitoring tools and reporting templates",
+        "Deliver first market intelligence report to MD & CFO"
+      ],
+      "stages": [
+        "Define scope & key intelligence questions",
+        "Tool and source selection",
+        "Build reporting template",
+        "First intelligence report",
+        "Quarterly cadence established"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "July 2026",
+      "targetDate": "Ongoing",
       "notes": ""
     }
   ]
