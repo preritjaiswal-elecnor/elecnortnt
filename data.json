@@ -1,64 +1,6 @@
 {
   "projects": [
     {
-      "id": 8,
-      "name": "Expenses Claims Digitalisation",
-      "category": "Process",
-      "pillar": "Organisation",
-      "priority": "Level 3",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Replace the current manual expense claims process with a digital workflow. Review available apps, select a solution, redesign the approval process and roll it out across eANZ.",
-      "goals": [
-        "Audit current expense claim process and pain points",
-        "Evaluate and select a digital expense management tool",
-        "Design and deploy new digital workflow with approvals"
-      ],
-      "stages": [
-        "Process audit & requirements",
-        "Tool shortlist & demo",
-        "Selection & configuration",
-        "Pilot with small team",
-        "Full rollout"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Ivan & Prerit",
-      "startDate": "July 2026",
-      "targetDate": "September 2026",
-      "notes": ""
-    },
-    {
-      "id": 10,
-      "name": "Market Intelligence Capability",
-      "category": "Strategy",
-      "pillar": "Organisation",
-      "priority": "Level 3",
-      "progress": 0,
-      "rag": "Green",
-      "living": true,
-      "description": "Build a structured market intelligence function inside eANZ — tracking competitor activity, sector trends, tender pipelines and strategic opportunities like the data centre boom.",
-      "goals": [
-        "Define the sectors and signals worth tracking",
-        "Set up monitoring tools and reporting templates",
-        "Deliver first market intelligence report to MD & CFO"
-      ],
-      "stages": [
-        "Define scope & key intelligence questions",
-        "Tool and source selection",
-        "Build reporting template",
-        "First intelligence report",
-        "Quarterly cadence established"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "July 2026",
-      "targetDate": "Ongoing",
-      "notes": ""
-    },
-    {
       "id": 1,
       "name": "Assets & Electronic Devices Register",
       "category": "Foundation",
@@ -262,11 +204,69 @@
       "notes": ""
     },
     {
+      "id": 8,
+      "name": "Expenses Claims Digitalisation",
+      "category": "Process",
+      "pillar": "Organisation",
+      "priority": "Level 3",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Replace the current manual expense claims process with a digital workflow. Review available apps, select a solution, redesign the approval process and roll it out across eANZ.",
+      "goals": [
+        "Audit current expense claim process and pain points",
+        "Evaluate and select a digital expense management tool",
+        "Design and deploy new digital workflow with approvals"
+      ],
+      "stages": [
+        "Process audit & requirements",
+        "Tool shortlist & demo",
+        "Selection & configuration",
+        "Pilot with small team",
+        "Full rollout"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Ivan & Prerit",
+      "startDate": "July 2026",
+      "targetDate": "September 2026",
+      "notes": ""
+    },
+    {
+      "id": 10,
+      "name": "Market Intelligence Capability",
+      "category": "Strategy",
+      "pillar": "Organisation",
+      "priority": "Level 3",
+      "progress": 0,
+      "rag": "Green",
+      "living": true,
+      "description": "Build a structured market intelligence function inside eANZ — tracking competitor activity, sector trends, tender pipelines and strategic opportunities like the data centre boom.",
+      "goals": [
+        "Define the sectors and signals worth tracking",
+        "Set up monitoring tools and reporting templates",
+        "Deliver first market intelligence report to MD & CFO"
+      ],
+      "stages": [
+        "Define scope & key intelligence questions",
+        "Tool and source selection",
+        "Build reporting template",
+        "First intelligence report",
+        "Quarterly cadence established"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "July 2026",
+      "targetDate": "Ongoing",
+      "notes": ""
+    },
+    {
       "id": 7,
       "name": "AI Adoption Roadmap",
       "category": "Innovation",
       "pillar": "Technology",
-      "priority": "Level 2",
+      "priority": "Level 3",
       "progress": 0,
       "rag": "Green",
       "living": false,
