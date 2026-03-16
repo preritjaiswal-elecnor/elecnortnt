@@ -191,35 +191,6 @@
       "notes": ""
     },
     {
-      "id": 5,
-      "name": "New eANZ Website",
-      "category": "Digital Presence",
-      "pillar": "Technology",
-      "priority": "Level 2",
-      "progress": 25,
-      "rag": "Green",
-      "living": true,
-      "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
-      "goals": [
-        "Refresh brand and content to reflect 2026 capabilities",
-        "Showcase EnergyConnect and major project credentials",
-        "Optimise for mobile and SEO"
-      ],
-      "stages": [
-        "Scope & brief",
-        "Site map",
-        "Content & design",
-        "Build & review",
-        "Launch"
-      ],
-      "currentStage": 1,
-      "documents": [],
-      "owner": "Prerit, Laura, Ana",
-      "startDate": "April 2026",
-      "targetDate": "December 2026",
-      "notes": ""
-    },
-    {
       "id": 6,
       "name": "eANZ SharePoint & Intranet",
       "category": "Collaboration",
@@ -254,32 +225,32 @@
       "notes": ""
     },
     {
-      "id": 3,
-      "name": "T&T Delivery Framework & Governance",
-      "category": "Foundation",
-      "pillar": "Organisation",
+      "id": 5,
+      "name": "New eANZ Website",
+      "category": "Digital Presence",
+      "pillar": "Technology",
       "priority": "Level 2",
-      "progress": 0,
+      "progress": 25,
       "rag": "Green",
       "living": true,
-      "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
+      "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
       "goals": [
-        "Define T&T governance structure and decision rights",
-        "Create quarterly review cadence and reporting template",
-        "Establish weekly T&T coffee agenda format"
+        "Refresh brand and content to reflect 2026 capabilities",
+        "Showcase EnergyConnect and major project credentials",
+        "Optimise for mobile and SEO"
       ],
       "stages": [
-        "Draft framework document",
-        "Review with Ivan",
-        "Agree reporting cadence",
-        "Launch first quarterly review",
-        "Ongoing — evolves each quarter"
+        "Scope & brief",
+        "Site map",
+        "Content & design",
+        "Build & review",
+        "Launch"
       ],
-      "currentStage": 0,
+      "currentStage": 1,
       "documents": [],
-      "owner": "Prerit, Ivan",
+      "owner": "Prerit, Laura, Ana",
       "startDate": "April 2026",
-      "targetDate": "Ongoing",
+      "targetDate": "December 2026",
       "notes": ""
     },
     {
@@ -314,6 +285,35 @@
       "owner": "Prerit, Vica",
       "startDate": "March 2026",
       "targetDate": "July 2026",
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "name": "T&T Delivery Framework & Governance",
+      "category": "Foundation",
+      "pillar": "Organisation",
+      "priority": "Level 2",
+      "progress": 0,
+      "rag": "Green",
+      "living": true,
+      "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
+      "goals": [
+        "Define T&T governance structure and decision rights",
+        "Create quarterly review cadence and reporting template",
+        "Establish weekly T&T coffee agenda format"
+      ],
+      "stages": [
+        "Draft framework document",
+        "Review with Ivan",
+        "Agree reporting cadence",
+        "Launch first quarterly review",
+        "Ongoing — evolves each quarter"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit, Ivan",
+      "startDate": "April 2026",
+      "targetDate": "Ongoing",
       "notes": ""
     }
   ]
