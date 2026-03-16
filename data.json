@@ -225,35 +225,6 @@
       "notes": ""
     },
     {
-      "id": 7,
-      "name": "AI Adoption Roadmap",
-      "category": "Innovation",
-      "pillar": "People",
-      "priority": "Level 3",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Identify where AI can create the most value inside Elecnor Australia — from quick wins like document drafting and reporting, to strategic plays like market intelligence and project estimation.",
-      "goals": [
-        "Map current manual processes that could be AI-assisted",
-        "Identify 3–5 quick win pilots to launch in 2026",
-        "Build a 12-month AI adoption roadmap for leadership approval"
-      ],
-      "stages": [
-        "Internal discovery & process mapping",
-        "Tool evaluation & pilots",
-        "Quick win deployment",
-        "Roadmap document",
-        "Leadership sign-off"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "April 2026",
-      "targetDate": "June 2026",
-      "notes": ""
-    },
-    {
       "id": 2,
       "name": "Software Systems Audit",
       "category": "Foundation",
@@ -309,6 +280,35 @@
       "owner": "Prerit",
       "startDate": "July 2026",
       "targetDate": "Ongoing",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "name": "AI Adoption Roadmap",
+      "category": "Innovation",
+      "pillar": "People",
+      "priority": "Level 3",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Identify where AI can create the most value inside Elecnor Australia — from quick wins like document drafting and reporting, to strategic plays like market intelligence and project estimation.",
+      "goals": [
+        "Map current manual processes that could be AI-assisted",
+        "Identify 3–5 quick win pilots to launch in 2026",
+        "Build a 12-month AI adoption roadmap for leadership approval"
+      ],
+      "stages": [
+        "Internal discovery & process mapping",
+        "Tool evaluation & pilots",
+        "Quick win deployment",
+        "Roadmap document",
+        "Leadership sign-off"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "April 2026",
+      "targetDate": "June 2026",
       "notes": ""
     }
   ]
