@@ -88,64 +88,6 @@
       "notes": ""
     },
     {
-      "id": 1,
-      "name": "Assets & Electronic Devices Register",
-      "category": "Foundation",
-      "pillar": "Technology",
-      "priority": "Level 1",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
-      "goals": [
-        "Catalogue all laptops, phones, tablets and peripherals",
-        "Record serial numbers, owners, locations and warranty status",
-        "Establish a process for onboarding new devices going forward"
-      ],
-      "stages": [
-        "Define asset categories & template",
-        "Data collection across all offices",
-        "Populate register / system",
-        "Review & sign-off",
-        "Handover to ongoing process"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "March 2026",
-      "targetDate": "May 2026",
-      "notes": ""
-    },
-    {
-      "id": 4,
-      "name": "Futura ERP Service Study",
-      "category": "ERP & Finance",
-      "pillar": "Organisation",
-      "priority": "Level 2",
-      "progress": 0,
-      "rag": "Amber",
-      "living": false,
-      "description": "Assess the current Futura ERP system — its capabilities, limitations, and fit for Elecnor Australia's needs. Determine whether to upgrade, extend, or replace it, and define a roadmap for improvement.",
-      "goals": [
-        "Understand current Futura usage and pain points",
-        "Evaluate upgrade vs replacement options and costs",
-        "Recommend a path forward with business case"
-      ],
-      "stages": [
-        "Stakeholder interviews on current pain points",
-        "Vendor capability assessment",
-        "Cost-benefit analysis",
-        "Draft recommendation report",
-        "Present to MD & CFO"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Ivan",
-      "startDate": "April 2026",
-      "targetDate": "June 2026",
-      "notes": ""
-    },
-    {
       "id": 5,
       "name": "New eANZ Website",
       "category": "Digital Presence",
@@ -286,6 +228,64 @@
       "currentStage": 0,
       "documents": [],
       "owner": "Prerit",
+      "startDate": "April 2026",
+      "targetDate": "June 2026",
+      "notes": ""
+    },
+    {
+      "id": 1,
+      "name": "Assets & Electronic Devices Register",
+      "category": "Foundation",
+      "pillar": "Technology",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
+      "goals": [
+        "Catalogue all laptops, phones, tablets and peripherals",
+        "Record serial numbers, owners, locations and warranty status",
+        "Establish a process for onboarding new devices going forward"
+      ],
+      "stages": [
+        "Define asset categories & template",
+        "Data collection across all offices",
+        "Populate register / system",
+        "Review & sign-off",
+        "Handover to ongoing process"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "March 2026",
+      "targetDate": "May 2026",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "Futura ERP Service Study",
+      "category": "ERP & Finance",
+      "pillar": "Organisation",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Amber",
+      "living": false,
+      "description": "Assess the current Futura ERP system — its capabilities, limitations, and fit for Elecnor Australia's needs. Determine whether to upgrade, extend, or replace it, and define a roadmap for improvement.",
+      "goals": [
+        "Understand current Futura usage and pain points",
+        "Evaluate upgrade vs replacement options and costs",
+        "Recommend a path forward with business case"
+      ],
+      "stages": [
+        "Stakeholder interviews on current pain points",
+        "Vendor capability assessment",
+        "Cost-benefit analysis",
+        "Draft recommendation report",
+        "Present to MD & CFO"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Ivan",
       "startDate": "April 2026",
       "targetDate": "June 2026",
       "notes": ""
