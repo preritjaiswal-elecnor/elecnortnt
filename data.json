@@ -75,6 +75,93 @@
       "notes": ""
     },
     {
+      "id": 8,
+      "name": "Expenses Claims Digitalisation",
+      "category": "Process",
+      "pillar": "Organisation",
+      "priority": "Level 3",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Replace the current manual expense claims process with a digital workflow. Review available apps, select a solution, redesign the approval process and roll it out across eANZ.",
+      "goals": [
+        "Audit current expense claim process and pain points",
+        "Evaluate and select a digital expense management tool",
+        "Design and deploy new digital workflow with approvals"
+      ],
+      "stages": [
+        "Process audit & requirements",
+        "Tool shortlist & demo",
+        "Selection & configuration",
+        "Pilot with small team",
+        "Full rollout"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Ivan & Prerit",
+      "startDate": "July 2026",
+      "targetDate": "September 2026",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "name": "AI Adoption Roadmap",
+      "category": "Innovation",
+      "pillar": "People",
+      "priority": "Level 3",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Identify where AI can create the most value inside Elecnor Australia — from quick wins like document drafting and reporting, to strategic plays like market intelligence and project estimation.",
+      "goals": [
+        "Map current manual processes that could be AI-assisted",
+        "Identify 3–5 quick win pilots to launch in 2026",
+        "Build a 12-month AI adoption roadmap for leadership approval"
+      ],
+      "stages": [
+        "Internal discovery & process mapping",
+        "Tool evaluation & pilots",
+        "Quick win deployment",
+        "Roadmap document",
+        "Leadership sign-off"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "April 2026",
+      "targetDate": "June 2026",
+      "notes": ""
+    },
+    {
+      "id": 10,
+      "name": "Market Intelligence Capability",
+      "category": "Strategy",
+      "pillar": "Organisation",
+      "priority": "Level 3",
+      "progress": 0,
+      "rag": "Green",
+      "living": true,
+      "description": "Build a structured market intelligence function inside eANZ — tracking competitor activity, sector trends, tender pipelines and strategic opportunities like the data centre boom.",
+      "goals": [
+        "Define the sectors and signals worth tracking",
+        "Set up monitoring tools and reporting templates",
+        "Deliver first market intelligence report to MD & CFO"
+      ],
+      "stages": [
+        "Define scope & key intelligence questions",
+        "Tool and source selection",
+        "Build reporting template",
+        "First intelligence report",
+        "Quarterly cadence established"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "July 2026",
+      "targetDate": "Ongoing",
+      "notes": ""
+    },
+    {
       "id": 5,
       "name": "New eANZ Website",
       "category": "Digital Presence",
@@ -222,93 +309,6 @@
       "owner": "Prerit",
       "startDate": "July 2026",
       "targetDate": "September 2026",
-      "notes": ""
-    },
-    {
-      "id": 8,
-      "name": "Expenses Claims Digitalisation",
-      "category": "Process",
-      "pillar": "Organisation",
-      "priority": "Level 3",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Replace the current manual expense claims process with a digital workflow. Review available apps, select a solution, redesign the approval process and roll it out across eANZ.",
-      "goals": [
-        "Audit current expense claim process and pain points",
-        "Evaluate and select a digital expense management tool",
-        "Design and deploy new digital workflow with approvals"
-      ],
-      "stages": [
-        "Process audit & requirements",
-        "Tool shortlist & demo",
-        "Selection & configuration",
-        "Pilot with small team",
-        "Full rollout"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Ivan & Prerit",
-      "startDate": "July 2026",
-      "targetDate": "September 2026",
-      "notes": ""
-    },
-    {
-      "id": 7,
-      "name": "AI Adoption Roadmap",
-      "category": "Innovation",
-      "pillar": "People",
-      "priority": "Level 3",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Identify where AI can create the most value inside Elecnor Australia — from quick wins like document drafting and reporting, to strategic plays like market intelligence and project estimation.",
-      "goals": [
-        "Map current manual processes that could be AI-assisted",
-        "Identify 3–5 quick win pilots to launch in 2026",
-        "Build a 12-month AI adoption roadmap for leadership approval"
-      ],
-      "stages": [
-        "Internal discovery & process mapping",
-        "Tool evaluation & pilots",
-        "Quick win deployment",
-        "Roadmap document",
-        "Leadership sign-off"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "April 2026",
-      "targetDate": "June 2026",
-      "notes": ""
-    },
-    {
-      "id": 10,
-      "name": "Market Intelligence Capability",
-      "category": "Strategy",
-      "pillar": "Organisation",
-      "priority": "Level 3",
-      "progress": 0,
-      "rag": "Green",
-      "living": true,
-      "description": "Build a structured market intelligence function inside eANZ — tracking competitor activity, sector trends, tender pipelines and strategic opportunities like the data centre boom.",
-      "goals": [
-        "Define the sectors and signals worth tracking",
-        "Set up monitoring tools and reporting templates",
-        "Deliver first market intelligence report to MD & CFO"
-      ],
-      "stages": [
-        "Define scope & key intelligence questions",
-        "Tool and source selection",
-        "Build reporting template",
-        "First intelligence report",
-        "Quarterly cadence established"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "July 2026",
-      "targetDate": "Ongoing",
       "notes": ""
     }
   ]
