@@ -80,7 +80,7 @@
       "category": "Digital Presence",
       "pillar": "Technology",
       "priority": "Level 2",
-      "progress": 0,
+      "progress": 25,
       "rag": "Green",
       "living": true,
       "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
@@ -96,7 +96,7 @@
         "Build & review",
         "Launch"
       ],
-      "currentStage": 0,
+      "currentStage": 1,
       "documents": [],
       "owner": "Prerit, Laura, Ana",
       "startDate": "April 2026",
