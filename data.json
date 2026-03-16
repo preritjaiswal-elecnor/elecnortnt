@@ -117,35 +117,6 @@
       "notes": ""
     },
     {
-      "id": 3,
-      "name": "T&T Delivery Framework & Governance",
-      "category": "Foundation",
-      "pillar": "Organisation",
-      "priority": "Level 1",
-      "progress": 0,
-      "rag": "Green",
-      "living": true,
-      "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
-      "goals": [
-        "Define T&T governance structure and decision rights",
-        "Create quarterly review cadence and reporting template",
-        "Establish weekly T&T coffee agenda format"
-      ],
-      "stages": [
-        "Draft framework document",
-        "Review with Ivan",
-        "Agree reporting cadence",
-        "Launch first quarterly review",
-        "Ongoing — evolves each quarter"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Ivan & Prerit",
-      "startDate": "April 2026",
-      "targetDate": "Ongoing",
-      "notes": ""
-    },
-    {
       "id": 4,
       "name": "Futura ERP Service Study",
       "category": "ERP & Finance",
@@ -259,6 +230,35 @@
       "owner": "Prerit",
       "startDate": "March 2026",
       "targetDate": "May 2026",
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "name": "T&T Delivery Framework & Governance",
+      "category": "Foundation",
+      "pillar": "Organisation",
+      "priority": "Level 2",
+      "progress": 0,
+      "rag": "Green",
+      "living": true,
+      "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
+      "goals": [
+        "Define T&T governance structure and decision rights",
+        "Create quarterly review cadence and reporting template",
+        "Establish weekly T&T coffee agenda format"
+      ],
+      "stages": [
+        "Draft framework document",
+        "Review with Ivan",
+        "Agree reporting cadence",
+        "Launch first quarterly review",
+        "Ongoing — evolves each quarter"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Ivan & Prerit",
+      "startDate": "April 2026",
+      "targetDate": "Ongoing",
       "notes": ""
     },
     {
