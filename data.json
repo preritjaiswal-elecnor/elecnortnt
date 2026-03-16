@@ -40,7 +40,7 @@
       "category": "ERP & Finance",
       "pillar": "Organisation",
       "priority": "Level 1",
-      "progress": 75,
+      "progress": 50,
       "rag": "Amber",
       "living": false,
       "description": "Assess the current Futura ERP system — its capabilities, limitations, and fit for Elecnor Australia's needs. Determine whether to upgrade, extend, or replace it, and define a roadmap for improvement.",
