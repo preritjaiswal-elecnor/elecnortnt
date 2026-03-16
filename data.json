@@ -40,7 +40,7 @@
       "category": "ERP & Finance",
       "pillar": "Organisation",
       "priority": "Level 1",
-      "progress": 0,
+      "progress": 75,
       "rag": "Amber",
       "living": false,
       "description": "Assess the current Futura ERP system — its capabilities, limitations, and fit for Elecnor Australia's needs. Determine whether to upgrade, extend, or replace it, and define a roadmap for improvement.",
@@ -54,9 +54,11 @@
         "Vendor capability assessment",
         "Cost-benefit analysis",
         "Draft recommendation report",
-        "Present to MD & CFO"
+        "Present to MD & CFO",
+        "Decision and Selection",
+        "Onboarding of New Vendor"
       ],
-      "currentStage": 0,
+      "currentStage": 3,
       "documents": [],
       "owner": "Ivan",
       "startDate": "April 2026",
