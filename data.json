@@ -8,7 +8,7 @@
       "priority": "Level 1",
       "progress": 75,
       "rag": "Green",
-      "living": false,
+      "living": true,
       "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
       "goals": [
         "Catalogue all laptops, phones, tablets and peripherals",
