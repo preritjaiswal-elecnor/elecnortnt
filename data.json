@@ -7,7 +7,7 @@
       "pillar": "Technology",
       "priority": "Level 1",
       "progress": 75,
-      "rag": "Green",
+      "rag": "Amber",
       "living": true,
       "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
       "goals": [
@@ -32,7 +32,7 @@
       "owner": "Prerit",
       "startDate": "March 2026",
       "targetDate": "May 2026",
-      "notes": ""
+      "notes": "Prerit is trying to find if we can integrate this asset register with our new IT Provider."
     },
     {
       "id": 4,
