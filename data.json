@@ -1,122 +1,6 @@
 {
   "projects": [
     {
-      "id": 4,
-      "name": "Futura ERP Service Study",
-      "category": "ERP & Finance",
-      "pillar": "Organisation",
-      "priority": "Level 2",
-      "progress": 0,
-      "rag": "Amber",
-      "living": false,
-      "description": "Assess the current Futura ERP system — its capabilities, limitations, and fit for Elecnor Australia's needs. Determine whether to upgrade, extend, or replace it, and define a roadmap for improvement.",
-      "goals": [
-        "Understand current Futura usage and pain points",
-        "Evaluate upgrade vs replacement options and costs",
-        "Recommend a path forward with business case"
-      ],
-      "stages": [
-        "Stakeholder interviews on current pain points",
-        "Vendor capability assessment",
-        "Cost-benefit analysis",
-        "Draft recommendation report",
-        "Present to MD & CFO"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Ivan",
-      "startDate": "April 2026",
-      "targetDate": "June 2026",
-      "notes": ""
-    },
-    {
-      "id": 5,
-      "name": "New eANZ Website",
-      "category": "Digital Presence",
-      "pillar": "Technology",
-      "priority": "Level 2",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
-      "goals": [
-        "Refresh brand and content to reflect 2026 capabilities",
-        "Showcase EnergyConnect and major project credentials",
-        "Optimise for mobile and SEO"
-      ],
-      "stages": [
-        "Scope & brief",
-        "Agency / developer selection",
-        "Content & design",
-        "Build & review",
-        "Launch"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "April 2026",
-      "targetDate": "July 2026",
-      "notes": ""
-    },
-    {
-      "id": 6,
-      "name": "eANZ SharePoint & Intranet",
-      "category": "Collaboration",
-      "pillar": "Organisation",
-      "priority": "Level 2",
-      "progress": 0,
-      "rag": "Green",
-      "living": true,
-      "description": "Design and deploy a SharePoint-based intranet and document management system for Elecnor Australia. The platform will serve as the single source of truth for company documents, policies, and team communications.",
-      "goals": [
-        "Deploy SharePoint intranet with company news and key links",
-        "Migrate critical documents from shared drives",
-        "Integrate with Microsoft Teams for seamless collaboration"
-      ],
-      "stages": [
-        "Information architecture design",
-        "SharePoint site build",
-        "Content migration",
-        "Staff training & adoption",
-        "Ongoing improvement"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "April 2026",
-      "targetDate": "Ongoing",
-      "notes": ""
-    },
-    {
-      "id": 7,
-      "name": "AI Adoption Roadmap",
-      "category": "Innovation",
-      "pillar": "Technology",
-      "priority": "Level 2",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Identify where AI can create the most value inside Elecnor Australia — from quick wins like document drafting and reporting, to strategic plays like market intelligence and project estimation.",
-      "goals": [
-        "Map current manual processes that could be AI-assisted",
-        "Identify 3–5 quick win pilots to launch in 2026",
-        "Build a 12-month AI adoption roadmap for leadership approval"
-      ],
-      "stages": [
-        "Internal discovery & process mapping",
-        "Tool evaluation & pilots",
-        "Quick win deployment",
-        "Roadmap document",
-        "Leadership sign-off"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "April 2026",
-      "targetDate": "June 2026",
-      "notes": ""
-    },
-    {
       "id": 8,
       "name": "Expenses Claims Digitalisation",
       "category": "Process",
@@ -233,35 +117,6 @@
       "notes": ""
     },
     {
-      "id": 2,
-      "name": "Software Systems Audit",
-      "category": "Foundation",
-      "pillar": "Technology",
-      "priority": "Level 1",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Map every software system in use across eANZ — name, function, business area, owner and annual cost. This audit will identify duplication, shadow IT, cost savings and gaps before any new systems are selected.",
-      "goals": [
-        "List all active SaaS, on-premise and licensed software",
-        "Capture annual spend and contract renewal dates",
-        "Identify overlap, underused tools and security risks"
-      ],
-      "stages": [
-        "Design data collection template",
-        "Survey all department heads",
-        "Consolidate & validate responses",
-        "Cost analysis & risk review",
-        "Present findings to leadership"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "March 2026",
-      "targetDate": "May 2026",
-      "notes": ""
-    },
-    {
       "id": 3,
       "name": "T&T Delivery Framework & Governance",
       "category": "Foundation",
@@ -288,6 +143,151 @@
       "owner": "Ivan & Prerit",
       "startDate": "April 2026",
       "targetDate": "Ongoing",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "Futura ERP Service Study",
+      "category": "ERP & Finance",
+      "pillar": "Organisation",
+      "priority": "Level 2",
+      "progress": 0,
+      "rag": "Amber",
+      "living": false,
+      "description": "Assess the current Futura ERP system — its capabilities, limitations, and fit for Elecnor Australia's needs. Determine whether to upgrade, extend, or replace it, and define a roadmap for improvement.",
+      "goals": [
+        "Understand current Futura usage and pain points",
+        "Evaluate upgrade vs replacement options and costs",
+        "Recommend a path forward with business case"
+      ],
+      "stages": [
+        "Stakeholder interviews on current pain points",
+        "Vendor capability assessment",
+        "Cost-benefit analysis",
+        "Draft recommendation report",
+        "Present to MD & CFO"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Ivan",
+      "startDate": "April 2026",
+      "targetDate": "June 2026",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "name": "New eANZ Website",
+      "category": "Digital Presence",
+      "pillar": "Technology",
+      "priority": "Level 2",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
+      "goals": [
+        "Refresh brand and content to reflect 2026 capabilities",
+        "Showcase EnergyConnect and major project credentials",
+        "Optimise for mobile and SEO"
+      ],
+      "stages": [
+        "Scope & brief",
+        "Agency / developer selection",
+        "Content & design",
+        "Build & review",
+        "Launch"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "April 2026",
+      "targetDate": "July 2026",
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "name": "eANZ SharePoint & Intranet",
+      "category": "Collaboration",
+      "pillar": "Organisation",
+      "priority": "Level 2",
+      "progress": 0,
+      "rag": "Green",
+      "living": true,
+      "description": "Design and deploy a SharePoint-based intranet and document management system for Elecnor Australia. The platform will serve as the single source of truth for company documents, policies, and team communications.",
+      "goals": [
+        "Deploy SharePoint intranet with company news and key links",
+        "Migrate critical documents from shared drives",
+        "Integrate with Microsoft Teams for seamless collaboration"
+      ],
+      "stages": [
+        "Information architecture design",
+        "SharePoint site build",
+        "Content migration",
+        "Staff training & adoption",
+        "Ongoing improvement"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "April 2026",
+      "targetDate": "Ongoing",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "name": "Software Systems Audit",
+      "category": "Foundation",
+      "pillar": "Technology",
+      "priority": "Level 2",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Map every software system in use across eANZ — name, function, business area, owner and annual cost. This audit will identify duplication, shadow IT, cost savings and gaps before any new systems are selected.",
+      "goals": [
+        "List all active SaaS, on-premise and licensed software",
+        "Capture annual spend and contract renewal dates",
+        "Identify overlap, underused tools and security risks"
+      ],
+      "stages": [
+        "Design data collection template",
+        "Survey all department heads",
+        "Consolidate & validate responses",
+        "Cost analysis & risk review",
+        "Present findings to leadership"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "March 2026",
+      "targetDate": "May 2026",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "name": "AI Adoption Roadmap",
+      "category": "Innovation",
+      "pillar": "Technology",
+      "priority": "Level 2",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Identify where AI can create the most value inside Elecnor Australia — from quick wins like document drafting and reporting, to strategic plays like market intelligence and project estimation.",
+      "goals": [
+        "Map current manual processes that could be AI-assisted",
+        "Identify 3–5 quick win pilots to launch in 2026",
+        "Build a 12-month AI adoption roadmap for leadership approval"
+      ],
+      "stages": [
+        "Internal discovery & process mapping",
+        "Tool evaluation & pilots",
+        "Quick win deployment",
+        "Roadmap document",
+        "Leadership sign-off"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "April 2026",
+      "targetDate": "June 2026",
       "notes": ""
     }
   ]
