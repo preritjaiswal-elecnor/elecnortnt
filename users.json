@@ -57,5 +57,15 @@
     ],
     "canAdd": false,
     "master": false
+  },
+  {
+    "key": "voyager",
+    "name": "Vica",
+    "codename": "Mission Specialist",
+    "emoji": "💫",
+    "level": "specialist",
+    "projects": [],
+    "canAdd": false,
+    "master": false
   }
 ]
