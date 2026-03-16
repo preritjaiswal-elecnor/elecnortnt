@@ -3,7 +3,7 @@
     "key": "apollo",
     "name": "Ivan",
     "codename": "Mission Commander",
-    "emoji": "\ud83d\ude80",
+    "emoji": "🚀",
     "level": "owner",
     "projects": "all",
     "canAdd": true,
@@ -13,7 +13,7 @@
     "key": "polaris",
     "name": "Prerit",
     "codename": "Lead Navigator",
-    "emoji": "\ud83c\udf0d",
+    "emoji": "🌍",
     "level": "owner",
     "projects": "all",
     "canAdd": true,
@@ -23,7 +23,7 @@
     "key": "orion",
     "name": "Laura",
     "codename": "Mission Specialist",
-    "emoji": "\ud83d\udef0\ufe0f",
+    "emoji": "🛰️",
     "level": "specialist",
     "projects": [
       5,
@@ -36,12 +36,22 @@
     "key": "artemis",
     "name": "Ana",
     "codename": "Mission Specialist",
-    "emoji": "\ud83c\udf19",
+    "emoji": "🌙",
     "level": "specialist",
     "projects": [
       5,
       6
     ],
+    "canAdd": false,
+    "master": false
+  },
+  {
+    "key": "pulsar",
+    "name": "Natalia",
+    "codename": "Mission Specialist",
+    "emoji": "💫",
+    "level": "specialist",
+    "projects": [],
     "canAdd": false,
     "master": false
   }
