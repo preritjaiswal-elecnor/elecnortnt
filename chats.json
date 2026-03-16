@@ -81,6 +81,14 @@
       "emoji": "🛰️",
       "text": "Hello",
       "ts": "2026-03-16T01:15:28.230Z"
+    },
+    {
+      "user": "System",
+      "emoji": "🛰️",
+      "text": "advanced stage to \"Site map\"",
+      "ts": "2026-03-16T01:25:05.621Z",
+      "system": true,
+      "from": "Laura"
     }
   ]
 }
