@@ -1,69 +1,5 @@
 {
-  "meta": {
-    "title": "T&T Program",
-    "subtitle": "Technology & Transformation",
-    "org": "Elecnor Australia",
-    "owners": ["Ivan", "Prerit"],
-    "updated": "March 2026"
-  },
   "projects": [
-    {
-      "id": 1,
-      "name": "Assets & Electronic Devices Register",
-      "category": "Foundation",
-      "pillar": "Technology",
-      "priority": "Level 1",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
-      "goals": ["Catalogue all laptops, phones, tablets and peripherals", "Record serial numbers, owners, locations and warranty status", "Establish a process for onboarding new devices going forward"],
-      "stages": ["Define asset categories & template", "Data collection across all offices", "Populate register / system", "Review & sign-off", "Handover to ongoing process"],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "March 2026",
-      "targetDate": "May 2026",
-      "notes": ""
-    },
-    {
-      "id": 2,
-      "name": "Software Systems Audit",
-      "category": "Foundation",
-      "pillar": "Technology",
-      "priority": "Level 1",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "description": "Map every software system in use across eANZ — name, function, business area, owner and annual cost. This audit will identify duplication, shadow IT, cost savings and gaps before any new systems are selected.",
-      "goals": ["List all active SaaS, on-premise and licensed software", "Capture annual spend and contract renewal dates", "Identify overlap, underused tools and security risks"],
-      "stages": ["Design data collection template", "Survey all department heads", "Consolidate & validate responses", "Cost analysis & risk review", "Present findings to leadership"],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit",
-      "startDate": "March 2026",
-      "targetDate": "May 2026",
-      "notes": ""
-    },
-    {
-      "id": 3,
-      "name": "T&T Delivery Framework & Governance",
-      "category": "Foundation",
-      "pillar": "Organisation",
-      "priority": "Level 1",
-      "progress": 0,
-      "rag": "Green",
-      "living": true,
-      "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
-      "goals": ["Define T&T governance structure and decision rights", "Create quarterly review cadence and reporting template", "Establish weekly T&T coffee agenda format"],
-      "stages": ["Draft framework document", "Review with Ivan", "Agree reporting cadence", "Launch first quarterly review", "Ongoing — evolves each quarter"],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Ivan & Prerit",
-      "startDate": "April 2026",
-      "targetDate": "Ongoing",
-      "notes": ""
-    },
     {
       "id": 4,
       "name": "Futura ERP Service Study",
@@ -74,8 +10,18 @@
       "rag": "Amber",
       "living": false,
       "description": "Assess the current Futura ERP system — its capabilities, limitations, and fit for Elecnor Australia's needs. Determine whether to upgrade, extend, or replace it, and define a roadmap for improvement.",
-      "goals": ["Understand current Futura usage and pain points", "Evaluate upgrade vs replacement options and costs", "Recommend a path forward with business case"],
-      "stages": ["Stakeholder interviews on current pain points", "Vendor capability assessment", "Cost-benefit analysis", "Draft recommendation report", "Present to MD & CFO"],
+      "goals": [
+        "Understand current Futura usage and pain points",
+        "Evaluate upgrade vs replacement options and costs",
+        "Recommend a path forward with business case"
+      ],
+      "stages": [
+        "Stakeholder interviews on current pain points",
+        "Vendor capability assessment",
+        "Cost-benefit analysis",
+        "Draft recommendation report",
+        "Present to MD & CFO"
+      ],
       "currentStage": 0,
       "documents": [],
       "owner": "Ivan",
@@ -93,8 +39,18 @@
       "rag": "Green",
       "living": false,
       "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
-      "goals": ["Refresh brand and content to reflect 2026 capabilities", "Showcase EnergyConnect and major project credentials", "Optimise for mobile and SEO"],
-      "stages": ["Scope & brief", "Agency / developer selection", "Content & design", "Build & review", "Launch"],
+      "goals": [
+        "Refresh brand and content to reflect 2026 capabilities",
+        "Showcase EnergyConnect and major project credentials",
+        "Optimise for mobile and SEO"
+      ],
+      "stages": [
+        "Scope & brief",
+        "Agency / developer selection",
+        "Content & design",
+        "Build & review",
+        "Launch"
+      ],
       "currentStage": 0,
       "documents": [],
       "owner": "Prerit",
@@ -112,8 +68,18 @@
       "rag": "Green",
       "living": true,
       "description": "Design and deploy a SharePoint-based intranet and document management system for Elecnor Australia. The platform will serve as the single source of truth for company documents, policies, and team communications.",
-      "goals": ["Deploy SharePoint intranet with company news and key links", "Migrate critical documents from shared drives", "Integrate with Microsoft Teams for seamless collaboration"],
-      "stages": ["Information architecture design", "SharePoint site build", "Content migration", "Staff training & adoption", "Ongoing improvement"],
+      "goals": [
+        "Deploy SharePoint intranet with company news and key links",
+        "Migrate critical documents from shared drives",
+        "Integrate with Microsoft Teams for seamless collaboration"
+      ],
+      "stages": [
+        "Information architecture design",
+        "SharePoint site build",
+        "Content migration",
+        "Staff training & adoption",
+        "Ongoing improvement"
+      ],
       "currentStage": 0,
       "documents": [],
       "owner": "Prerit",
@@ -131,8 +97,18 @@
       "rag": "Green",
       "living": false,
       "description": "Identify where AI can create the most value inside Elecnor Australia — from quick wins like document drafting and reporting, to strategic plays like market intelligence and project estimation.",
-      "goals": ["Map current manual processes that could be AI-assisted", "Identify 3–5 quick win pilots to launch in 2026", "Build a 12-month AI adoption roadmap for leadership approval"],
-      "stages": ["Internal discovery & process mapping", "Tool evaluation & pilots", "Quick win deployment", "Roadmap document", "Leadership sign-off"],
+      "goals": [
+        "Map current manual processes that could be AI-assisted",
+        "Identify 3–5 quick win pilots to launch in 2026",
+        "Build a 12-month AI adoption roadmap for leadership approval"
+      ],
+      "stages": [
+        "Internal discovery & process mapping",
+        "Tool evaluation & pilots",
+        "Quick win deployment",
+        "Roadmap document",
+        "Leadership sign-off"
+      ],
       "currentStage": 0,
       "documents": [],
       "owner": "Prerit",
@@ -150,8 +126,18 @@
       "rag": "Green",
       "living": false,
       "description": "Replace the current manual expense claims process with a digital workflow. Review available apps, select a solution, redesign the approval process and roll it out across eANZ.",
-      "goals": ["Audit current expense claim process and pain points", "Evaluate and select a digital expense management tool", "Design and deploy new digital workflow with approvals"],
-      "stages": ["Process audit & requirements", "Tool shortlist & demo", "Selection & configuration", "Pilot with small team", "Full rollout"],
+      "goals": [
+        "Audit current expense claim process and pain points",
+        "Evaluate and select a digital expense management tool",
+        "Design and deploy new digital workflow with approvals"
+      ],
+      "stages": [
+        "Process audit & requirements",
+        "Tool shortlist & demo",
+        "Selection & configuration",
+        "Pilot with small team",
+        "Full rollout"
+      ],
       "currentStage": 0,
       "documents": [],
       "owner": "Ivan & Prerit",
@@ -169,8 +155,18 @@
       "rag": "Green",
       "living": false,
       "description": "Review and digitalise how Elecnor Australia manages business travel — flights, rental cars and hotel bookings. Assess current tools, policies and spend, and implement a streamlined digital solution.",
-      "goals": ["Map current travel booking process and costs", "Evaluate travel management platforms", "Implement approved tool with policy guardrails"],
-      "stages": ["Travel spend & process audit", "Platform evaluation", "Policy design", "System configuration & training", "Launch"],
+      "goals": [
+        "Map current travel booking process and costs",
+        "Evaluate travel management platforms",
+        "Implement approved tool with policy guardrails"
+      ],
+      "stages": [
+        "Travel spend & process audit",
+        "Platform evaluation",
+        "Policy design",
+        "System configuration & training",
+        "Launch"
+      ],
       "currentStage": 0,
       "documents": [],
       "owner": "Prerit",
@@ -188,12 +184,109 @@
       "rag": "Green",
       "living": true,
       "description": "Build a structured market intelligence function inside eANZ — tracking competitor activity, sector trends, tender pipelines and strategic opportunities like the data centre boom.",
-      "goals": ["Define the sectors and signals worth tracking", "Set up monitoring tools and reporting templates", "Deliver first market intelligence report to MD & CFO"],
-      "stages": ["Define scope & key intelligence questions", "Tool and source selection", "Build reporting template", "First intelligence report", "Quarterly cadence established"],
+      "goals": [
+        "Define the sectors and signals worth tracking",
+        "Set up monitoring tools and reporting templates",
+        "Deliver first market intelligence report to MD & CFO"
+      ],
+      "stages": [
+        "Define scope & key intelligence questions",
+        "Tool and source selection",
+        "Build reporting template",
+        "First intelligence report",
+        "Quarterly cadence established"
+      ],
       "currentStage": 0,
       "documents": [],
       "owner": "Prerit",
       "startDate": "July 2026",
+      "targetDate": "Ongoing",
+      "notes": ""
+    },
+    {
+      "id": 1,
+      "name": "Assets & Electronic Devices Register",
+      "category": "Foundation",
+      "pillar": "Technology",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
+      "goals": [
+        "Catalogue all laptops, phones, tablets and peripherals",
+        "Record serial numbers, owners, locations and warranty status",
+        "Establish a process for onboarding new devices going forward"
+      ],
+      "stages": [
+        "Define asset categories & template",
+        "Data collection across all offices",
+        "Populate register / system",
+        "Review & sign-off",
+        "Handover to ongoing process"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "March 2026",
+      "targetDate": "May 2026",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "name": "Software Systems Audit",
+      "category": "Foundation",
+      "pillar": "Technology",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "description": "Map every software system in use across eANZ — name, function, business area, owner and annual cost. This audit will identify duplication, shadow IT, cost savings and gaps before any new systems are selected.",
+      "goals": [
+        "List all active SaaS, on-premise and licensed software",
+        "Capture annual spend and contract renewal dates",
+        "Identify overlap, underused tools and security risks"
+      ],
+      "stages": [
+        "Design data collection template",
+        "Survey all department heads",
+        "Consolidate & validate responses",
+        "Cost analysis & risk review",
+        "Present findings to leadership"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit",
+      "startDate": "March 2026",
+      "targetDate": "May 2026",
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "name": "T&T Delivery Framework & Governance",
+      "category": "Foundation",
+      "pillar": "Organisation",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Green",
+      "living": true,
+      "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
+      "goals": [
+        "Define T&T governance structure and decision rights",
+        "Create quarterly review cadence and reporting template",
+        "Establish weekly T&T coffee agenda format"
+      ],
+      "stages": [
+        "Draft framework document",
+        "Review with Ivan",
+        "Agree reporting cadence",
+        "Launch first quarterly review",
+        "Ongoing — evolves each quarter"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Ivan & Prerit",
+      "startDate": "April 2026",
       "targetDate": "Ongoing",
       "notes": ""
     }
