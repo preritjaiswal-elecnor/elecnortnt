@@ -126,7 +126,12 @@
         "Ongoing improvement"
       ],
       "currentStage": 0,
-      "documents": [],
+      "documents": [
+        {
+          "url": "https://grupoelecnor.sharepoint.com/sites/brasil_intranet?e=1%3Af8383a027417418d8c3f39e0580e660b",
+          "label": "Elecnor Brazil (Intranet)"
+        }
+      ],
       "owner": "Prerit",
       "startDate": "April 2026",
       "targetDate": "Ongoing",
