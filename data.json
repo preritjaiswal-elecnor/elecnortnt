@@ -82,7 +82,7 @@
       "priority": "Level 2",
       "progress": 0,
       "rag": "Green",
-      "living": false,
+      "living": true,
       "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
       "goals": [
         "Refresh brand and content to reflect 2026 capabilities",
