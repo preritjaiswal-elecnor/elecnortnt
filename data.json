@@ -247,11 +247,16 @@
         "Launch"
       ],
       "currentStage": 1,
-      "documents": [],
+      "documents": [
+        {
+          "url": "https://docs.google.com/spreadsheets/d/1YsNjU35MBxFeEtaPlz9luansIAgkTNUHsmYXZRl_eds/edit?gid=0#gid=0",
+          "label": "Sitemap"
+        }
+      ],
       "owner": "Prerit, Laura, Ana",
       "startDate": "April 2026",
       "targetDate": "December 2026",
-      "notes": "STRUCTURE: https://docs.google.com/spreadsheets/d/1YsNjU35MBxFeEtaPlz9luansIAgkTNUHsmYXZRl_eds/edit?gid=0#gid=0"
+      "notes": ""
     },
     {
       "id": 9,
