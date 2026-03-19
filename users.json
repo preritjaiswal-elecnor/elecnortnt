@@ -69,5 +69,15 @@
     ],
     "canAdd": false,
     "master": false
+  },
+  {
+    "key": "altair",
+    "name": "Abhi",
+    "codename": "Mission Specialist",
+    "emoji": "🛸",
+    "level": "specialist",
+    "projects": [],
+    "canAdd": false,
+    "master": false
   }
 ]
