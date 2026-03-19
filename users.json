@@ -75,9 +75,9 @@
     "name": "Abhi",
     "codename": "Mission Specialist",
     "emoji": "🛸",
-    "level": "specialist",
-    "projects": [],
-    "canAdd": false,
+    "level": "owner",
+    "projects": "all",
+    "canAdd": true,
     "master": false
   }
 ]
