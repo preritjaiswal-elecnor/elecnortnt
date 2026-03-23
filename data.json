@@ -6,7 +6,7 @@
       "category": "Foundation",
       "pillar": "Technology",
       "priority": "Level 1",
-      "progress": 75,
+      "progress": 50,
       "rag": "Amber",
       "living": true,
       "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
@@ -22,7 +22,7 @@
         "Review & sign-off",
         "Handover to ongoing process"
       ],
-      "currentStage": 3,
+      "currentStage": 2,
       "documents": [
         {
           "url": "https://elecnor-it-assets.base44.app",
