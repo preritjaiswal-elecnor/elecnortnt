@@ -347,12 +347,7 @@
         "Ongoing — evolves each quarter"
       ],
       "currentStage": 0,
-      "documents": [
-        {
-          "url": "https://www.itilite.com/",
-          "label": "https://www.itilite.com/"
-        }
-      ],
+      "documents": [],
       "owner": "Prerit, Ivan",
       "startDate": "April 2026",
       "targetDate": "Ongoing",
