@@ -79,5 +79,15 @@
     "projects": "all",
     "canAdd": true,
     "master": false
+  },
+  {
+    "key": "sirius",
+    "name": "Sean",
+    "codename": "Mission Specialist",
+    "emoji": "🌌",
+    "level": "specialist",
+    "projects": [],
+    "canAdd": false,
+    "master": false
   }
 ]
