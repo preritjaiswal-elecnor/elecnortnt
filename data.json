@@ -352,6 +352,31 @@
       "startDate": "April 2026",
       "targetDate": "August 2026",
       "notes": ""
+    },
+    {
+      "id": 1774491034524,
+      "name": "Elecnor Recruitment Software",
+      "description": "....",
+      "category": "General",
+      "pillar": "Organisation",
+      "priority": "Level 3",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "goals": [],
+      "stages": [
+        "Define scope",
+        "Plan & design",
+        "Execute",
+        "Review & test",
+        "Complete"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit, Sean",
+      "startDate": "March 2026",
+      "targetDate": "TBD",
+      "notes": ""
     }
   ]
 }
