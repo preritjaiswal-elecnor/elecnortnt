@@ -6,7 +6,7 @@
       "category": "Foundation",
       "pillar": "Technology",
       "priority": "Level 1",
-      "progress": 75,
+      "progress": 95,
       "rag": "Green",
       "living": true,
       "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
@@ -75,6 +75,10 @@
         {
           "url": "https://drive.google.com/file/d/1WzpLcSgDAi9yAKSMB5TfiHYwqKk_VPlk/view",
           "label": "First Focus Proposal"
+        },
+        {
+          "url": "https://drive.google.com/file/d/1dXmzZ-u_xXJS4qLPKxCmoTGoqgJdJkTl/view?usp=sharing",
+          "label": "Tecala Group Proposal"
         }
       ],
       "owner": "Prerit",
