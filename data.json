@@ -23,7 +23,12 @@
         "Handover to ongoing process"
       ],
       "currentStage": 3,
-      "documents": [],
+      "documents": [
+        {
+          "url": "https://it-assets-app.pages.dev/",
+          "label": "IT Register"
+        }
+      ],
       "owner": "Prerit, Natalia",
       "startDate": "March 2026",
       "targetDate": "Ongoing",
