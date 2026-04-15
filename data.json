@@ -7,7 +7,7 @@
       "pillar": "Technology",
       "priority": "Level 1",
       "progress": 75,
-      "rag": "Amber",
+      "rag": "Green",
       "living": true,
       "description": "Build a complete, accurate inventory of all hardware and electronic devices across Elecnor Australia. This is a foundational project — without knowing what we have, we can't manage it, secure it, or plan replacements.",
       "goals": [
