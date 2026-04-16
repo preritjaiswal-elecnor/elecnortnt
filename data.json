@@ -328,7 +328,9 @@
       "owner": "Prerit, Natalia",
       "startDate": "March 2026",
       "targetDate": "Ongoing",
-      "notes": "Fine Tuning the register"
+      "notes": "Fine Tuning the register",
+      "archived": true,
+      "archivedAt": "2026-04-16T04:51:30.278Z"
     },
     {
       "id": 4,
