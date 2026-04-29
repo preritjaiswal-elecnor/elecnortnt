@@ -1,44 +1,6 @@
 {
   "projects": [
     {
-      "id": 6,
-      "name": "eANZ SharePoint & Intranet",
-      "category": "Collaboration",
-      "pillar": "Organisation",
-      "priority": "Level 2",
-      "progress": 0,
-      "rag": "Green",
-      "living": true,
-      "description": "Design and deploy a SharePoint-based intranet and document management system for Elecnor Australia. The platform will serve as the single source of truth for company documents, policies, and team communications.",
-      "goals": [
-        "Deploy SharePoint intranet with company news and key links",
-        "Migrate critical documents from shared drives",
-        "Integrate with Microsoft Teams for seamless collaboration"
-      ],
-      "stages": [
-        "Information architecture design",
-        "SharePoint site build",
-        "Content migration",
-        "Staff training & adoption",
-        "Ongoing improvement"
-      ],
-      "currentStage": 0,
-      "documents": [
-        {
-          "url": "https://grupoelecnor.sharepoint.com/sites/brasil_intranet?e=1%3Af8383a027417418d8c3f39e0580e660b",
-          "label": "Elecnor Brazil (Intranet)"
-        },
-        {
-          "url": "https://grupoelecnor.sharepoint.com/sites/ANZ",
-          "label": "Elecnor Australia (Intranet)"
-        }
-      ],
-      "owner": "Prerit, Laura, Ana",
-      "startDate": "April 2026",
-      "targetDate": "December 2026",
-      "notes": ""
-    },
-    {
       "id": 5,
       "name": "New eANZ Website",
       "category": "Digital Presence",
@@ -381,6 +343,44 @@
       "startDate": "April 2026",
       "targetDate": "June 2026",
       "notes": "We need to start organizing executive meeting with the representatives if possible."
+    },
+    {
+      "id": 6,
+      "name": "eANZ SharePoint & Intranet",
+      "category": "Collaboration",
+      "pillar": "Organisation",
+      "priority": "Level 1",
+      "progress": 25,
+      "rag": "Green",
+      "living": true,
+      "description": "Design and deploy a SharePoint-based intranet and document management system for Elecnor Australia. The platform will serve as the single source of truth for company documents, policies, and team communications.",
+      "goals": [
+        "Deploy SharePoint intranet with company news and key links",
+        "Migrate critical documents from shared drives",
+        "Integrate with Microsoft Teams for seamless collaboration"
+      ],
+      "stages": [
+        "Information architecture design",
+        "SharePoint site build",
+        "Content migration",
+        "Staff training & adoption",
+        "Ongoing improvement"
+      ],
+      "currentStage": 1,
+      "documents": [
+        {
+          "url": "https://grupoelecnor.sharepoint.com/sites/brasil_intranet?e=1%3Af8383a027417418d8c3f39e0580e660b",
+          "label": "Elecnor Brazil (Intranet)"
+        },
+        {
+          "url": "https://grupoelecnor.sharepoint.com/sites/ANZ",
+          "label": "Elecnor Australia (Intranet)"
+        }
+      ],
+      "owner": "Prerit, Laura, Ana",
+      "startDate": "April 2026",
+      "targetDate": "December 2026",
+      "notes": ""
     }
   ]
 }
