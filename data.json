@@ -379,6 +379,10 @@
         {
           "url": "https://sharepoint-aus-map.pages.dev/",
           "label": "Sharepoint Australia Map"
+        },
+        {
+          "url": "https://sharepoint-international-map.pages.dev/",
+          "label": "Sharepoint International Map"
         }
       ],
       "owner": "Prerit, Laura, Ana",
