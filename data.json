@@ -375,6 +375,10 @@
         {
           "url": "https://grupoelecnor.sharepoint.com/sites/ANZ",
           "label": "Elecnor Australia (Intranet)"
+        },
+        {
+          "url": "https://sharepoint-aus-map.pages.dev/",
+          "label": "Sharepoint Australia Map"
         }
       ],
       "owner": "Prerit, Laura, Ana",
