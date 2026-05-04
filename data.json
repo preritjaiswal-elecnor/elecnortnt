@@ -389,6 +389,32 @@
       "startDate": "April 2026",
       "targetDate": "December 2026",
       "notes": ""
+    },
+    {
+      "id": 1777862151668,
+      "name": "Set up 1300 HSEQ number for Elecnor Australia",
+      "description": "Procure and configure 1300 354 737 (1300 ELHSEQ) as the central contact number for Elecnor Australia's Health, Safety, Environment and Quality services. Includes selecting an end-to-end managed provider (shortlist: Alltel, Zintel), securing the smart number, building a 5-option IVR with call routing to nurse triage, RTWC, EAP (with failover), confidential reporting hotline, and one TBC destination. Scope also covers professional voice recording for greetings and menu prompts, full end-to-end testing, and handover. Approver: Roman Francisco Brache Reyes (HSEQ Manager, ANZ). Requestor: Ben Hinton",
+      "category": "Health, Safety, Environment, and Quality",
+      "pillar": "Organisation",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "goals": [],
+      "stages": [
+        "Requirements & approvals",
+        "Quotes & vendor selection",
+        "Number procurement",
+        "IVR build & voice recording",
+        "Testing & UAT",
+        "Go-live & handover"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit, Ben",
+      "startDate": "May 2026",
+      "targetDate": "TBD",
+      "notes": ""
     }
   ]
 }
