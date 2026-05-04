@@ -94,7 +94,7 @@
       "category": "Foundation",
       "pillar": "Organisation",
       "priority": "Level 2",
-      "progress": 0,
+      "progress": 25,
       "rag": "Green",
       "living": true,
       "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
@@ -110,7 +110,7 @@
         "Launch first quarterly review",
         "Ongoing — evolves each quarter"
       ],
-      "currentStage": 0,
+      "currentStage": 1,
       "documents": [],
       "owner": "Prerit, Ivan",
       "startDate": "April 2026",
