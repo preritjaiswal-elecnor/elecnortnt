@@ -498,8 +498,8 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 
 /* ── NOTIFICATIONS ── */
 .bell-wrap{position:relative;display:none}
-.bell-btn{background:rgba(255,255,255,.1);border:none;border-radius:7px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;transition:background .15s;position:relative}
-.bell-btn:hover{background:rgba(255,255,255,.18)}
+.bell-btn{background:rgba(255,255,255,.1);border:none;border-radius:7px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;transition:background .15s,color .15s;position:relative;color:rgba(255,255,255,.7)}
+.bell-btn:hover{background:rgba(255,255,255,.18);color:#fff}
 .bell-badge{position:absolute;top:-4px;right:-4px;background:var(--orange);color:#fff;border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;min-width:16px;text-align:center;border:2px solid var(--blue);display:none}
 .bell-badge.show{display:block}
 .notif-panel{position:absolute;top:calc(100% + 10px);right:0;width:320px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);border:1px solid rgba(0,0,0,.08);z-index:500;display:none;flex-direction:column;overflow:hidden;max-height:420px}
@@ -526,7 +526,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 
 /* ── MOBILE TAB BAR ── */
 .mob-tabs{display:none;background:var(--blue-dark);padding:0;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.08)}
-.mob-tab{flex:1;padding:10px 4px;background:none;border:none;border-bottom:3px solid transparent;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.mob-tab{flex:1;padding:10px 4px;background:none;border:none;border-bottom:3px solid transparent;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;letter-spacing:.5px;display:inline-flex;align-items:center;justify-content:center;gap:5px}
 .mob-tab.active{color:#fff;border-bottom-color:var(--orange)}
 
 /* ── MOBILE MODAL ── */
@@ -715,6 +715,9 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></symbol>
     <symbol id="i-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></symbol>
     <symbol id="i-party" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-1.4-.467a2.1 2.1 0 0 0-2.6 1.4l-.473 1.4a2.1 2.1 0 0 1-2.6 1.4L13 17"/><path d="m11 2 .33 1.13a2.1 2.1 0 0 0 2.18 1.43L15 4.5"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
   </defs>
 </svg>
 <script>
@@ -833,9 +836,9 @@ function icon(name, cls) {
 
 <!-- MOBILE TAB BAR -->
 <div class="mob-tabs" id="mob-tabs">
-  <button class="mob-tab active" data-col="Level 1" onclick="mobTab(this)">⚡ Level 1</button>
-  <button class="mob-tab" data-col="Level 2" onclick="mobTab(this)">◎ Level 2</button>
-  <button class="mob-tab" data-col="Level 3" onclick="mobTab(this)">◷ Level 3</button>
+  <button class="mob-tab active" data-col="Level 1" onclick="mobTab(this)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-zap"/></svg> Level 1</button>
+  <button class="mob-tab" data-col="Level 2" onclick="mobTab(this)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-target"/></svg> Level 2</button>
+  <button class="mob-tab" data-col="Level 3" onclick="mobTab(this)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clock"/></svg> Level 3</button>
 </div>
 
 <!-- MOBILE PROJECT MODAL -->
@@ -863,21 +866,21 @@ function icon(name, cls) {
   <div class="board" id="board">
     <div class="col">
       <div class="col-hdr">
-        <div class="col-title l1">⚡ Level 1 — Immediate</div>
+        <div class="col-title l1"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-zap"/></svg> Level 1 — Immediate</div>
         <div class="col-pill l1" id="cnt-Level 1">0</div>
       </div>
       <div class="col-body drop-zone" id="col-Level 1" data-col="Level 1"></div>
     </div>
     <div class="col">
       <div class="col-hdr">
-        <div class="col-title l2">◎ Level 2 — Near Term</div>
+        <div class="col-title l2"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-target"/></svg> Level 2 — Near Term</div>
         <div class="col-pill l2" id="cnt-Level 2">0</div>
       </div>
       <div class="col-body drop-zone" id="col-Level 2" data-col="Level 2"></div>
     </div>
     <div class="col">
       <div class="col-hdr">
-        <div class="col-title l3">◷ Level 3 — Pipeline</div>
+        <div class="col-title l3"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clock"/></svg> Level 3 — Pipeline</div>
         <div class="col-pill l3" id="cnt-Level 3">0</div>
       </div>
       <div class="col-body drop-zone" id="col-Level 3" data-col="Level 3"></div>
