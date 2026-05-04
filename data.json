@@ -142,6 +142,123 @@
       "notes": ""
     },
     {
+      "id": 5,
+      "name": "New eANZ Website",
+      "category": "Digital Presence",
+      "pillar": "Technology",
+      "priority": "Level 2",
+      "progress": 25,
+      "rag": "Red",
+      "living": true,
+      "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
+      "goals": [
+        "Refresh brand and content to reflect 2026 capabilities",
+        "Showcase EnergyConnect and major project credentials",
+        "Optimise for mobile and SEO"
+      ],
+      "stages": [
+        "Scope & brief",
+        "Site map",
+        "Content & design",
+        "Build & review",
+        "Launch"
+      ],
+      "currentStage": 1,
+      "documents": [
+        {
+          "url": "https://docs.google.com/spreadsheets/d/1YsNjU35MBxFeEtaPlz9luansIAgkTNUHsmYXZRl_eds/edit?gid=0#gid=0",
+          "label": "Sitemap"
+        },
+        {
+          "url": "https://mmp68m8n-5500.aue.devtunnels.ms/",
+          "label": "Site Prototype (Temporary Link)"
+        }
+      ],
+      "owner": "Prerit, Laura, Ana",
+      "startDate": "April 2026",
+      "targetDate": "December 2026",
+      "notes": ""
+    },
+    {
+      "id": 9,
+      "name": "Travel Management Review",
+      "category": "Process",
+      "pillar": "People",
+      "priority": "Level 2",
+      "progress": 25,
+      "rag": "Amber",
+      "living": false,
+      "description": "Review and digitalise how Elecnor Australia manages business travel — flights, rental cars and hotel bookings. Assess current tools, policies and spend, and implement a streamlined digital solution.",
+      "goals": [
+        "Map current travel booking process and costs",
+        "Evaluate travel management platforms",
+        "Implement approved tool with policy guardrails"
+      ],
+      "stages": [
+        "Travel spend & process audit",
+        "Platform evaluation",
+        "Policy design",
+        "System configuration & training",
+        "Launch"
+      ],
+      "currentStage": 1,
+      "documents": [
+        {
+          "url": "https://app.pandadoc.com/document/v2?token=0fca0e30afae54bab0ea16f24d4fc954e19e41a3",
+          "label": "Webjet Proposal"
+        },
+        {
+          "url": "https://www.concur.com.au/",
+          "label": "https://www.concur.com.au/"
+        },
+        {
+          "url": "https://www.rippling.com/en-AU",
+          "label": "https://www.rippling.com/en-AU"
+        },
+        {
+          "url": "https://www.itilite.com/",
+          "label": "https://www.itilite.com/"
+        },
+        {
+          "url": "https://app.navan.com/",
+          "label": "https://app.navan.com/"
+        }
+      ],
+      "owner": "Prerit, Vica",
+      "startDate": "March 2026",
+      "targetDate": "July 2026",
+      "notes": "Abhi is reviewing all the available providers."
+    },
+    {
+      "id": 3,
+      "name": "T&T Delivery Framework & Governance",
+      "category": "Foundation",
+      "pillar": "Organisation",
+      "priority": "Level 2",
+      "progress": 25,
+      "rag": "Green",
+      "living": true,
+      "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
+      "goals": [
+        "Define T&T governance structure and decision rights",
+        "Create quarterly review cadence and reporting template",
+        "Establish weekly T&T coffee agenda format"
+      ],
+      "stages": [
+        "Draft framework document",
+        "Review with Ivan",
+        "Agree reporting cadence",
+        "Launch first quarterly review",
+        "Ongoing — evolves each quarter"
+      ],
+      "currentStage": 1,
+      "documents": [],
+      "owner": "Prerit, Ivan",
+      "startDate": "April 2026",
+      "targetDate": "Ongoing",
+      "notes": ""
+    },
+    {
       "id": 1,
       "name": "Assets & Electronic Devices Register",
       "category": "Foundation",
@@ -274,129 +391,12 @@
       "notes": ""
     },
     {
-      "id": 5,
-      "name": "New eANZ Website",
-      "category": "Digital Presence",
-      "pillar": "Technology",
-      "priority": "Level 2",
-      "progress": 25,
-      "rag": "Red",
-      "living": true,
-      "description": "Redesign and rebuild the Elecnor Australia website to reflect current capabilities, project credentials and brand. Particular focus on showcasing HV, renewables and data centre capability to attract new clients and partners.",
-      "goals": [
-        "Refresh brand and content to reflect 2026 capabilities",
-        "Showcase EnergyConnect and major project credentials",
-        "Optimise for mobile and SEO"
-      ],
-      "stages": [
-        "Scope & brief",
-        "Site map",
-        "Content & design",
-        "Build & review",
-        "Launch"
-      ],
-      "currentStage": 1,
-      "documents": [
-        {
-          "url": "https://docs.google.com/spreadsheets/d/1YsNjU35MBxFeEtaPlz9luansIAgkTNUHsmYXZRl_eds/edit?gid=0#gid=0",
-          "label": "Sitemap"
-        },
-        {
-          "url": "https://mmp68m8n-5500.aue.devtunnels.ms/",
-          "label": "Site Prototype (Temporary Link)"
-        }
-      ],
-      "owner": "Prerit, Laura, Ana",
-      "startDate": "April 2026",
-      "targetDate": "December 2026",
-      "notes": ""
-    },
-    {
-      "id": 9,
-      "name": "Travel Management Review",
-      "category": "Process",
-      "pillar": "People",
-      "priority": "Level 2",
-      "progress": 25,
-      "rag": "Amber",
-      "living": false,
-      "description": "Review and digitalise how Elecnor Australia manages business travel — flights, rental cars and hotel bookings. Assess current tools, policies and spend, and implement a streamlined digital solution.",
-      "goals": [
-        "Map current travel booking process and costs",
-        "Evaluate travel management platforms",
-        "Implement approved tool with policy guardrails"
-      ],
-      "stages": [
-        "Travel spend & process audit",
-        "Platform evaluation",
-        "Policy design",
-        "System configuration & training",
-        "Launch"
-      ],
-      "currentStage": 1,
-      "documents": [
-        {
-          "url": "https://app.pandadoc.com/document/v2?token=0fca0e30afae54bab0ea16f24d4fc954e19e41a3",
-          "label": "Webjet Proposal"
-        },
-        {
-          "url": "https://www.concur.com.au/",
-          "label": "https://www.concur.com.au/"
-        },
-        {
-          "url": "https://www.rippling.com/en-AU",
-          "label": "https://www.rippling.com/en-AU"
-        },
-        {
-          "url": "https://www.itilite.com/",
-          "label": "https://www.itilite.com/"
-        },
-        {
-          "url": "https://app.navan.com/",
-          "label": "https://app.navan.com/"
-        }
-      ],
-      "owner": "Prerit, Vica",
-      "startDate": "March 2026",
-      "targetDate": "July 2026",
-      "notes": "Abhi is reviewing all the available providers."
-    },
-    {
-      "id": 3,
-      "name": "T&T Delivery Framework & Governance",
-      "category": "Foundation",
-      "pillar": "Organisation",
-      "priority": "Level 2",
-      "progress": 25,
-      "rag": "Green",
-      "living": true,
-      "description": "Design the lightweight methodology that governs how T&T runs and tracks all projects. Defines how decisions are made, how progress is reported to leadership, and how the program evolves each quarter.",
-      "goals": [
-        "Define T&T governance structure and decision rights",
-        "Create quarterly review cadence and reporting template",
-        "Establish weekly T&T coffee agenda format"
-      ],
-      "stages": [
-        "Draft framework document",
-        "Review with Ivan",
-        "Agree reporting cadence",
-        "Launch first quarterly review",
-        "Ongoing — evolves each quarter"
-      ],
-      "currentStage": 1,
-      "documents": [],
-      "owner": "Prerit, Ivan",
-      "startDate": "April 2026",
-      "targetDate": "Ongoing",
-      "notes": ""
-    },
-    {
       "id": 1777862151668,
       "name": "Set up 1300 HSEQ number for Elecnor Australia",
       "description": "Procure and configure 1300 354 737 (1300 ELHSEQ) as the central contact number for Elecnor Australia's Health, Safety, Environment and Quality services. Includes selecting an end-to-end managed provider (shortlist: Alltel, Zintel), securing the smart number, building a 5-option IVR with call routing to nurse triage, RTWC, EAP (with failover), confidential reporting hotline, and one TBC destination. Scope also covers professional voice recording for greetings and menu prompts, full end-to-end testing, and handover. Approver: Roman Francisco Brache Reyes (HSEQ Manager, ANZ). Requestor: Ben Hinton",
       "category": "Health, Safety, Environment, and Quality",
       "pillar": "Organisation",
-      "priority": "Level 2",
+      "priority": "Level 1",
       "progress": 20,
       "rag": "Green",
       "living": false,
