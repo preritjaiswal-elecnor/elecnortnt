@@ -379,7 +379,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .card.locked:hover{transform:none;box-shadow:0 1px 5px rgba(0,0,0,.07)}
 .card-blur{filter:blur(4px);user-select:none;pointer-events:none}
 .card-lock-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:10px;background:rgba(255,255,255,.5)}
-.card-lock-icon{font-size:20px;opacity:.4}
+.card-lock-icon{opacity:.4;display:flex;align-items:center;justify-content:center}
 .card-lock-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mid);opacity:.6}
 
 
@@ -657,10 +657,12 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .archive-bar{background:#fff;border-top:2px solid var(--light);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:38px;flex-shrink:0;cursor:pointer;user-select:none;transition:background .15s}
 .archive-bar:hover{background:var(--light)}
 .archive-bar-l{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;color:var(--mid);letter-spacing:1px;text-transform:uppercase}
-.archive-bar-icon{font-size:15px}
+.archive-bar-icon{display:inline-flex;align-items:center}
+.archive-bar-icon .ic{width:16px;height:16px}
 .archive-pill{background:var(--mid);color:#fff;border-radius:20px;padding:1px 8px;font-size:10px;font-weight:700}
-.archive-chevron{font-size:12px;color:var(--muted);transition:transform .2s}
+.archive-chevron{color:var(--muted);transition:transform .2s;display:inline-flex;align-items:center}
 .archive-chevron.open{transform:rotate(180deg)}
+.archive-chevron .ic{width:14px;height:14px}
 .archive-body{background:#f8fafc;border-top:1px solid var(--light);display:none;overflow-y:auto;max-height:260px;padding:12px 16px;gap:8px;flex-wrap:wrap}
 .archive-body.open{display:flex}
 .archive-card{background:#fff;border-radius:8px;padding:10px 12px;border:1px solid var(--light);opacity:.7;min-width:220px;flex:1;max-width:320px;display:flex;flex-direction:column;gap:6px}
@@ -684,6 +686,53 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 </style>
 </head>
 <body>
+
+<!-- ─── LUCIDE ICON SPRITE ──────────────────────────────────────────────
+     Inline SVG symbols. Reference each via <svg class="ic"><use href="#i-name"/></svg>
+     or via the JS icon('name') helper. All icons inherit currentColor and
+     stroke-width via CSS so they theme cleanly for dark mode. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></symbol>
+    <symbol id="i-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-paperclip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.93 8.8L9.41 17.31a2 2 0 0 1-2.83-2.83l8.49-8.48"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="17" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></symbol>
+    <symbol id="i-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></symbol>
+    <symbol id="i-party" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-1.4-.467a2.1 2.1 0 0 0-2.6 1.4l-.473 1.4a2.1 2.1 0 0 1-2.6 1.4L13 17"/><path d="m11 2 .33 1.13a2.1 2.1 0 0 0 2.18 1.43L15 4.5"/></symbol>
+  </defs>
+</svg>
+<script>
+// ─── Icon helper ─────────────────────────────────────────────────
+// Returns the SVG markup for an icon. Use in template literals where you'd
+// previously embed an emoji, e.g. innerHTML = `${icon('bell')} Alerts`.
+// `cls` lets you apply size/colour classes (default 'ic').
+function icon(name, cls) {
+  return `<svg class="${cls||'ic'}" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+}
+</script>
+<style>
+/* ─── Icon base styles ─── */
+.ic{width:18px;height:18px;display:inline-block;vertical-align:-3px;flex-shrink:0;color:currentColor}
+.ic-sm{width:14px;height:14px;vertical-align:-2px}
+.ic-lg{width:22px;height:22px;vertical-align:-4px}
+.ic-xl{width:28px;height:28px;vertical-align:-6px}
+</style>
 <!-- AUTH SCREEN -->
 <div id="auth-screen">
   <div class="auth-grid"></div>
@@ -703,7 +752,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     <div class="auth-input-wrap" id="auth-input-wrap" style="display:none">
       <div style="position:relative;width:100%">
         <input class="auth-inp" id="auth-inp" type="password" placeholder="Enter your access key…" autocomplete="off" onkeydown="if(event.key==='Enter')doAuth()" style="padding-right:48px"/>
-        <button class="auth-eye" onclick="toggleAuthVis()" id="auth-eye">👁</button>
+        <button class="auth-eye" onclick="toggleAuthVis()" id="auth-eye"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg></button>
       </div>
       <button class="auth-btn" onclick="doAuth()">Access Dashboard</button>
     </div>
@@ -718,7 +767,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     <div style="display:flex;align-items:center;gap:14px">
       <div class="logo-wrap" style="height:36px;padding:4px 10px"><img src="https://www.elecnor.com.au/storage/media/files/shares/logo-elecnoraustralia.png" style="height:20px"/></div>
       <div>
-        <div class="adm-title">⚙️ <span>Mission</span> Control — User Management</div>
+        <div class="adm-title"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-settings"/></svg> <span>Mission</span> Control — User Management</div>
         <div class="adm-sub">Visible to Owners only · Changes take effect on next login</div>
       </div>
     </div>
@@ -762,10 +811,10 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
   </div>
   <div class="h-r">
     <span id="sync-status" style="font-size:10px;font-weight:600;transition:color .3s;min-width:120px;text-align:right"></span>
-    <button class="admin-btn" id="admin-btn" onclick="openAdmin()">⚙️ Users</button>
-    <button class="broadcast-btn" id="broadcast-btn" onclick="openBroadcast()">📣 Broadcast</button>
+    <button class="admin-btn" id="admin-btn" onclick="openAdmin()"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg> Users</button>
+    <button class="broadcast-btn" id="broadcast-btn" onclick="openBroadcast()"><svg class="ic" aria-hidden="true"><use href="#i-megaphone"/></svg> Broadcast</button>
     <div class="bell-wrap" id="bell-wrap">
-      <button class="bell-btn" onclick="toggleNotifPanel()" id="bell-btn" title="Notifications">🔔
+      <button class="bell-btn" onclick="toggleNotifPanel()" id="bell-btn" title="Notifications"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>
         <span class="bell-badge" id="bell-badge"></span>
       </button>
       <div class="notif-panel" id="notif-panel">
@@ -777,7 +826,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
       </div>
     </div>
     <div id="role-badge-wrap"></div>
-    <button class="add-btn" id="add-proj-btn" onclick="openModal()" style="display:none">＋ Add Project</button>
+    <button class="add-btn" id="add-proj-btn" onclick="openModal()" style="display:none"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg> Add Project</button>
   </div>
 </header>
 
@@ -794,7 +843,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
   <div class="mob-modal" id="mob-modal" onclick="event.stopPropagation()">
     <div class="mob-modal-hdr">
       <div class="mob-modal-name" id="mob-modal-name"></div>
-      <button class="mob-modal-close" onclick="closeMobModal()">✕</button>
+      <button class="mob-modal-close" onclick="closeMobModal()"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
     </div>
     <div class="mob-modal-body" id="mob-modal-body"></div>
   </div>
@@ -843,7 +892,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     <div class="p-hdr">
       <div class="p-hdr-top">
         <div class="p-name" id="p-name" contenteditable="true" spellcheck="false"></div>
-        <button class="p-close" onclick="closePanel()">✕</button>
+        <button class="p-close" onclick="closePanel()"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
       </div>
       <div class="p-meta" id="p-meta"></div>
     </div>
@@ -887,7 +936,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
       <div class="sec">
         <div class="sec-title-row">
           <div class="sec-title">Stage Map — click to advance</div>
-          <button class="edit-icon-btn" onclick="toggleStageEditor()" title="Edit stages">✏️</button>
+          <button class="edit-icon-btn" onclick="toggleStageEditor()" title="Edit stages"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-edit"/></svg></button>
         </div>
         <div class="stage-map" id="p-stages"></div>
         <div class="stage-editor" id="stage-editor">
@@ -944,8 +993,8 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     </div>
     <div class="p-footer">
       <button class="save-btn" id="save-btn" onclick="saveProject()">Save Changes</button>
-      <button class="arch-btn" id="arch-btn" onclick="archiveProject()">🗄 Archive</button>
-      <button class="del-btn" id="del-btn" onclick="deleteProject()" title="Delete this project permanently"><span style="font-size:14px;line-height:1">🗑</span> Delete</button>
+      <button class="arch-btn" id="arch-btn" onclick="archiveProject()"><svg class="ic" aria-hidden="true"><use href="#i-archive"/></svg> Archive</button>
+      <button class="del-btn" id="del-btn" onclick="deleteProject()" title="Delete this project permanently"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg> Delete</button>
     </div>
     </div><!-- /p-view-details -->
     <!-- Chat view -->
@@ -963,11 +1012,11 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 <!-- ARCHIVE -->
 <div class="archive-bar" onclick="toggleArchive()" id="archive-bar">
   <div class="archive-bar-l">
-    <span class="archive-bar-icon">🗄️</span>
+    <span class="archive-bar-icon"><svg class="ic" aria-hidden="true"><use href="#i-archive"/></svg></span>
     <span>Archived Projects</span>
     <span class="archive-pill" id="archive-pill">0</span>
   </div>
-  <span class="archive-chevron" id="archive-chevron">▼</span>
+  <span class="archive-chevron" id="archive-chevron"><svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></span>
 </div>
 <div class="archive-body" id="archive-body"></div>
 
@@ -975,13 +1024,13 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 <div class="chat-drawer" id="chat-drawer">
   <div class="chat-hdr">
     <div class="chat-hdr-l">
-      <div class="chat-hdr-icon">💬</div>
+      <div class="chat-hdr-icon"><svg class="ic" aria-hidden="true" style="color:#fff"><use href="#i-message"/></svg></div>
       <div>
         <div class="chat-hdr-name" id="chat-hdr-name">Project Chat</div>
         <div class="chat-hdr-sub" id="chat-hdr-sub">Team messages</div>
       </div>
     </div>
-    <button class="chat-close" onclick="closeChat()">✕</button>
+    <button class="chat-close" onclick="closeChat()"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-x"/></svg></button>
   </div>
   <div class="chat-msgs" id="chat-msgs"></div>
   <div class="chat-input-row">
@@ -1044,8 +1093,8 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 <div class="bc-modal-bg" id="bc-modal-bg" onclick="if(event.target===this)closeBroadcast()">
   <div class="bc-modal">
     <div class="bc-modal-hdr">
-      <div class="bc-modal-title">📣 <span>Clan Mail</span> — Broadcast to All Projects</div>
-      <button class="bc-modal-close" onclick="closeBroadcast()">✕</button>
+      <div class="bc-modal-title"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-megaphone"/></svg> <span>Clan Mail</span> — Broadcast to All Projects</div>
+      <button class="bc-modal-close" onclick="closeBroadcast()"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
     </div>
     <div class="bc-modal-body">
       <div class="bc-modal-sub">Your message will be posted into <strong>every project chat</strong> you have access to. Use this for program-wide announcements, reminders, or updates.</div>
@@ -1053,7 +1102,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     </div>
     <div class="bc-modal-footer">
       <button class="bc-cancel" onclick="closeBroadcast()">Cancel</button>
-      <button class="bc-send" onclick="sendBroadcast()">📣 Send to All Projects</button>
+      <button class="bc-send" onclick="sendBroadcast()"><svg class="ic" aria-hidden="true"><use href="#i-megaphone"/></svg> Send to All Projects</button>
     </div>
   </div>
 </div>
@@ -1213,7 +1262,7 @@ function enterDashboard() {
   wrap.innerHTML = `<div class="role-badge" onclick="logout()" title="Click to sign out">
     <div class="role-badge-dot"></div>
     <div class="role-badge-name">${currentRole.emoji} ${currentRole.name} · ${currentRole.codename}</div>
-    <div class="role-badge-logout">✕</div>
+    <div class="role-badge-logout"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-x"/></svg></div>
   </div>`;
   render();
   updateBell();
@@ -1234,7 +1283,12 @@ function logout() {
 
 function toggleAuthVis() {
   const inp = document.getElementById('auth-inp');
-  inp.type = inp.type === 'password' ? 'text' : 'password';
+  const btn = document.getElementById('auth-eye');
+  const visible = inp.type === 'text';
+  inp.type = visible ? 'password' : 'text';
+  if (btn) btn.innerHTML = visible
+    ? '<svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg>'
+    : '<svg class="ic" aria-hidden="true"><use href="#i-eye-off"/></svg>';
 }
 
 function canAccess(projectId) {
@@ -1572,7 +1626,7 @@ function makeCard(p) {
         </div>
       </div>
       <div class="card-lock-overlay">
-        <div class="card-lock-icon">🔒</div>
+        <div class="card-lock-icon"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-lock"/></svg></div>
         <div class="card-lock-label">Classified</div>
       </div>`;
     el.draggable = false;
@@ -1597,7 +1651,7 @@ function makeCard(p) {
   if (unreadCount > 0) el.classList.add('has-unread');
   const chatBtn = document.createElement('button');
   chatBtn.className = 'chat-btn';
-  chatBtn.innerHTML = `<span class="chat-btn-icon">💬</span> Chat${unreadCount>0?` <span class="chat-badge">${unreadCount}`+`</span>`:''}`;
+  chatBtn.innerHTML = `<svg class="ic ic-sm" aria-hidden="true" style="color:#fff"><use href="#i-message"/></svg> Chat${unreadCount>0?` <span class="chat-badge">${unreadCount}`+`</span>`:''}`;
   chatBtn.addEventListener('click', e => { e.stopPropagation(); openChat(p.id); });
   // Reserve space only when the button is permanently visible (unread present).
   // On hover, the button briefly overlays the card's bottom edge — that's fine.
@@ -1726,7 +1780,7 @@ function renderStages(p) {
     const last = i === p.stages.length-1;
     el.innerHTML += `<div class="stage-item">
       <div class="stage-l">
-        <div class="stage-circle ${done?'done':cur?'cur':''}" onclick="setStage(${p.id},${i})">${done?'✓':i+1}</div>
+        <div class="stage-circle ${done?'done':cur?'cur':''}" onclick="setStage(${p.id},${i})">${done?'<svg class="ic ic-sm" aria-hidden="true" style="color:#fff"><use href="#i-check"/></svg>':i+1}</div>
         ${!last?`<div class="stage-line ${done?'done':''}"></div>`:''}
       </div>
       <div class="stage-txt ${done?'done':cur?'cur':''}">${s}</div>
@@ -1753,7 +1807,7 @@ function renderDocs(p) {
   (p.documents||[]).forEach((d,i) => {
     const div = document.createElement('div');
     div.className = 'doc-item';
-    div.innerHTML = `<span>📎</span><a class="doc-link" href="${d.url}" target="_blank">${d.label||d.url}</a><button class="doc-rm" onclick="removeDoc(${p.id},${i})">✕</button>`;
+    div.innerHTML = `<svg class="ic ic-sm" aria-hidden="true"><use href="#i-paperclip"/></svg><a class="doc-link" href="${d.url}" target="_blank">${d.label||d.url}</a><button class="doc-rm" onclick="removeDoc(${p.id},${i})"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-x"/></svg></button>`;
     el.appendChild(div);
   });
 }
@@ -1944,7 +1998,7 @@ function renderStageEditor() {
     row.className = 'stage-edit-row';
     row.innerHTML = `
       <input class="stage-edit-inp" value="${s}" onchange="updateStageItem(${i}, this.value)" onblur="updateStageItem(${i}, this.value)"/>
-      <button class="stage-rm-btn" onclick="removeStageItem(${i})">✕</button>
+      <button class="stage-rm-btn" onclick="removeStageItem(${i})"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-x"/></svg></button>
     `;
     list.appendChild(row);
   });
@@ -1990,7 +2044,7 @@ let notifications = [];   // { id, type, text, projectId, projectName, from, ts,
 let _notifSha = null;
 let _notifPollInterval = null;
 const NOTIF_ICONS = {
-  progress: '📊', document: '📎', project: '🚀', chat: '💬'
+  progress: 'bar-chart', document: 'paperclip', project: 'rocket', chat: 'message'
 };
 
 async function loadNotifsFromGitHub() {
@@ -2127,15 +2181,19 @@ function renderNotifList() {
   if (!el) return;
   const mine = notifications.filter(n => canAccessProject(n.projectId));
   if (!mine.length) {
-    el.innerHTML = '<div class="notif-empty">All caught up! 🎉<br/>No notifications yet.</div>';
+    el.innerHTML = '<div class="notif-empty"><svg class="ic ic-lg" aria-hidden="true" style="opacity:.5;display:block;margin:0 auto 8px"><use href="#i-party"/></svg>All caught up!<br/>No notifications yet.</div>';
     return;
   }
   el.innerHTML = mine.map(n => {
     const unread = !n.readBy?.includes(currentRole?.name) && n.from !== currentRole?.name;
     const time = new Date(n.ts).toLocaleString('en-AU', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
-    const icon = NOTIF_ICONS[n.type] || '📌';
+    const iconName = NOTIF_ICONS[n.type] || 'pin';
+    // Prefer the sender's personal emoji (identity), fall back to the action icon (SVG)
+    const iconHtml = n.emoji
+      ? n.emoji
+      : `<svg class="ic" aria-hidden="true"><use href="#i-${iconName}"/></svg>`;
     return `<div class="notif-item ${unread?'unread':''}">
-      <div class="notif-icon">${n.emoji||icon}</div>
+      <div class="notif-icon">${iconHtml}</div>
       <div class="notif-body">
         <div class="notif-text"><span>${n.from}</span> ${n.detail} on <span>${n.projectName}</span></div>
         <div class="notif-time">${time}</div>
@@ -2205,7 +2263,7 @@ function openMobModal(projectId) {
     const done = i < p.currentStage, cur = i === p.currentStage;
     return `<div class="stage-item">
       <div class="stage-l">
-        <div class="stage-circle ${done?'done':cur?'cur':''}" onclick="mobSetStage(${p.id},${i})">${done?'✓':i+1}</div>
+        <div class="stage-circle ${done?'done':cur?'cur':''}" onclick="mobSetStage(${p.id},${i})">${done?'<svg class="ic ic-sm" aria-hidden="true" style="color:#fff"><use href="#i-check"/></svg>':i+1}</div>
         ${i<p.stages.length-1?`<div class="stage-line ${done?'done':''}"></div>`:''}
       </div>
       <div class="stage-txt ${done?'done':cur?'cur':''}">${s}</div>
@@ -2262,14 +2320,14 @@ function openMobModal(projectId) {
 
     <div class="sec" style="margin-top:14px">
       <div style="display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--muted);font-weight:500">
-        <span>👤 ${p.owner||'—'}</span>
-        <span>📅 ${p.startDate||'—'} → ${p.targetDate||'—'}</span>
+        <span style="display:inline-flex;align-items:center;gap:5px"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-users"/></svg> ${p.owner||'—'}</span>
+        <span style="display:inline-flex;align-items:center;gap:5px"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-calendar"/></svg> ${p.startDate||'—'} → ${p.targetDate||'—'}</span>
       </div>
     </div>
 
     <div style="display:flex;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid var(--light)">
       <button onclick="mobSaveProject(${p.id})" style="flex:1;padding:11px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer" id="mob-save-${p.id}">Save Changes</button>
-      <button onclick="openChat(${p.id})" style="padding:11px 14px;background:var(--light);color:var(--blue);border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer">💬 Chat</button>
+      <button onclick="openChat(${p.id})" style="padding:11px 14px;background:var(--light);color:var(--blue);border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-message"/></svg> Chat</button>
     </div>`;
 
   document.getElementById('mob-modal-bg').classList.add('open');
