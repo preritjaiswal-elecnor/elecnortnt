@@ -98,7 +98,9 @@
     "codename": "Mission Specialist",
     "emoji": "🌙",
     "level": "specialist",
-    "projects": [],
+    "projects": [
+      1777862151668
+    ],
     "canAdd": false,
     "master": false
   }
