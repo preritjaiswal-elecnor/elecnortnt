@@ -91,5 +91,15 @@
     ],
     "canAdd": false,
     "master": false
+  },
+  {
+    "key": "ceres",
+    "name": "Ben",
+    "codename": "Mission Specialist",
+    "emoji": "🌙",
+    "level": "specialist",
+    "projects": [],
+    "canAdd": false,
+    "master": false
   }
 ]
