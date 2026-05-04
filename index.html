@@ -104,10 +104,15 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 
 /* PILLARS */
 .pillars{height:var(--pill);display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;flex-shrink:0}
-.pillar{display:flex;align-items:center;justify-content:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.pillar{display:flex;align-items:center;justify-content:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;font-family:'Montserrat',sans-serif;cursor:pointer;transition:filter .2s,opacity .2s,box-shadow .2s;position:relative}
+.pillar:hover{filter:brightness(1.08)}
 .pillar.tech{background:var(--blue-mid);color:#fff}
 .pillar.org{background:var(--purple);color:#fff}
 .pillar.ppl{background:var(--teal);color:#fff}
+/* Filter states: when a pillar is active, others dim. Active pillar gets a subtle inset glow. */
+.pillars.has-filter .pillar:not(.active){opacity:.42;filter:saturate(.6)}
+.pillars.has-filter .pillar.active{box-shadow:inset 0 -3px 0 rgba(255,255,255,.85)}
+.pillars.has-filter .pillar.active::after{content:' ✕';margin-left:6px;font-size:11px;letter-spacing:0;opacity:.85}
 .psub{font-size:9px;font-weight:500;opacity:.6;letter-spacing:.8px}
 .arr{background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:800}
 
@@ -133,6 +138,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .col-body{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
 .col-body::-webkit-scrollbar{width:3px}
 .col-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:2px}
+.col-empty{font-size:11px;color:var(--muted);font-weight:500;padding:20px 12px;text-align:center;font-style:italic}
 
 /* DROP ZONE */
 .drop-zone{min-height:50px;border:2px dashed transparent;border-radius:10px;transition:all .15s}
@@ -722,8 +728,6 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     </div>
   </div>
   <div class="h-r">
-    <div class="hstat"><div class="hstat-v" id="s-total">—</div><div class="hstat-l">Projects</div></div>
-    <div class="hdiv"></div>
     <span id="sync-status" style="font-size:10px;font-weight:600;transition:color .3s;min-width:120px;text-align:right"></span>
     <button class="admin-btn" id="admin-btn" onclick="openAdmin()">⚙️ Users</button>
     <button class="broadcast-btn" id="broadcast-btn" onclick="openBroadcast()">📣 Broadcast</button>
@@ -764,12 +768,12 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 </div>
 
 <!-- PILLARS -->
-<div class="pillars">
-  <div class="pillar tech">Technology<span class="psub">&nbsp;·&nbsp;Systems · Data · AI</span></div>
+<div class="pillars" id="pillars">
+  <button type="button" class="pillar tech" data-pillar="Technology" onclick="togglePillarFilter('Technology')" title="Click to filter by Technology">Technology<span class="psub">&nbsp;·&nbsp;Systems · Data · AI</span></button>
   <div class="arr">›</div>
-  <div class="pillar org">Organisation<span class="psub">&nbsp;·&nbsp;Process · Governance</span></div>
+  <button type="button" class="pillar org" data-pillar="Organisation" onclick="togglePillarFilter('Organisation')" title="Click to filter by Organisation">Organisation<span class="psub">&nbsp;·&nbsp;Process · Governance</span></button>
   <div class="arr">›</div>
-  <div class="pillar ppl">People<span class="psub">&nbsp;·&nbsp;Adoption · Culture</span></div>
+  <button type="button" class="pillar ppl" data-pillar="People" onclick="togglePillarFilter('People')" title="Click to filter by People">People<span class="psub">&nbsp;·&nbsp;Adoption · Culture</span></button>
 </div>
 
 <!-- BOARD -->
@@ -1348,6 +1352,7 @@ const STORE = 'tt_v3';
 let projects = [];
 let activeId = null;
 let dragId   = null;
+let pillarFilter = null;  // null = show all, otherwise 'Technology' | 'Organisation' | 'People'
 
 // ── BOOT: Load from GitHub, fall back to embedded ────────────────────
 // Show loading state while fetching
@@ -1418,16 +1423,52 @@ function render() {
   ['Level 1','Level 2','Level 3'].forEach(p => {
     const col = document.getElementById('col-'+p);
     col.innerHTML = '';
-    const grp = projects.filter(x => x.priority === p && !x.archived);
+    let grp = projects.filter(x => x.priority === p && !x.archived);
+    if (pillarFilter) grp = grp.filter(x => x.pillar === pillarFilter);
     document.getElementById('cnt-'+p).textContent = grp.length;
-    grp.forEach(proj => col.appendChild(makeCard(proj)));
+    if (grp.length === 0 && pillarFilter) {
+      const empty = document.createElement('div');
+      empty.className = 'col-empty';
+      empty.textContent = `No ${pillarFilter} projects in ${p}`;
+      col.appendChild(empty);
+    } else {
+      grp.forEach(proj => col.appendChild(makeCard(proj)));
+    }
     setupDropZone(col);
   });
   updateStats();
   updateArchivePill();
+  updatePillarUI();
   if (activeId) {
     const p = projects.find(x => x.id === activeId);
     if (p) populatePanel(p);
+  }
+}
+
+// ── PILLAR FILTER ────────────────────────────────────────────────────
+function togglePillarFilter(pillar) {
+  pillarFilter = (pillarFilter === pillar) ? null : pillar;
+  render();
+}
+
+function updatePillarUI() {
+  const bar = document.getElementById('pillars');
+  if (!bar) return;
+  bar.classList.toggle('has-filter', !!pillarFilter);
+  bar.querySelectorAll('.pillar').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.pillar === pillarFilter);
+    // Update title for screen readers / tooltip clarity
+    const isActive = btn.dataset.pillar === pillarFilter;
+    btn.title = isActive
+      ? `Currently filtering by ${btn.dataset.pillar} — click to show all`
+      : `Click to filter by ${btn.dataset.pillar}`;
+  });
+}
+
+function clearPillarFilter() {
+  if (pillarFilter !== null) {
+    pillarFilter = null;
+    render();
   }
 }
 
@@ -1440,12 +1481,11 @@ function updateArchivePill() {
 }
 
 function updateStats() {
-  const active = projects.filter(p => !p.archived);
-  const t = active.length;
-  // Only Total Projects is shown in the header now; other stats kept calculated
-  // for any future use, but no longer rendered.
-  const totalEl = document.getElementById('s-total');
-  if (totalEl) totalEl.textContent = t;
+  // Header stats removed in favour of column-level counts.
+  // Function retained as a no-op so all existing call sites continue to work.
+  // If a future need arises (e.g. a stats page), reuse the calc below.
+  // const active = projects.filter(p => !p.archived);
+  // const t = active.length;
 }
 
 // ── CARD ─────────────────────────────────────────────────────────────
@@ -1549,6 +1589,13 @@ function getDragAfterEl(container, y) {
 
 // ── PANEL ─────────────────────────────────────────────────────────────
 function openPanel(id) {
+  // If a pillar filter is hiding this project, clear the filter first
+  // so the user has spatial context when the panel opens.
+  const proj = projects.find(x => x.id === id);
+  if (proj && pillarFilter && proj.pillar !== pillarFilter) {
+    pillarFilter = null;
+    render();
+  }
   activeId = id;
   const p = projects.find(x => x.id === id);
   if (!p) return;
@@ -2030,6 +2077,11 @@ function openMobModal(projectId) {
   if (!isMobile()) return false;
   const p = projects.find(x => x.id === projectId);
   if (!p) return false;
+  // Auto-clear pillar filter if the project we're opening is hidden by it
+  if (pillarFilter && p.pillar !== pillarFilter) {
+    pillarFilter = null;
+    render();
+  }
   activeId = projectId;
 
   document.getElementById('mob-modal-name').textContent = p.name;
