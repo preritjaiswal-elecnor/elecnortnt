@@ -282,7 +282,7 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .save-btn:hover{background:#e05500}
 .save-btn:active{transform:scale(.98)}
 .save-btn.ok{background:var(--rag-g)}
-.del-btn{padding:11px 14px;background:#fff;color:var(--red);border:1.5px solid rgba(220,38,38,.25);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s,border-color .15s,transform .1s;display:flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0}
+.del-btn{padding:11px 14px;background:#fff;color:var(--red);border:1.5px solid rgba(220,38,38,.25);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s,border-color .15s,transform .1s;display:none;align-items:center;justify-content:center;gap:6px;flex-shrink:0}
 .del-btn:hover{background:#fef2f2;border-color:var(--red)}
 .del-btn:active{transform:scale(.98)}
 
@@ -452,10 +452,21 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .chat-btn-icon{font-size:13px;line-height:1}
 .chat-badge{background:var(--orange);border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;min-width:16px;text-align:center}
 
-/* Chat drawer — slides up inside the panel */
+/* ── PANEL TABS ── */
+.p-tabs{display:flex;gap:0;border-bottom:1px solid var(--light);background:#fff;flex-shrink:0;padding:0 18px}
+.p-tab{background:none;border:none;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);padding:12px 16px;cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;transition:color .15s}
+.p-tab:hover{color:var(--mid)}
+.p-tab.active{color:var(--orange)}
+.p-tab.active::after{content:'';position:absolute;left:16px;right:16px;bottom:-1px;height:2px;background:var(--orange);border-radius:2px}
+.p-tab-badge{background:var(--orange);color:#fff;border-radius:10px;padding:1px 6px;font-size:9px;font-weight:800;min-width:16px;text-align:center;letter-spacing:0}
+.p-view{display:none;flex:1;min-height:0;flex-direction:column}
+.p-view.active{display:flex}
+
+/* ── CHAT DRAWER (mobile bottom sheet) ── */
+/* Note: on desktop the chat now lives inside the panel as a tab.
+   This drawer is mobile-only and is referenced by the existing chat-drawer markup. */
 .chat-drawer{position:fixed;bottom:0;right:0;width:var(--panel);height:420px;background:#fff;border-top:2px solid var(--orange);border-left:1px solid rgba(0,0,0,.09);box-shadow:0 -4px 24px rgba(0,0,0,.12);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:150}
 .chat-drawer.open{transform:translateY(0)}
-.chat-drawer.board-shifted{right:var(--panel)}
 .chat-hdr{padding:10px 14px;border-bottom:1px solid var(--light);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--blue-dark)}
 .chat-hdr-l{display:flex;align-items:center;gap:8px}
 .chat-hdr-icon{font-size:16px}
@@ -463,7 +474,11 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .chat-hdr-sub{font-size:9px;color:rgba(255,255,255,.4);font-weight:500}
 .chat-close{background:rgba(255,255,255,.1);border:none;border-radius:5px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6);font-size:12px;font-family:'Montserrat',sans-serif}
 .chat-close:hover{background:rgba(255,255,255,.2);color:#fff}
-.chat-msgs{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;background:#f8fafc}
+/* Hide the drawer entirely on desktop — chat lives in the panel there */
+@media (min-width:769px){.chat-drawer{display:none !important}}
+
+/* ── CHAT MESSAGES (shared between in-panel and mobile drawer) ── */
+.chat-msgs{flex:1;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:10px;background:#f8fafc;min-height:0}
 .chat-msgs::-webkit-scrollbar{width:3px}
 .chat-msgs::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:2px}
 .chat-empty{text-align:center;color:var(--muted);font-size:11px;font-weight:500;margin:auto;padding:20px}
@@ -832,6 +847,16 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
       </div>
       <div class="p-meta" id="p-meta"></div>
     </div>
+    <!-- Panel Tabs (desktop) — Details / Chat -->
+    <div class="p-tabs" id="p-tabs">
+      <button type="button" class="p-tab active" data-view="details" onclick="switchPanelView('details')">Details</button>
+      <button type="button" class="p-tab" data-view="chat" onclick="switchPanelView('chat')">
+        Chat
+        <span class="p-tab-badge" id="panel-chat-badge" style="display:none">0</span>
+      </button>
+    </div>
+    <!-- Details view -->
+    <div class="p-view active" id="p-view-details">
     <div class="p-body">
 
       <div class="sec">
@@ -920,7 +945,16 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
     <div class="p-footer">
       <button class="save-btn" id="save-btn" onclick="saveProject()">Save Changes</button>
       <button class="arch-btn" id="arch-btn" onclick="archiveProject()">🗄 Archive</button>
-      <button class="del-btn" onclick="deleteProject()" title="Delete this project permanently"><span style="font-size:14px;line-height:1">🗑</span> Delete</button>
+      <button class="del-btn" id="del-btn" onclick="deleteProject()" title="Delete this project permanently"><span style="font-size:14px;line-height:1">🗑</span> Delete</button>
+    </div>
+    </div><!-- /p-view-details -->
+    <!-- Chat view -->
+    <div class="p-view" id="p-view-chat">
+      <div class="chat-msgs" id="panel-chat-msgs"></div>
+      <div class="chat-input-row">
+        <input class="chat-inp" id="panel-chat-inp" placeholder="Type a message…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"/>
+        <button class="chat-send" onclick="sendMsg()">Send</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1164,7 +1198,10 @@ function enterDashboard() {
   if (isMaster) document.getElementById('admin-btn').style.display = 'flex';
   if (isMaster) document.getElementById('broadcast-btn').style.display = 'flex';
   document.getElementById('bell-wrap').style.display = 'flex';
-  if (currentRole.level === 'owner') document.getElementById('arch-btn').style.display = 'flex';
+  if (currentRole.level === 'owner') {
+    document.getElementById('arch-btn').style.display = 'flex';
+    document.getElementById('del-btn').style.display = 'flex';
+  }
   startNotifPolling();
   initMobile();
   // Reload ROLES from stored users so changes persist
@@ -1656,6 +1693,8 @@ function populatePanel(p) {
   const descEl = document.getElementById('p-desc');
   descEl.value = p.description||'';
   autoFitDesc();
+  // Refresh the chat tab unread badge for this project
+  if (typeof updatePanelChatBadge === 'function') updatePanelChatBadge();
   // Pillar
   document.querySelectorAll('.psel-btn').forEach(b => b.classList.toggle('active', b.dataset.pillar===p.pillar));
   // Living
@@ -1761,7 +1800,10 @@ function closePanel() {
   document.getElementById('panel-backdrop').classList.remove('open');
   document.getElementById('board').classList.remove('shifted');
   document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+  // Reset to Details view so the next open starts there (chat doesn't leak across projects)
+  switchPanelView('details');
   activeId = null;
+  activeChatId = null;
 }
 
 // Backdrop click — desktop only (CSS hides backdrop on mobile, so this is desktop-only by default)
@@ -1819,7 +1861,13 @@ function saveProject() {
 // ── DELETE ─────────────────────────────────────────────────────────────
 function deleteProject() {
   if (!activeId) return;
-  if (!confirm('Delete this project?')) return;
+  // Owners only — also guards against the button being revealed via dev tools
+  // or deleteProject() being called from the console.
+  if (!currentRole || currentRole.level !== 'owner') {
+    alert('Only owners can delete projects.');
+    return;
+  }
+  if (!confirm('Delete this project? This cannot be undone.')) return;
   projects = projects.filter(x => x.id !== activeId);
   closePanel();
   save(); render();
@@ -2366,6 +2414,10 @@ function renderArchive() {
 
 function archiveProject() {
   if (!activeId) return;
+  if (!currentRole || currentRole.level !== 'owner') {
+    alert('Only owners can archive projects.');
+    return;
+  }
   const p = projects.find(x => x.id === activeId);
   if (!p) return;
   if (!confirm(`Archive "${p.name}"? It will be hidden from the board but can be restored.`)) return;
@@ -2381,6 +2433,10 @@ function archiveProject() {
 }
 
 function unarchiveProject(pid) {
+  if (!currentRole || currentRole.level !== 'owner') {
+    alert('Only owners can restore archived projects.');
+    return;
+  }
   const p = projects.find(x => x.id === pid);
   if (!p) return;
   delete p.archived;
@@ -2460,59 +2516,107 @@ function markChatRead(projectId) {
 function openChat(projectId) {
   activeChatId = projectId;
   const p = projects.find(x => x.id === projectId);
-  document.getElementById('chat-hdr-name').textContent = p ? p.name : 'Project Chat';
-  document.getElementById('chat-hdr-sub').textContent = p ? p.pillar + ' · ' + (p.priority||'') : '';
-  const drawer = document.getElementById('chat-drawer');
-  drawer.classList.add('open');
-  // Position chat drawer — sits to the left of side panel if open.
-  // Note: chat drawer will be merged into the panel in the next iteration;
-  // for now we just keep it functional alongside the wider 640px panel.
-  const panelOpen = document.getElementById('panel').classList.contains('open');
-  drawer.style.right = panelOpen ? 'var(--panel)' : '0';
-  drawer.style.width = panelOpen ? 'min(420px, calc(100vw - var(--panel)))' : 'min(460px, 100vw)';
-  markChatRead(projectId);
-  renderChat();
-  render(); // refresh badge
-  // Only auto-focus on desktop, not mobile (avoids keyboard popup)
-  if (window.innerWidth > 768) setTimeout(() => { document.getElementById('chat-inp').focus(); }, 300);
+  const isDesktop = window.innerWidth > 768;
+  if (isDesktop) {
+    // Desktop: open the side panel and switch to the Chat tab
+    if (activeId !== projectId) {
+      openPanel(projectId);
+    }
+    switchPanelView('chat');
+    markChatRead(projectId);
+    renderChat();
+    render();
+    setTimeout(() => { const inp = document.getElementById('panel-chat-inp'); if (inp) inp.focus(); }, 300);
+  } else {
+    // Mobile: open the bottom-sheet drawer (existing behaviour)
+    document.getElementById('chat-hdr-name').textContent = p ? p.name : 'Project Chat';
+    document.getElementById('chat-hdr-sub').textContent = p ? p.pillar + ' · ' + (p.priority||'') : '';
+    const drawer = document.getElementById('chat-drawer');
+    drawer.classList.add('open');
+    drawer.style.right = '0';
+    drawer.style.width = '100vw';
+    markChatRead(projectId);
+    renderChat();
+    render();
+  }
+}
+
+// Switch the panel between Details and Chat views
+function switchPanelView(view) {
+  document.querySelectorAll('#p-tabs .p-tab').forEach(t => t.classList.toggle('active', t.dataset.view === view));
+  document.getElementById('p-view-details').classList.toggle('active', view === 'details');
+  document.getElementById('p-view-chat').classList.toggle('active', view === 'chat');
+  if (view === 'chat' && activeId) {
+    activeChatId = activeId;
+    markChatRead(activeId);
+    renderChat();
+    updatePanelChatBadge();
+    render();
+    setTimeout(() => { const inp = document.getElementById('panel-chat-inp'); if (inp) inp.focus(); }, 60);
+  }
+}
+
+// Update the unread count badge on the Chat tab
+function updatePanelChatBadge() {
+  if (!activeId) return;
+  const badge = document.getElementById('panel-chat-badge');
+  if (!badge) return;
+  // If we're currently looking at the Chat tab, no unread to show
+  const onChat = document.getElementById('p-view-chat').classList.contains('active');
+  const n = onChat ? 0 : getChatUnread(activeId);
+  if (n > 0) { badge.textContent = n; badge.style.display = 'inline-block'; }
+  else { badge.style.display = 'none'; }
 }
 
 function closeChat() {
-  document.getElementById('chat-drawer').classList.remove('open');
+  const drawer = document.getElementById('chat-drawer');
+  if (drawer) drawer.classList.remove('open');
+  // If panel is open and on Chat view, switch back to Details
+  const chatView = document.getElementById('p-view-chat');
+  if (chatView && chatView.classList.contains('active')) {
+    switchPanelView('details');
+  }
   activeChatId = null;
 }
 
 function renderChat() {
-  const el = document.getElementById('chat-msgs');
   const msgs = chats[activeChatId] || [];
-  if (!msgs.length) {
-    el.innerHTML = '<div class="chat-empty">No messages yet.<br/>Be the first to say something 👋</div>';
-    return;
-  }
-  el.innerHTML = msgs.map(m => {
-    const mine = currentRole && m.user === currentRole.name;
-    const time = new Date(m.ts).toLocaleString('en-AU', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
-    if (m.system) {
-      return `<div class="msg system">
-        <div class="msg-bubble">${m.emoji} ${m.from} ${m.text} · <span style="font-weight:400;opacity:.7">${time}</span></div>
-      </div>`;
-    }
-    if (m.broadcast) {
-      return `<div class="msg broadcast">
-        <div class="msg-meta">📣 ${m.emoji} ${m.user} · Broadcast · ${time}</div>
-        <div class="msg-bubble">${m.text}</div>
-      </div>`;
-    }
-    return `<div class="msg ${mine?'mine':'theirs'}">
-      <div class="msg-meta">${m.emoji||'👤'} ${m.user} · ${time}</div>
-      <div class="msg-bubble">${m.text}</div>
-    </div>`;
-  }).join('');
-  el.scrollTop = el.scrollHeight;
+  const html = !msgs.length
+    ? '<div class="chat-empty">No messages yet.<br/>Be the first to say something 👋</div>'
+    : msgs.map(m => {
+        const mine = currentRole && m.user === currentRole.name;
+        const time = new Date(m.ts).toLocaleString('en-AU', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+        if (m.system) {
+          return `<div class="msg system">
+            <div class="msg-bubble">${m.emoji} ${m.from} ${m.text} · <span style="font-weight:400;opacity:.7">${time}</span></div>
+          </div>`;
+        }
+        if (m.broadcast) {
+          return `<div class="msg broadcast">
+            <div class="msg-meta">📣 ${m.emoji} ${m.user} · Broadcast · ${time}</div>
+            <div class="msg-bubble">${m.text}</div>
+          </div>`;
+        }
+        return `<div class="msg ${mine?'mine':'theirs'}">
+          <div class="msg-meta">${m.emoji||'👤'} ${m.user} · ${time}</div>
+          <div class="msg-bubble">${m.text}</div>
+        </div>`;
+      }).join('');
+  // Render to both surfaces so whichever one is visible (mobile drawer or desktop panel tab) stays in sync.
+  ['chat-msgs','panel-chat-msgs'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.innerHTML = html; el.scrollTop = el.scrollHeight; }
+  });
 }
 
 function sendMsg() {
-  const inp = document.getElementById('chat-inp');
+  // Read from whichever input has content (panel input on desktop, drawer input on mobile)
+  const panelInp = document.getElementById('panel-chat-inp');
+  const drawerInp = document.getElementById('chat-inp');
+  const inp = (panelInp && panelInp.value.trim()) ? panelInp
+            : (drawerInp && drawerInp.value.trim()) ? drawerInp
+            : panelInp || drawerInp;
+  if (!inp) return;
   const text = inp.value.trim();
   if (!text || !activeChatId || !currentRole) return;
   if (!chats[activeChatId]) chats[activeChatId] = [];
@@ -2523,7 +2627,9 @@ function sendMsg() {
     text,
     ts: new Date().toISOString()
   });
-  inp.value = '';
+  // Clear both inputs so neither retains the value
+  if (panelInp) panelInp.value = '';
+  if (drawerInp) drawerInp.value = '';
   markChatRead(activeChatId);
   renderChat();
   saveChatsToGitHub();
