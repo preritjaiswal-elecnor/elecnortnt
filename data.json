@@ -397,7 +397,7 @@
       "category": "Health, Safety, Environment, and Quality",
       "pillar": "Organisation",
       "priority": "Level 1",
-      "progress": 0,
+      "progress": 20,
       "rag": "Green",
       "living": false,
       "goals": [],
@@ -409,7 +409,7 @@
         "Testing & UAT",
         "Go-live & handover"
       ],
-      "currentStage": 0,
+      "currentStage": 1,
       "documents": [],
       "owner": "Prerit, Ben",
       "startDate": "May 2026",
