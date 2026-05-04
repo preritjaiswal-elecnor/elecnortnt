@@ -295,6 +295,14 @@
       "ts": "2026-04-15T04:56:00.573Z",
       "system": true,
       "from": "Prerit"
+    },
+    {
+      "user": "System",
+      "emoji": "🌍",
+      "text": "changed RAG status to Amber",
+      "ts": "2026-05-04T06:08:26.184Z",
+      "system": true,
+      "from": "Prerit"
     }
   ],
   "5": [
@@ -355,6 +363,14 @@
       "emoji": "🌍",
       "text": "updated progress to 15%",
       "ts": "2026-04-15T04:56:19.047Z",
+      "system": true,
+      "from": "Prerit"
+    },
+    {
+      "user": "System",
+      "emoji": "🌍",
+      "text": "changed RAG status to Red",
+      "ts": "2026-05-04T06:08:43.249Z",
       "system": true,
       "from": "Prerit"
     }
@@ -447,6 +463,14 @@
       "ts": "2026-05-04T03:47:21.310Z",
       "system": true,
       "from": "Prerit"
+    },
+    {
+      "user": "System",
+      "emoji": "🌍",
+      "text": "changed RAG status to Amber",
+      "ts": "2026-05-04T06:08:16.286Z",
+      "system": true,
+      "from": "Prerit"
     }
   ],
   "9": [
@@ -487,6 +511,14 @@
       "ts": "2026-03-23T04:01:35.586Z",
       "system": true,
       "from": "Abhi"
+    },
+    {
+      "user": "System",
+      "emoji": "🌍",
+      "text": "changed RAG status to Amber",
+      "ts": "2026-05-04T06:08:30.392Z",
+      "system": true,
+      "from": "Prerit"
     }
   ],
   "1777862151668": [
