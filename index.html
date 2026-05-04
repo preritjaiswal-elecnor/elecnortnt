@@ -26,6 +26,66 @@
 }
 html,body{height:100%;font-family:'Montserrat',sans-serif;background:var(--light);color:var(--dark);overflow:hidden}
 
+/* ─── BUTTON SYSTEM ─────────────────────────────────────────────────────
+   Base .btn + size + variant modifiers. Use these for new buttons.
+   Existing legacy classes (.add-btn, .save-btn etc.) still work.
+*/
+.btn{
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+  border-radius:7px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  transition:background .15s, color .15s, border-color .15s, transform .1s;
+  white-space:nowrap;
+  line-height:1;
+  padding:8px 16px;
+  font-size:12px;
+}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn:disabled:active{transform:none}
+
+/* Sizes */
+.btn-sm{padding:6px 12px;font-size:11px;border-radius:6px}
+.btn-lg{padding:11px 20px;font-size:13px;border-radius:8px;font-weight:800}
+
+/* Variants */
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:hover{background:#e05500}
+
+.btn-secondary{background:var(--blue);color:#fff}
+.btn-secondary:hover{background:var(--blue-mid)}
+
+.btn-ghost{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.btn-ghost:hover{background:rgba(255,255,255,.18);color:#fff}
+
+.btn-ghost-light{background:rgba(0,0,0,.04);color:var(--mid);border:1.5px solid rgba(0,0,0,.1)}
+.btn-ghost-light:hover{border-color:var(--orange);color:var(--orange)}
+
+.btn-danger{background:var(--light);color:var(--red)}
+.btn-danger:hover{background:#fee2e2}
+
+.btn-icon{
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);
+  width:36px;height:36px;padding:0;border-radius:7px;font-size:16px
+}
+.btn-icon:hover{background:rgba(255,255,255,.18);color:#fff}
+
+.btn-icon-light{
+  background:var(--light);color:var(--mid);
+  width:28px;height:28px;padding:0;border-radius:6px;font-size:13px
+}
+.btn-icon-light:hover{background:#e2e8f0;color:var(--dark)}
+
+/* Success state for save buttons that flash green */
+.btn-primary.ok, .btn-secondary.ok{background:var(--rag-g)}
+.btn-primary.ok:hover, .btn-secondary.ok:hover{background:#15803d}
+
 /* HEADER */
 header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;justify-content:space-between;padding:0 24px;box-shadow:0 2px 16px rgba(0,0,60,.28);position:relative;z-index:200}
 .h-l{display:flex;align-items:center;gap:14px}
@@ -359,8 +419,13 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 
 
 /* ── CHAT ── */
-.chat-btn{position:absolute;bottom:10px;right:10px;background:var(--blue);border:none;border-radius:20px;padding:5px 10px 5px 8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .15s;z-index:5}
+.chat-btn{position:absolute;bottom:10px;right:10px;background:var(--blue);border:none;border-radius:20px;padding:5px 10px 5px 8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .15s,opacity .15s,transform .15s;z-index:5;opacity:0;transform:translateY(4px);pointer-events:none}
 .chat-btn:hover{background:var(--blue-mid)}
+.card:hover .chat-btn,.card.active .chat-btn{opacity:1;transform:translateY(0);pointer-events:auto}
+/* When card has unread messages, always show */
+.card.has-unread .chat-btn{opacity:1;transform:translateY(0);pointer-events:auto}
+/* Touch devices have no hover — always show so it's tappable */
+@media (hover:none){.chat-btn{opacity:1;transform:translateY(0);pointer-events:auto}}
 .chat-btn-icon{font-size:13px;line-height:1}
 .chat-badge{background:var(--orange);border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;min-width:16px;text-align:center}
 
@@ -658,12 +723,6 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
   </div>
   <div class="h-r">
     <div class="hstat"><div class="hstat-v" id="s-total">—</div><div class="hstat-l">Projects</div></div>
-    <div class="hdiv"></div>
-    <div class="hstat"><div class="hstat-v" id="s-active">—</div><div class="hstat-l">In Progress</div></div>
-    <div class="hdiv"></div>
-    <div class="hstat"><div class="hstat-v" id="s-done">—</div><div class="hstat-l">Complete</div></div>
-    <div class="hdiv"></div>
-    <div class="hstat"><div class="hstat-v" id="s-avg">—</div><div class="hstat-l">Avg Progress</div></div>
     <div class="hdiv"></div>
     <span id="sync-status" style="font-size:10px;font-weight:600;transition:color .3s;min-width:120px;text-align:right"></span>
     <button class="admin-btn" id="admin-btn" onclick="openAdmin()">⚙️ Users</button>
@@ -1383,13 +1442,10 @@ function updateArchivePill() {
 function updateStats() {
   const active = projects.filter(p => !p.archived);
   const t = active.length;
-  const a = active.filter(p => p.progress > 0 && p.progress < 100).length;
-  const d = active.filter(p => p.progress === 100).length;
-  const avg = t ? Math.round(active.reduce((s,p) => s+p.progress,0)/t) : 0;
-  document.getElementById('s-total').textContent = t;
-  document.getElementById('s-active').textContent = a;
-  document.getElementById('s-done').textContent = d;
-  document.getElementById('s-avg').textContent = avg+'%';
+  // Only Total Projects is shown in the header now; other stats kept calculated
+  // for any future use, but no longer rendered.
+  const totalEl = document.getElementById('s-total');
+  if (totalEl) totalEl.textContent = t;
 }
 
 // ── CARD ─────────────────────────────────────────────────────────────
@@ -1435,13 +1491,16 @@ function makeCard(p) {
       <div class="prog-bar"><div class="prog-fill${pct===100?' done':''}" style="width:${pct}%"></div></div>
       <div class="prog-pct">${pct}%</div>
     </div>`;
-  // Chat button — show unread count only
+  // Chat button — hidden by default; shown on card hover or when unread > 0
   const unreadCount = getChatUnread(p.id);
+  if (unreadCount > 0) el.classList.add('has-unread');
   const chatBtn = document.createElement('button');
   chatBtn.className = 'chat-btn';
   chatBtn.innerHTML = `<span class="chat-btn-icon">💬</span> Chat${unreadCount>0?` <span class="chat-badge">${unreadCount}`+`</span>`:''}`;
   chatBtn.addEventListener('click', e => { e.stopPropagation(); openChat(p.id); });
-  el.style.paddingBottom = '38px';
+  // Reserve space only when the button is permanently visible (unread present).
+  // On hover, the button briefly overlays the card's bottom edge — that's fine.
+  el.style.paddingBottom = unreadCount > 0 ? '38px' : '14px';
   el.appendChild(chatBtn);
   el.addEventListener('click', () => { if (!openMobModal(p.id)) openPanel(p.id); });
   el.addEventListener('dragstart', e => { dragId = p.id; el.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
