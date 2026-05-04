@@ -22,7 +22,7 @@
   --dark:#0f172a;--mid:#475569;--muted:#94a3b8;--light:#f1f5f9;--white:#fff;
   --red:#dc2626;--amber:#d97706;--steel:#2563eb;
   --rag-g:#16a34a;--rag-a:#d97706;--rag-r:#dc2626;
-  --panel:460px;--hdr:58px;--pill:32px;
+  --panel:640px;--hdr:58px;--pill:32px;
 }
 html,body{height:100%;font-family:'Montserrat',sans-serif;background:var(--light);color:var(--dark);overflow:hidden}
 
@@ -121,8 +121,9 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .board-wrap{flex:1;display:flex;overflow:hidden;position:relative;-webkit-overflow-scrolling:touch}
 
 /* BOARD */
-.board{flex:1;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden;transition:margin-right .32s cubic-bezier(.4,0,.2,1)}
-.board.shifted{margin-right:var(--panel)}
+.board{flex:1;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden}
+/* board.shifted retained as a no-op for backwards compatibility; panel now overlays */
+.board.shifted{margin-right:0}
 
 .col{display:flex;flex-direction:column;border-right:1px solid rgba(0,0,0,.07);overflow:hidden;background:var(--light)}
 .col:last-child{border-right:none}
@@ -174,7 +175,19 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
 .prog-pct{font-size:10px;font-weight:700;color:var(--mid);min-width:28px;text-align:right}
 
 /* PANEL */
-.panel{position:absolute;right:0;top:0;bottom:0;width:var(--panel);background:#fff;border-left:1px solid rgba(0,0,0,.09);box-shadow:-4px 0 28px rgba(0,0,0,.11);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);z-index:100;overflow:hidden}
+.panel-backdrop{
+  position:absolute;inset:0;
+  background:rgba(2,8,30,.55);
+  opacity:0;pointer-events:none;
+  transition:opacity .28s ease;
+  z-index:90;
+}
+.panel-backdrop.open{opacity:1;pointer-events:auto}
+/* On mobile, the backdrop should never intercept clicks (panel is a separate full-screen modal flow). */
+@media (max-width:768px){
+  .panel-backdrop{display:none}
+}
+.panel{position:absolute;right:0;top:0;bottom:0;width:var(--panel);max-width:100%;background:#fff;border-left:1px solid rgba(0,0,0,.09);box-shadow:-12px 0 40px rgba(0,0,0,.22);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);z-index:100;overflow:hidden}
 .panel.open{transform:translateX(0)}
 .p-hdr{padding:16px 18px 12px;border-bottom:1px solid var(--light);flex-shrink:0}
 .p-hdr-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
@@ -801,6 +814,9 @@ header{height:var(--hdr);background:var(--blue);display:flex;align-items:center;
       <div class="col-body drop-zone" id="col-Level 3" data-col="Level 3"></div>
     </div>
   </div>
+
+  <!-- PANEL BACKDROP — heavy dim. Click to close (desktop only via CSS pointer-events). -->
+  <div class="panel-backdrop" id="panel-backdrop" onclick="onBackdropClick()"></div>
 
   <!-- SIDE PANEL -->
   <div class="panel" id="panel">
@@ -1601,6 +1617,8 @@ function openPanel(id) {
   if (!p) return;
   populatePanel(p);
   document.getElementById('panel').classList.add('open');
+  document.getElementById('panel-backdrop').classList.add('open');
+  // Keep .shifted as a no-op (backdrop replaces the visual relationship).
   document.getElementById('board').classList.add('shifted');
   document.querySelectorAll('.card').forEach(c => c.classList.toggle('active', +c.dataset.id===id));
 }
@@ -1719,10 +1737,35 @@ function setRag(rag) {
 
 function closePanel() {
   document.getElementById('panel').classList.remove('open');
+  document.getElementById('panel-backdrop').classList.remove('open');
   document.getElementById('board').classList.remove('shifted');
   document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
   activeId = null;
 }
+
+// Backdrop click — desktop only (CSS hides backdrop on mobile, so this is desktop-only by default)
+function onBackdropClick() {
+  // Defensive: only close when panel is actually open
+  if (document.getElementById('panel').classList.contains('open')) {
+    closePanel();
+  }
+}
+
+// Esc key closes the panel on desktop, but only if no higher-priority modal
+// is already open and the user isn't typing into a text field (avoids
+// surprising the user mid-edit).
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const panel = document.getElementById('panel');
+  if (!panel.classList.contains('open')) return;
+  // Don't fire if any modal is open on top of us
+  const modalOpen = document.querySelector('.modal-bg.open, .bc-modal-bg.open, .mob-modal-bg.open, #auth-screen:not(.gone)');
+  if (modalOpen) return;
+  // Don't fire if user is typing in a text input/textarea/contenteditable inside the panel
+  const ae = document.activeElement;
+  if (ae && (ae.tagName === 'TEXTAREA' || ae.tagName === 'INPUT' || ae.isContentEditable)) return;
+  closePanel();
+});
 
 // ── SAVE ──────────────────────────────────────────────────────────────
 function saveProject() {
@@ -2400,10 +2443,12 @@ function openChat(projectId) {
   document.getElementById('chat-hdr-sub').textContent = p ? p.pillar + ' · ' + (p.priority||'') : '';
   const drawer = document.getElementById('chat-drawer');
   drawer.classList.add('open');
-  // Position chat drawer — sits to the left of side panel if open
+  // Position chat drawer — sits to the left of side panel if open.
+  // Note: chat drawer will be merged into the panel in the next iteration;
+  // for now we just keep it functional alongside the wider 640px panel.
   const panelOpen = document.getElementById('panel').classList.contains('open');
   drawer.style.right = panelOpen ? 'var(--panel)' : '0';
-  drawer.style.width = panelOpen ? 'min(460px, calc(100vw - var(--panel)))' : 'var(--panel)';
+  drawer.style.width = panelOpen ? 'min(420px, calc(100vw - var(--panel)))' : 'min(460px, 100vw)';
   markChatRead(projectId);
   renderChat();
   render(); // refresh badge
