@@ -351,7 +351,7 @@
       "pillar": "Organisation",
       "priority": "Level 1",
       "progress": 25,
-      "rag": "Green",
+      "rag": "Amber",
       "living": true,
       "description": "Design and deploy a SharePoint-based intranet and document management system for Elecnor Australia. The platform will serve as the single source of truth for company documents, policies, and team communications.",
       "goals": [
