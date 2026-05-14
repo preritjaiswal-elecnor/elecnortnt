@@ -415,6 +415,31 @@
       "startDate": "May 2026",
       "targetDate": "TBD",
       "notes": ""
+    },
+    {
+      "id": 1778740416621,
+      "name": "PEC Sharepoint Migration",
+      "description": "",
+      "category": "General",
+      "pillar": "Organisation",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "goals": [],
+      "stages": [
+        "Define scope",
+        "Plan & design",
+        "Execute",
+        "Review & test",
+        "Complete"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit, Abhi",
+      "startDate": "May 2026",
+      "targetDate": "TBD",
+      "notes": ""
     }
   ]
 }
