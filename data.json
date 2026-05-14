@@ -293,6 +293,31 @@
       "notes": "Fine Tuning the register"
     },
     {
+      "id": 1778740416621,
+      "name": "PEC Sharepoint Migration",
+      "description": "",
+      "category": "General",
+      "pillar": "Organisation",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "goals": [],
+      "stages": [
+        "Define scope",
+        "Plan & design",
+        "Execute",
+        "Review & test",
+        "Complete"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit, Abhi",
+      "startDate": "May 2026",
+      "targetDate": "TBD",
+      "notes": ""
+    },
+    {
       "id": 4,
       "name": "Futura ERP Service Study",
       "category": "ERP & Finance",
@@ -391,31 +416,6 @@
       "notes": ""
     },
     {
-      "id": 1778740416621,
-      "name": "PEC Sharepoint Migration",
-      "description": "",
-      "category": "General",
-      "pillar": "Organisation",
-      "priority": "Level 1",
-      "progress": 0,
-      "rag": "Green",
-      "living": false,
-      "goals": [],
-      "stages": [
-        "Define scope",
-        "Plan & design",
-        "Execute",
-        "Review & test",
-        "Complete"
-      ],
-      "currentStage": 0,
-      "documents": [],
-      "owner": "Prerit, Abhi",
-      "startDate": "May 2026",
-      "targetDate": "TBD",
-      "notes": ""
-    },
-    {
       "id": 1777862151668,
       "name": "Set up 1300 HSEQ number for Elecnor Australia",
       "description": "Procure and configure 1300 354 737 (1300 ELHSEQ) as the central contact number for Elecnor Australia's Health, Safety, Environment and Quality services. Includes selecting an end-to-end managed provider (shortlist: Alltel, Zintel), securing the smart number, building a 5-option IVR with call routing to nurse triage, RTWC, EAP (with failover), confidential reporting hotline, and one TBC destination. Scope also covers professional voice recording for greetings and menu prompts, full end-to-end testing, and handover. Approver: Roman Francisco Brache Reyes (HSEQ Manager, ANZ). Requestor: Ben Hinton",
@@ -437,6 +437,31 @@
       "currentStage": 1,
       "documents": [],
       "owner": "Prerit, Ben",
+      "startDate": "May 2026",
+      "targetDate": "TBD",
+      "notes": ""
+    },
+    {
+      "id": 1778740458914,
+      "name": "Licenses Review and Application",
+      "description": "",
+      "category": "General",
+      "pillar": "Technology",
+      "priority": "Level 1",
+      "progress": 0,
+      "rag": "Green",
+      "living": false,
+      "goals": [],
+      "stages": [
+        "Define scope",
+        "Plan & design",
+        "Execute",
+        "Review & test",
+        "Complete"
+      ],
+      "currentStage": 0,
+      "documents": [],
+      "owner": "Prerit, Abhi",
       "startDate": "May 2026",
       "targetDate": "TBD",
       "notes": ""
