@@ -1,5 +1,18 @@
 [
   {
+    "id": 1778740458914,
+    "type": "project",
+    "projectId": 1778740458914,
+    "projectName": "Licenses Review and Application",
+    "from": "Prerit",
+    "emoji": "🌍",
+    "detail": "added a new project",
+    "ts": "2026-05-14T06:34:18.914Z",
+    "readBy": [
+      "Prerit"
+    ]
+  },
+  {
     "id": 1778740416642,
     "type": "project",
     "projectId": 1778740416621,
